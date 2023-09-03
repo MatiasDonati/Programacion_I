@@ -56,39 +56,26 @@ lista_votos = ["APPLE", "DUNKIN", "IKEA", "APPLE", "TACO", "DUNKIN", "TACO", "AP
 
 #PUEDE MODIFICAR LOS DATOS A SU ANTOJO, A EFECTOS DE REALIZAR PRUEBAS
 
-# while True:
-
-#     print("\n1-Cargar Voto\n2-Cantidad de encuestados que votaron por APPLE, cuya edad no supere los 35 años\n3-Género que predomina en la empresa.\n4-Porcentaje de empleados que no votaron por APPLE , siempre y cuando su género no sea Femenino o su edad se encuentre.\n5-Nombre y edad de los empleados que votaron IKEA o TACO, cuya edad supere la edad promedio de todos los empleados\n6-Salir")
-
-#     opcion = input("Ingrese una opción 1-6:")
-#     opcion = int(opcion)
-#     if opcion == 1:
-#         print("1")
-#     elif opcion == 2:
-#         print("2")
-#     elif opcion == 3:
-#         print("3")
-#     elif opcion == 4:
-#         print("4")
-#     elif opcion == 5:
-#         print("5")
-#     elif opcion == 6:
-#         print("Adios")
-#         break
-#     else:
-#         print("Opcion incorrecta (1-6)")
-
 cantidad_apple_hasta_35 = 0
 cantidad_masculino = 0
 cantidad_femenino = 0
 cantidad_otro = 0
 no_votaron_apple_no_fem_entre_18_y_30 = 0
 suma_edades = 0
+nombre_votaron_a_IKEA_o_TACO_y_superan_la_edad_promedio = []
+edad_votaron_a_IKEA_o_TACO_y_superan_la_edad_promedio = []
 
 for indice in range(len(lista_nombres)):
 
-    if lista_votos[indice] == "APPLE" and lista_edades[indice] <= 36:
-        cantidad_apple_hasta_35 += 1
+    match lista_votos[indice]:
+        case "APPLE":
+            if lista_edades[indice] <= 36:
+                cantidad_apple_hasta_35 += 1
+        case _:
+            if lista_edades[indice] >= 18 and lista_edades[indice] <= 30:
+                no_votaron_apple_no_fem_entre_18_y_30 =+ 1
+
+    suma_edades += lista_edades[indice]
 
     match lista_generos[indice]:
         case "Masculino":
@@ -97,11 +84,6 @@ for indice in range(len(lista_nombres)):
             cantidad_femenino += 1
         case _:
             cantidad_otro += 1
-
-    if lista_votos[indice] != "APPLE" and lista_generos[indice] != "Femenino" and lista_edades[indice] >= 18 and lista_edades[indice] <= 30:
-        no_votaron_apple_no_fem_entre_18_y_30 =+ 1
-
-    suma_edades += lista_edades[indice]
 
 porcentaje_no_votaron_apple_no_fem_entre_18_y_30 = (no_votaron_apple_no_fem_entre_18_y_30/ len(lista_nombres)) * 100
 
@@ -114,19 +96,31 @@ elif cantidad_masculino > cantidad_otro:
 else:
     genero_prediminante = "Otro"
 
-    print(promedio_edades)
-
 for indice in range(len(lista_edades)):
     if (lista_votos[indice] == "IKEA" or lista_votos[indice] == "TACO") and lista_edades[indice] > promedio_edades:
-        print("Votaron a IKEA o TACO y superan la edad promedio: ")
-        print(lista_nombres[indice])
-        print(lista_edades[indice])
-    # else:
-    #     print("No hay personas que votaron a IKEA o TACO y superan la edad promedio")
+        nombre_votaron_a_IKEA_o_TACO_y_superan_la_edad_promedio.append(lista_nombres[indice])
+        edad_votaron_a_IKEA_o_TACO_y_superan_la_edad_promedio.append(lista_edades[indice])
 
-print(f"""La de encuestados que votaron por APPLE, cuya edad no supere los 35 años es: {cantidad_apple_hasta_35}
-      \nLa cantidad de personas Masculino es: {cantidad_masculino}\nLa cantidad de personas Femenino es: {cantidad_femenino}
-      \nLa cantidad de personas Otro es: {cantidad_otro}\nEl genero predominante es {genero_prediminante}
-      \nEl porcentaje de lo que  novotaron por APPLE, 
-      siempre y cuando su género no sea Femenino y su edad se 
-      encuentre entre los 18 y 30 es: {porcentaje_no_votaron_apple_no_fem_entre_18_y_30}%\nEl promedio de edades es {promedio_edades}""")
+while True:
+
+    print("\n1-Cargar Voto\n2-Cantidad de encuestados que votaron por APPLE, cuya edad no supere los 35 años\n3-Género que predomina en la empresa.\n4-Porcentaje de empleados que no votaron por APPLE , siempre y cuando su género no sea Femenino o su edad se encuentre.\n5-Nombre y edad de los empleados que votaron IKEA o TACO, cuya edad supere la edad promedio de todos los empleados\n6-Salir")
+
+    opcion = input("Ingrese una opción 1-6:")
+    opcion = int(opcion)
+    if opcion == 1:
+        print("Nooooooooooo")
+    elif opcion == 2:
+        print(cantidad_apple_hasta_35)
+    elif opcion == 3:
+        print(genero_prediminante)
+    elif opcion == 4:
+        print(porcentaje_no_votaron_apple_no_fem_entre_18_y_30)
+    elif opcion == 5:
+        for indice in range(len(nombre_votaron_a_IKEA_o_TACO_y_superan_la_edad_promedio)):
+            print(nombre_votaron_a_IKEA_o_TACO_y_superan_la_edad_promedio[indice])
+            print(edad_votaron_a_IKEA_o_TACO_y_superan_la_edad_promedio[indice])
+    elif opcion == 6:
+        print("Adios")
+        break
+    else:
+        print("Opcion incorrecta (1-6)")
