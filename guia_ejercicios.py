@@ -123,9 +123,3 @@
 #     tipo = "descuento"
 
 # print(f"En {estacion} en la ciudad de {localidad} hay un {tipo} de {abs(porcentaje)}% \n Precio final por estadia:{precio_final}")
-
-
-
-
-# print()
-# input("aca ingreso el mensaje")
