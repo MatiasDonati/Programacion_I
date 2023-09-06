@@ -19,32 +19,34 @@
 # lista_fabricante = []
 # lista_marca = []
 
-# tipo = input('Tipo: ')
-# while tipo != "barbijo" and tipo != "jabón" and tipo != "alcohol":
-#   tipo = input('Tipo: ')
-# lista_tipo.append(tipo)
+# for _ in range(5):
 
-# precio = input('Precio: ')
-# while int(precio) < 100 or int(precio) > 300:
+#     tipo = input('Tipo: ')
+#     while tipo != "barbijo" and tipo != "jabón" and tipo != "alcohol":
+#         tipo = input('Tipo: ')
+#     lista_tipo.append(tipo)
+
 #     precio = input('Precio: ')
-# precio = int(precio)
-# lista_precio.append(precio)
+#     while int(precio) < 100 or int(precio) > 300:
+#         precio = input('Precio: ')
+#     precio = int(precio)
+#     lista_precio.append(precio)
 
-# cantidad = input('Canitdad: ')
-# while int(cantidad) <= 0 or int(cantidad) > 1000:
 #     cantidad = input('Canitdad: ')
-# cantidad = int(cantidad)
-# lista_cantidad.append(cantidad)
+#     while int(cantidad) <= 0 or int(cantidad) > 1000:
+#         cantidad = input('Canitdad: ')
+#     cantidad = int(cantidad)
+#     lista_cantidad.append(cantidad)
 
-# marca = input('Marca: ')
-# while marca == None:
 #     marca = input('Marca: ')
-# lista_marca.append(marca)
+#     while marca == None:
+#         marca = input('Marca: ')
+#     lista_marca.append(marca)
 
-# fabricante = input('Fabricante: ')
-# while fabricante == None:
 #     fabricante = input('Fabricante: ')
-# lista_fabricante.append(fabricante)
+#     while fabricante == None:
+#         fabricante = input('Fabricante: ')
+#     lista_fabricante.append(fabricante)
 
 lista_tipo = ["barbijo", "jabón", "alcohol", "jabón", "alcohol"]
 lista_precio = [150, 200, 250, 180, 220]
@@ -65,13 +67,13 @@ for indice in range (len(lista_tipo)):
             barbijo_mas_caro = lista_precio[indice]
             cantidad_barbijos_mas_caro += lista_cantidad[indice]
             fabricante_barbijos_mas_caros = lista_fabricante[indice]
+    # C
+    elif lista_tipo[indice] == "jabón":
+        suma_jabones += lista_cantidad[indice]
     # B
     if mayor_cantidad == None or lista_cantidad[indice] > mayor_cantidad:
         mayor_cantidad = lista_cantidad[indice]
         fabricante_mayor_cantidad = lista_fabricante[indice]
 
-    # C
-    if lista_tipo[indice] == "jabón":
-        suma_jabones += lista_cantidad[indice]
 
 print(f"A - Del mas caro de los barbijos, son {cantidad_barbijos_mas_caro} cantidad y de {fabricante_barbijos_mas_caros}\nB - El fabricante del item con mas unidades es {fabricante_mayor_cantidad}\nC - En total hay {suma_jabones} jabones")
