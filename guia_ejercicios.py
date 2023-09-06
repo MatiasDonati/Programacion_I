@@ -158,12 +158,34 @@
 # # [82, 3, 49, 38, 94, 85, 95, 92, 64, 8, 75, 37, 97, 45, 12, 64, 48, 78, 29, 58]
 # # mostrar el número repetido
 
-# numeros = [82, 3, 49, 38, 94, 85, 97, 92, 64, 8, 75, 37, 67, 45, 12, 55, 48, 78, 29, 58]
+# lista_numeros = [82, 3, 49, 38, 94, 85, 95, 92, 64, 8, 75, 37, 97, 45, 12, 64, 48, 78, 29, 58]
+# bandera = False
+# for numero in lista_numeros:
+#     contador = 0
+#     for dato in lista_numeros:
+#         if numero == dato:
+#             contador += 1
+#             if contador == 2:
+#                 numero_repetido = numero
+#                 bandera = True
+#                 break
+#     if bandera == True:
+#         break
+# print(numero_repetido)
 
-# VER COMO haCER !!!
-# VER COMO haCER !!!
-# VER COMO haCER !!!
-# VER COMO haCER !!!
+# /******************************************************************************
+# ejercicio 8
+# *******************************************************************************/
+# numeros = [82, 3, 49, 38, 94, 85, 97, 92, 64, 8, 75, 37, 67, 45, 3, 12, 48, 78, 29, 58]
+
+# repetidos = []
+
+# for indice in range(len(numeros)):
+#     for indice_dos in range(indice + 1, len(numeros)):
+#         if numeros[indice] == numeros[indice_dos] and numeros[indice] not in repetidos:
+#             repetidos.append(numeros[indice])
+
+# print(repetidos)
 
 
 # # Ejercicio 9:
@@ -195,13 +217,13 @@
 # Ejemplo:
 
 
-nombres = ["Juan","Pedro","Sol","Paco","Ana"]
-sexo = ["m","m","f","m","f"]
-nota = [6,8,10,8,5]
+# nombres = ["Juan","Pedro","Sol","Paco","Ana"]
+# sexo = ["m","m","f","m","f"]
+# nota = [6,8,10,8,5]
 
-nota_mas_baja = None
-cantidad_mujeres = 0
-suma_notas_mujeres = 0
+# nota_mas_baja = None
+# cantidad_mujeres = 0
+# suma_notas_mujeres = 0
 # nombres = []
 # sexos = []
 # notas = []
