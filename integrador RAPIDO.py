@@ -12,7 +12,6 @@
 # B. Del ítem con más unidades, el fabricante.
 # C. Cuántas unidades de jabones hay en total.
 
-
 # lista_tipo = []
 # lista_precio = []
 # lista_cantidad = []
@@ -74,6 +73,5 @@ for indice in range (len(lista_tipo)):
     if mayor_cantidad == None or lista_cantidad[indice] > mayor_cantidad:
         mayor_cantidad = lista_cantidad[indice]
         fabricante_mayor_cantidad = lista_fabricante[indice]
-
 
 print(f"A - Del mas caro de los barbijos, son {cantidad_barbijos_mas_caro} cantidad y de {fabricante_barbijos_mas_caros}\nB - El fabricante del item con mas unidades es {fabricante_mayor_cantidad}\nC - En total hay {suma_jabones} jabones")
