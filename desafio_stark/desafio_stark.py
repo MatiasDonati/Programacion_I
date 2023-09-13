@@ -16,17 +16,9 @@ inciso_e = "Recorrer la lista y mostrar nombre y peso de los superhéroes (cualq
 # A "Recorrer la lista imprimiendo por consola todos los datos de cada superhéroe"
 
 for personaje in lista_personajes:
-    # print(personaje["nombre"].upper()+':')
-    # print(f"Identidad: {personaje['identidad']}")
-    # print(f"Empresa: {personaje['empresa']}")
-    # print(f"Altura: {personaje['altura']}")
-    # print(f"Peso: {personaje['peso']}")
-    # print(f"Genero: {personaje['genero']}")
-    # print(f"Color de ojos: {personaje['color_ojos']}")
-    # print(f"Color de pelo: {personaje['color_pelo']}")
-    # print(f"Fuerza: {personaje['fuerza']}")
-    # print(f"Inteligencia: {personaje['inteligencia']}")
-    # print("------------\n")
+    # for clave in personaje:
+    #     print(f"{clave}: {personaje[clave]}")
+    # print("\n")
 
 # B "Recorrer la lista y mostrar la identidad y el peso del superhéroe con mayor fuerza (MÁXIMO)"
 
@@ -88,19 +80,13 @@ while flag:
     match opcion_elegida:
         case 'A':
             for personaje in lista_personajes:
-                print("------------")
-                print(personaje["nombre"].upper()+':')
-                print(f"Identidad: {personaje['identidad']}")
-                print(f"Empresa: {personaje['empresa']}")
-                print(f"Altura: {personaje['altura']}")
-                print(f"Peso: {personaje['peso']}")
-                print(f"Genero: {personaje['genero']}")
-                print(f"Color de ojos: {personaje['color_ojos']}")
-                print(f"Color de pelo: {personaje['color_pelo']}")
-                print(f"Fuerza: {personaje['fuerza']}")
-                print(f"Inteligencia: {personaje['inteligencia']}")
-                print("------------\n")
+                for clave in personaje:
+                    print(f"{clave}: {personaje[clave]}")
+                print("\n")
         case 'B':
+            # HACERLO COMO EL A HACER UN IF PARA Q IMPRIMA LAS CLAVES QUE HAY Q IMPRIMIR
+            # HACERLO COMO EL A HACER UN IF PARA Q IMPRIMA LAS CLAVES QUE HAY Q IMPRIMIR
+            # HACERLO COMO EL A HACER UN IF PARA Q IMPRIMA LAS CLAVES QUE HAY Q IMPRIMIR
             for personaje in lista_personajes_con_fuerza_mayor:
                 print("------------")
                 print(personaje["identidad"])
