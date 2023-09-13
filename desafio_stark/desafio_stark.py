@@ -9,18 +9,17 @@ suma_fuerza_femenino = 0
 
 # A. Recorrer la lista imprimiendo por consola todos los datos de cada superhéroe
 for personaje in lista_personajes:
-    def mostrar_personajes():
-        print(personaje["nombre"].upper()+':')
-        print(personaje["identidad"])
-        print(personaje["empresa"])
-        print(personaje["altura"])
-        print(personaje["peso"])
-        print(personaje["genero"])
-        print(personaje["color_ojos"])
-        print(personaje["color_pelo"])
-        print(personaje["fuerza"])
-        print(personaje["inteligencia"])
-        print("------------\n")
+    # print(personaje["nombre"].upper()+':')
+    # print(personaje["identidad"])
+    # print(personaje["empresa"])
+    # print(personaje["altura"])
+    # print(personaje["peso"])
+    # print(personaje["genero"])
+    # print(personaje["color_ojos"])
+    # print(personaje["color_pelo"])
+    # print(personaje["fuerza"])
+    # print(personaje["inteligencia"])
+    # print("------------\n")
 
 # B Recorrer la lista y mostrar la identidad y el peso del superhéroe con mayor fuerza (MÁXIMO)
 
@@ -62,10 +61,10 @@ for personaje in lista_personajes:
     if int(personaje["fuerza"]) > promedio_fuerza_femenino:
         diccionario = {}
         diccionario['Nombre'] = personaje["nombre"]
-        diccionario['Apellido'] = personaje["peso"]
+        diccionario['Peso'] = personaje["peso"]
         lista_superan_fuerza_femenina_promedio.append(diccionario)
 
-mensaje_e = lista_superan_fuerza_femenina_promedio
+# mensaje_e = lista_superan_fuerza_femenina_promedio
 
 flag = True
 while flag:
@@ -76,7 +75,18 @@ while flag:
 
     match opcion_elegida:
         case 'A':
-            mostrar_personajes()
+            for personaje in lista_personajes:
+                print(personaje["nombre"].upper()+':')
+                print(personaje["identidad"])
+                print(personaje["empresa"])
+                print(personaje["altura"])
+                print(personaje["peso"])
+                print(personaje["genero"])
+                print(personaje["color_ojos"])
+                print(personaje["color_pelo"])
+                print(personaje["fuerza"])
+                print(personaje["inteligencia"])
+                print("------------\n")
         case 'B':
             print(mensaje_b)
         case 'C':
@@ -84,7 +94,10 @@ while flag:
         case 'D':
             print(mensaje_d)
         case 'E':
-            print(mensaje_e)
+            for personaje in lista_superan_fuerza_femenina_promedio:
+                print(personaje["Nombre"])
+                print(personaje["Peso"])
+                print("------------\n")
         case 'FIN':
             print('Hasta Pronto!!!')
             flag = False
@@ -95,11 +108,3 @@ while flag:
             # PONER TODOS LOS SUPERHEROES CON MAYOR FUERZA  NO SOLO EL PRIMERO QUE APARECE//// punto B
             # PONER TODOS LOS SUPERHEROES CON MAYOR FUERZA  NO SOLO EL PRIMERO QUE APARECE//// punto B
             # PONER TODOS LOS SUPERHEROES CON MAYOR FUERZA  NO SOLO EL PRIMERO QUE APARECE//// punto B
-
-            # MOSTRAR A en MENU sin funcion!!!
-            # MOSTRAR A en MENU sin funcion!!!
-            # MOSTRAR A en MENU sin funcion!!!
-            # MOSTRAR A en MENU sin funcion!!!
-            # MOSTRAR A en MENU sin funcion!!!
-            # MOSTRAR A en MENU sin funcion!!!
-            # MOSTRAR A en MENU sin funcion!!!
