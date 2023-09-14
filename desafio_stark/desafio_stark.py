@@ -1,3 +1,5 @@
+# MATIAS EDUARDO DONATI
+
 from data_stark import lista_personajes
 
 mayor_fuerza = None
@@ -16,9 +18,6 @@ inciso_e = "Recorrer la lista y mostrar nombre y peso de los superhéroes (cualq
 # A "Recorrer la lista imprimiendo por consola todos los datos de cada superhéroe"
 
 for personaje in lista_personajes:
-    # for clave in personaje:
-    #     print(f"{clave}: {personaje[clave]}")
-    # print("\n")
 
 # B "Recorrer la lista y mostrar la identidad y el peso del superhéroe con mayor fuerza (MÁXIMO)"
 
@@ -84,28 +83,22 @@ while flag:
                     print(f"{clave}: {personaje[clave]}")
                 print("\n")
         case 'B':
-            # HACERLO COMO EL A HACER UN IF PARA Q IMPRIMA LAS CLAVES QUE HAY Q IMPRIMIR
-            # HACERLO COMO EL A HACER UN IF PARA Q IMPRIMA LAS CLAVES QUE HAY Q IMPRIMIR
-            # HACERLO COMO EL A HACER UN IF PARA Q IMPRIMA LAS CLAVES QUE HAY Q IMPRIMIR
             for personaje in lista_personajes_con_fuerza_mayor:
-                print("------------")
-                print(personaje["identidad"])
-                print(personaje["peso"])
-                print("------------\n")
+                print('')
+                for clave in personaje:
+                    if clave == "identidad" or clave == "peso":
+                        print(f"{clave}: {personaje[clave]}")
+                print('')
         case 'C':
             print(f"\n{mensaje_c}")
         case 'D':
             print(f"\n{mensaje_d}")
         case 'E':
             for personaje in lista_superan_fuerza_femenina_promedio:
-                print(personaje["Nombre"])
-                print(personaje["Peso"])
-                print("------------\n")
+                for clave in personaje:
+                    print(f"{clave}: {personaje[clave]}")
+                print('')
+
         case '0':
             print('Hasta Pronto!!!')
             flag = False
-
-# QUIZA EL MATCH DE OPCIONES LO PUEDO HACER DESDE EL PRINCIPIO DEL CODIGO Y DEPENDIENDO QUE SE ELIGE SE EJECUTA.
-# QUIZA EL MATCH DE OPCIONES LO PUEDO HACER DESDE EL PRINCIPIO DEL CODIGO Y DEPENDIENDO QUE SE ELIGE SE EJECUTA.
-# QUIZA EL MATCH DE OPCIONES LO PUEDO HACER DESDE EL PRINCIPIO DEL CODIGO Y DEPENDIENDO QUE SE ELIGE SE EJECUTA.
-# QUIZA EL MATCH DE OPCIONES LO PUEDO HACER DESDE EL PRINCIPIO DEL CODIGO Y DEPENDIENDO QUE SE ELIGE SE EJECUTA.
