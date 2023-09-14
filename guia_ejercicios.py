@@ -176,16 +176,16 @@
 # /******************************************************************************
 # ejercicio 8
 # *******************************************************************************/
-# numeros = [82, 3, 49, 38, 94, 85, 97, 92, 64, 8, 75, 37, 67, 45, 3, 12, 48, 78, 29, 58]
+numeros = [82, 3, 49, 38, 94, 85, 97, 92, 64, 8, 75, 37, 67, 45, 3, 12, 48, 78, 29, 58]
 
-# repetidos = []
+repetidos = []
 
-# for indice in range(len(numeros)):
-#     for indice_dos in range(indice + 1, len(numeros)):
-#         if numeros[indice] == numeros[indice_dos] and numeros[indice] not in repetidos:
-#             repetidos.append(numeros[indice])
+for indice in range(len(numeros)):
+    for indice_dos in range(indice + 1, len(numeros)):
+        if numeros[indice] == numeros[indice_dos] and numeros[indice] not in repetidos:
+            repetidos.append(numeros[indice])
 
-# print(repetidos)
+print(repetidos)
 
 
 # # Ejercicio 9:

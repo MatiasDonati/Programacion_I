@@ -56,12 +56,35 @@ for personaje in lista_personajes:
                 # D
                 nombre_masculino_mas_debil = personaje["nombre"]
 
+# G
+# Guardo en un conjunto "set" para tener cada tipo de color de ojos
 tipos_de_ojos = set(personaje["color_ojos"] for personaje in lista_personajes)
-print(tipos_de_ojos)
 
-# for personaje in lista_personajes:
-#     if personaje["color_ojos"] == "Blue":
-#         print(personaje["nombre"])
+
+contador_colores_ojos = {}
+suma_contadores_ojos = 0
+
+# Recorro el set, en la primer vuelta ininio un contador, recorro cada persona con otro for y si matchea el color de ojo se incrementa contador
+# antes termine la primer vuelta del bucle de tipo de ojo guardo en nuevo diccionario el color de ojo como clave y el contador como valor
+# para conocer cuantos valores tengo de cada clave
+
+for color_ojo in tipos_de_ojos:
+    contador = 0
+    for personaje in lista_personajes:
+        if personaje['color_ojos'] == color_ojo:
+            contador += 1
+
+    contador_colores_ojos[color_ojo] = contador
+
+for cantidad_color in contador_colores_ojos:
+    suma_contadores_ojos += contador_colores_ojos[cantidad_color]
+
+if suma_contadores_ojos == len(lista_personajes):
+    for clave in contador_colores_ojos:
+        print(f"{clave}: {contador_colores_ojos[clave]}")
+        print('')
+else:
+    print("ERROR.\nLa suma de las cantidades de tipos de ojos no concuerda con la cantidad de personajes")
 
 
 
