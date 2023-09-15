@@ -99,6 +99,8 @@ respuesta_g_o_h = contar_cantidad_pelos_u_ojos(g_o_h)
 
 
 # I. Listar todos los superhéroes agrupados por color de ojos.
+# J. Listar todos los superhéroes agrupados por tipo de inteligencia
+
 def listar_superheroes_por_color_de_ojos():
     superheroes_por_color_de_ojos = {}
 
@@ -122,11 +124,6 @@ def listar_superheroes_por_color_de_ojos():
 
 # Llamar a la función para listar superhéroes por color de ojos
 listar_superheroes_por_color_de_ojos()
-
-
-
-
-
 
 
 # flag = True
