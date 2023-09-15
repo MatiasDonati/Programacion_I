@@ -72,19 +72,28 @@ def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
     tipos_de_ojos_o_pelo = set(personaje[color_de_ojos_o_pelo] for personaje in lista_personajes)
 
     contador_colores_ojos_o_pelo = {}
+    lista_contador_colores_ojos_o_pelo = []
     suma_contadores_ojos_o_pelo = 0
-
+   
     for color_ojo_o_pelo in tipos_de_ojos_o_pelo:
         contador = 0
+        lista_nombres_mismo_color_ojos_o_pelo = []
         for personaje in lista_personajes:
             if personaje[color_de_ojos_o_pelo] == color_ojo_o_pelo:
                 contador += 1
+                lista_nombres_mismo_color_ojos_o_pelo.append(personaje["nombre"])
+               
                 # Agregar una clave que "nombres" y que su valor sea una lista con 'personaes["nombre"].
-                # para hacer lo q quiero hacer tengo que haceer un lista de diccionario asi tengo clave color y vlaor cantidad y 
+                # para hacer lo q quiero hacer tengo que haceer un lista de diccionario asi tengo clave color y vlaor cantidad y
                 # otra clave nombres y valos la lista de nombres.
-
-        contador_colores_ojos_o_pelo[color_ojo_o_pelo] = contador
-
+        diccionario_colores_o_pelo = {}
+        diccionario_colores_o_pelo[color_ojo_o_pelo] = contador
+        diccionario_colores_o_pelo["nombres"] = lista_nombres_mismo_color_ojos_o_pelo
+       
+        lista_contador_colores_ojos_o_pelo.append(diccionario_colores_o_pelo)
+        # diccionario_colores_o_pelo["nombre"] = personaje["nombre"]
+    
+    # ADAPTAR ESTE CODIGO AL NUEOV DICCIONARIO CON LISTA PARA ENCONTRAR LOS NUMEROS Y SUMAR
     for cantidad_color in contador_colores_ojos_o_pelo:
         suma_contadores_ojos_o_pelo += contador_colores_ojos_o_pelo[cantidad_color]
 
@@ -93,7 +102,7 @@ def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
             print(f"{clave}: {contador_colores_ojos_o_pelo[clave]}\n""")
     else:
         print(f"ERROR.\nLa suma de las cantidades de tipos de {color_de_ojos_o_pelo} no concuerda con la cantidad de personajes")
-    print(contador_colores_ojos_o_pelo)
+    print(lista_contador_colores_ojos_o_pelo)
 # DEPENDIENDO SI ES G o H SE GIJA EN PELO O COLOR DE OJOS
 # DEPENDIENDO SI ES G o H SE GIJA EN PELO O COLOR DE OJOS
 g_o_h = "G"
@@ -103,29 +112,29 @@ respuesta_g_o_h = contar_cantidad_pelos_u_ojos(g_o_h)
 # I. Listar todos los superhéroes agrupados por color de ojos.
 # J. Listar todos los superhéroes agrupados por tipo de inteligencia
 
-def listar_superheroes_por_color_de_ojos():
-    superheroes_por_color_de_ojos = {}
+# def listar_superheroes_por_color_de_ojos():
+#     superheroes_por_color_de_ojos = {}
 
-    for personaje in lista_personajes:
-        color_ojos = personaje["color_ojos"]
+#     for personaje in lista_personajes:
+#         color_ojos = personaje["color_ojos"]
 
-        # Comprobar si el color de ojos ya existe en el diccionario
-        if color_ojos in superheroes_por_color_de_ojos:
-            # Si existe, agregar el personaje a la lista correspondiente
-            superheroes_por_color_de_ojos[color_ojos].append(personaje)
-        else:
-            # Si no existe, crear una nueva lista con el personaje
-            superheroes_por_color_de_ojos[color_ojos] = [personaje]
+#         # Comprobar si el color de ojos ya existe en el diccionario
+#         if color_ojos in superheroes_por_color_de_ojos:
+#             # Si existe, agregar el personaje a la lista correspondiente
+#             superheroes_por_color_de_ojos[color_ojos].append(personaje)
+#         else:
+#             # Si no existe, crear una nueva lista con el personaje
+#             superheroes_por_color_de_ojos[color_ojos] = [personaje]
 
-    # Imprimir la lista de superhéroes por color de ojos
-    for color_ojos, superheroes in superheroes_por_color_de_ojos.items():
-        print(f"Color de ojos: {color_ojos}")
-        for heroe in superheroes:
-            print(f"Nombre: {heroe['nombre']}")
-        print("\n")
+#     # Imprimir la lista de superhéroes por color de ojos
+#     for color_ojos, superheroes in superheroes_por_color_de_ojos.items():
+#         print(f"Color de ojos: {color_ojos}")
+#         for heroe in superheroes:
+#             print(f"Nombre: {heroe['nombre']}")
+#         print("\n")
 
-# Llamar a la función para listar superhéroes por color de ojos
-listar_superheroes_por_color_de_ojos()
+# # Llamar a la función para listar superhéroes por color de ojos
+# listar_superheroes_por_color_de_ojos()
 
 
 # flag = True
