@@ -55,41 +55,44 @@ for personaje in lista_personajes:
                 masculino_mas_debil = int(personaje["fuerza"])
                 # D
                 nombre_masculino_mas_debil = personaje["nombre"]
+# F
+if nb_cantidad != 0:
+    fuerza_promedio_nb = nb_suma_fuerza / nb_cantidad
 
-# G
-# Guardo en un conjunto "set" para tener cada tipo de color de ojos
-tipos_de_ojos = set(personaje["color_ojos"] for personaje in lista_personajes)
+# G y H - PERFECTO !!
+def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
+    if color_de_ojos_o_pelo == "G":
+        color_de_ojos_o_pelo = "color_ojos"
+    else:
+        color_de_ojos_o_pelo = "color_pelo"
 
+    tipos_de_ojos = set(personaje[color_de_ojos_o_pelo] for personaje in lista_personajes)
 
-contador_colores_ojos = {}
-suma_contadores_ojos = 0
+    contador_colores_ojos_o_pelo = {}
+    suma_contadores_ojos_o_pelo = 0
 
-# Recorro el set, en la primer vuelta ininio un contador, recorro cada persona con otro for y si matchea el color de ojo se incrementa contador
-# antes termine la primer vuelta del bucle de tipo de ojo guardo en nuevo diccionario el color de ojo como clave y el contador como valor
-# para conocer cuantos valores tengo de cada clave
+    for color_ojo_o_pelo in tipos_de_ojos:
+        contador = 0
+        for personaje in lista_personajes:
+            if personaje[color_de_ojos_o_pelo] == color_ojo_o_pelo:
+                contador += 1
 
-for color_ojo in tipos_de_ojos:
-    contador = 0
-    for personaje in lista_personajes:
-        if personaje['color_ojos'] == color_ojo:
-            contador += 1
+        contador_colores_ojos_o_pelo[color_ojo_o_pelo] = contador
 
-    contador_colores_ojos[color_ojo] = contador
+    for cantidad_color in contador_colores_ojos_o_pelo:
+        suma_contadores_ojos_o_pelo += contador_colores_ojos_o_pelo[cantidad_color]
 
-for cantidad_color in contador_colores_ojos:
-    suma_contadores_ojos += contador_colores_ojos[cantidad_color]
+    if suma_contadores_ojos_o_pelo == len(lista_personajes):
+        for clave in contador_colores_ojos_o_pelo:
+            print(f"{clave}: {contador_colores_ojos_o_pelo[clave]}\n""")
+    else:
+        print(f"ERROR.\nLa suma de las cantidades de tipos de {color_de_ojos_o_pelo} no concuerda con la cantidad de personajes")
 
-if suma_contadores_ojos == len(lista_personajes):
-    for clave in contador_colores_ojos:
-        print(f"{clave}: {contador_colores_ojos[clave]}")
-        print('')
-else:
-    print("ERROR.\nLa suma de las cantidades de tipos de ojos no concuerda con la cantidad de personajes")
-
-
-
-
-
+# DEPENDIENDO SI ES G o H SE GIJA EN PELO O COLOR DE OJOS
+# DEPENDIENDO SI ES G o H SE GIJA EN PELO O COLOR DE OJOS
+g_o_h = "H"
+respuesta_g_o_h = contar_cantidad_pelos_u_ojos(g_o_h)
+print(respuesta_g_o_h)
 
 
 
