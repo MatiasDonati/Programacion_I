@@ -80,6 +80,8 @@ def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
             if personaje[color_de_ojos_o_pelo] == color_ojo_o_pelo:
                 contador += 1
                 # Agregar una clave que "nombres" y que su valor sea una lista con 'personaes["nombre"].
+                # para hacer lo q quiero hacer tengo que haceer un lista de diccionario asi tengo clave color y vlaor cantidad y 
+                # otra clave nombres y valos la lista de nombres.
 
         contador_colores_ojos_o_pelo[color_ojo_o_pelo] = contador
 
@@ -91,7 +93,7 @@ def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
             print(f"{clave}: {contador_colores_ojos_o_pelo[clave]}\n""")
     else:
         print(f"ERROR.\nLa suma de las cantidades de tipos de {color_de_ojos_o_pelo} no concuerda con la cantidad de personajes")
-
+    print(contador_colores_ojos_o_pelo)
 # DEPENDIENDO SI ES G o H SE GIJA EN PELO O COLOR DE OJOS
 # DEPENDIENDO SI ES G o H SE GIJA EN PELO O COLOR DE OJOS
 g_o_h = "G"
