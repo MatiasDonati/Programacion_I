@@ -88,7 +88,6 @@ def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
 
         lista_contador_colores_ojos_o_pelo.append(diccionario_colores_o_pelo)
 
-    # ADAPTAR ESTE CODIGO AL NUEOV DICCIONARIO CON LISTA PARA ENCONTRAR LOS NUMEROS Y SUMAR
     for cantidad_color in lista_contador_colores_ojos_o_pelo:
         suma_contadores_ojos_o_pelo += list(cantidad_color.values())[0]
 
@@ -104,8 +103,6 @@ def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
 
     else:
         print(f"ERROR.\nLa suma de las cantidades de tipos de {color_de_ojos_o_pelo} no concuerda con la cantidad de personajes")
-
-    # print(lista_contador_colores_ojos_o_pelo)
 
 # DEPENDIENDO SI ES G o H SE FIJA EN PELO O COLOR DE OJOS
 g_o_h = "G"
