@@ -68,8 +68,6 @@ for personaje in lista_personajes:
     if int(personaje["fuerza"]) == mayor_fuerza:
         lista_personajes_con_fuerza_mayor.append(personaje)
 
-# mensaje_e = lista_superan_fuerza_femenina_promedio
-
 flag = True
 while flag:
 

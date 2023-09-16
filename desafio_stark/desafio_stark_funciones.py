@@ -97,16 +97,21 @@ def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
             primer_valor = list(color.values())[0]
             segunda_clave = list(color.keys())[1]
             segundo_valor = list(color.values())[1]
-
             print(f"{primera_clave}: {primer_valor}")
             print(f"{segunda_clave}: {segundo_valor}")
 
     else:
         print(f"ERROR.\nLa suma de las cantidades de tipos de {color_de_ojos_o_pelo} no concuerda con la cantidad de personajes")
 
+    return lista_contador_colores_ojos_o_pelo
+
+    # HACER FUNCIONES QUE RECIBA A LISTA Y AHI HACER CADA INCISO !
+    # HACER FUNCIONES QUE RECIBA A LISTA Y AHI HACER CADA INCISO !
+    # HACER FUNCIONES QUE RECIBA A LISTA Y AHI HACER CADA INCISO !
+
 # DEPENDIENDO SI ES G o H SE FIJA EN PELO O COLOR DE OJOS
-g_o_h = "G"
-respuesta_g_o_h = contar_cantidad_pelos_u_ojos(g_o_h)
+# g_o_h = "G"
+# contar_cantidad_pelos_u_ojos(g_o_h)
 
 # I. Listar todos los superhéroes agrupados por color de ojos.
 # J. Listar todos los superhéroes agrupados por tipo de inteligencia
@@ -135,34 +140,41 @@ respuesta_g_o_h = contar_cantidad_pelos_u_ojos(g_o_h)
 # # Llamar a la función para listar superhéroes por color de ojos
 # listar_superheroes_por_color_de_ojos()
 
-# flag = True
-# while flag:
+flag = True
+while flag:
 
-#     opcion_elegida = input(f"""\n-A - {inciso_a} \n-B - {inciso_b}\n-C - {inciso_c}\n-D - {inciso_d}\n-E - {inciso_e}\n-F - {inciso_f}\n-G - {inciso_g}\n-H - {inciso_h}\n-I - {inciso_i}\n-J - {inciso_j}\n-0 - SALIR\nElija la opcion que quiera conocer: """).upper()
+    opcion_elegida = input(f"""\n-A - {inciso_a} \n-B - {inciso_b}\n-C - {inciso_c}\n-D - {inciso_d}\n-E - {inciso_e}\n-F - {inciso_f}\n-G - {inciso_g}\n-H - {inciso_h}\n-I - {inciso_i}\n-J - {inciso_j}\n-0 - SALIR\nElija la opcion que quiera conocer: """).upper()
 
-#     match opcion_elegida:
-#         case 'A':
-#             pass
-#         case 'B':
-#             pass
-#         case 'C':
-#            pass
-#         case 'D':
-#            pass
-#         case 'E':
-#             pass
-#         case 'F':
-#             pass
-#         case 'G':
-#             pass
-#         case 'H':
-#             pass
-#         case 'I':
-#            pass
-#         case 'J':
-#            pass
-#         case '0':
-#             print('Hasta Pronto!!!')
-#             flag = False
-#         case _:
-#             print("\nOPCION INCORRECTA\nElija la opcion que quiera conocer: A-B-C-D-E o FIN para salir: ")
+    match opcion_elegida:
+        case 'A':
+            pass
+        case 'B':
+            pass
+        case 'C':
+           pass
+        case 'D':
+           pass
+        case 'E':
+            pass
+        case 'F':
+            pass
+        case 'G':
+            lista_contador_colores_ojos_o_pelo = contar_cantidad_pelos_u_ojos(opcion_elegida)
+            # for color in lista_contador_colores_ojos_o_pelo:
+            #     primera_clave = list(color.keys())[0]
+            #     primer_valor = list(color.values())[0]
+            #     segunda_clave = list(color.keys())[1]
+            #     segundo_valor = list(color.values())[1]
+            #     print(f"{primera_clave}: {primer_valor}")
+            #     print(f"{segunda_clave}: {segundo_valor}")
+        case 'H':
+            contar_cantidad_pelos_u_ojos(opcion_elegida)
+        case 'I':
+           pass
+        case 'J':
+           pass
+        case '0':
+            print('Hasta Pronto!!!')
+            flag = False
+        case _:
+            print("\nOPCION INCORRECTA\nElija la opcion que quiera conocer: A-B-C-D-E o FIN para salir: ")
