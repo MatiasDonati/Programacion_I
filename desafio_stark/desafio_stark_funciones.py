@@ -1,23 +1,21 @@
-# MATIAS EDUARDO DONATI
-
 from data_stark import lista_personajes
 from funciones import *
 
-# Desafío #02:
-# Usando como base lo realizado en el anterior desafío realizar los siguientes
-# informes en un menú
-# A. Recorrer la lista imprimiendo por consola el nombre de cada superhéroe de
-# género NB
-# B. Recorrer la lista y determinar cuál es el superhéroe más alto de género F
-# C. Recorrer la lista y determinar cuál es el superhéroe más alto de género M
-# D. Recorrer la lista y determinar cuál es el superhéroe más débil de género M
-# E. Recorrer la lista y determinar cuál es el superhéroe más débil de género NB
-# F. Recorrer la lista y determinar la fuerza promedio de los superhéroes de
-# género NB
-# G. Determinar cuántos superhéroes tienen cada tipo de color de ojos.
-# H. Determinar cuántos superhéroes tienen cada tipo de color de pelo.
-# I. Listar todos los superhéroes agrupados por color de ojos.
-# J. Listar todos los superhéroes agrupados por tipo de inteligencia
+# MATIAS EDUARDO DONATI
+# DESAFIO STARK 2
+
+inciso_a =  "Recorrer la lista imprimiendo por consola el nombre de cada superhéroe de género NB"
+inciso_b = "Recorrer la lista y determinar cuál es el superhéroe más alto de género F"
+inciso_c =  "Recorrer la lista y determinar cuál es el superhéroe más alto de género M"
+inciso_d = "Recorrer la lista y determinar cuál es el superhéroe más débil de género M"
+inciso_e = "Recorrer la lista y determinar cuál es el superhéroe más débil de género NB"
+inciso_f =  "Recorrer la lista y determinar la fuerza promedio de los superhéroes de género NB"
+inciso_g =  "Determinar cuántos superhéroes tienen cada tipo de color de ojos."
+inciso_h =  "Determinar cuántos superhéroes tienen cada tipo de color de pelo."
+inciso_i =  "Listar todos los superhéroes agrupados por color de ojos."
+inciso_j =  "Listar todos los superhéroes agrupados por tipo de inteligencia"
+# NOTA: Se debe aplicar el tema Funciones visto en clase para cada opción del menú
+# NOTA: Se debe aplicar el tema Funciones visto en clase para cada opción del menú
 # NOTA: Se debe aplicar el tema Funciones visto en clase para cada opción del menú
 
 femenino_mas_alto = None
@@ -59,8 +57,9 @@ for personaje in lista_personajes:
 if nb_cantidad != 0:
     fuerza_promedio_nb = nb_suma_fuerza / nb_cantidad
 
-# G y H - PERFECTO !!
+# G y H
 # I y J ARMAR DICCIONARIO AGRUPADOS POR COLOR DE OJOS E INTELIGENCIA
+
 def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
 
     if color_de_ojos_o_pelo == "G":
@@ -74,7 +73,7 @@ def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
     contador_colores_ojos_o_pelo = {}
     lista_contador_colores_ojos_o_pelo = []
     suma_contadores_ojos_o_pelo = 0
-   
+
     for color_ojo_o_pelo in tipos_de_ojos_o_pelo:
         contador = 0
         lista_nombres_mismo_color_ojos_o_pelo = []
@@ -82,32 +81,35 @@ def contar_cantidad_pelos_u_ojos(color_de_ojos_o_pelo):
             if personaje[color_de_ojos_o_pelo] == color_ojo_o_pelo:
                 contador += 1
                 lista_nombres_mismo_color_ojos_o_pelo.append(personaje["nombre"])
-               
-                # Agregar una clave que "nombres" y que su valor sea una lista con 'personaes["nombre"].
-                # para hacer lo q quiero hacer tengo que haceer un lista de diccionario asi tengo clave color y vlaor cantidad y
-                # otra clave nombres y valos la lista de nombres.
+
         diccionario_colores_o_pelo = {}
         diccionario_colores_o_pelo[color_ojo_o_pelo] = contador
         diccionario_colores_o_pelo["nombres"] = lista_nombres_mismo_color_ojos_o_pelo
-       
+
         lista_contador_colores_ojos_o_pelo.append(diccionario_colores_o_pelo)
-        # diccionario_colores_o_pelo["nombre"] = personaje["nombre"]
-    
+
     # ADAPTAR ESTE CODIGO AL NUEOV DICCIONARIO CON LISTA PARA ENCONTRAR LOS NUMEROS Y SUMAR
-    for cantidad_color in contador_colores_ojos_o_pelo:
-        suma_contadores_ojos_o_pelo += contador_colores_ojos_o_pelo[cantidad_color]
+    for cantidad_color in lista_contador_colores_ojos_o_pelo:
+        suma_contadores_ojos_o_pelo += list(cantidad_color.values())[0]
 
     if suma_contadores_ojos_o_pelo == len(lista_personajes):
-        for clave in contador_colores_ojos_o_pelo:
-            print(f"{clave}: {contador_colores_ojos_o_pelo[clave]}\n""")
+        for color in lista_contador_colores_ojos_o_pelo:
+            primera_clave = list(color.keys())[0]
+            primer_valor = list(color.values())[0]
+            segunda_clave = list(color.keys())[1]
+            segundo_valor = list(color.values())[1]
+
+            print(f"{primera_clave}: {primer_valor}")
+            print(f"{segunda_clave}: {segundo_valor}")
+
     else:
         print(f"ERROR.\nLa suma de las cantidades de tipos de {color_de_ojos_o_pelo} no concuerda con la cantidad de personajes")
-    print(lista_contador_colores_ojos_o_pelo)
-# DEPENDIENDO SI ES G o H SE GIJA EN PELO O COLOR DE OJOS
-# DEPENDIENDO SI ES G o H SE GIJA EN PELO O COLOR DE OJOS
+
+    # print(lista_contador_colores_ojos_o_pelo)
+
+# DEPENDIENDO SI ES G o H SE FIJA EN PELO O COLOR DE OJOS
 g_o_h = "G"
 respuesta_g_o_h = contar_cantidad_pelos_u_ojos(g_o_h)
-
 
 # I. Listar todos los superhéroes agrupados por color de ojos.
 # J. Listar todos los superhéroes agrupados por tipo de inteligencia
@@ -136,37 +138,34 @@ respuesta_g_o_h = contar_cantidad_pelos_u_ojos(g_o_h)
 # # Llamar a la función para listar superhéroes por color de ojos
 # listar_superheroes_por_color_de_ojos()
 
-
 # flag = True
 # while flag:
 
-#     opcion_elegida = input(f"""\n-A - {inciso_a} \n-B - {inciso_b}\n-C - {inciso_c}\n-D - {inciso_d}\n-E - {inciso_e} \n-0 - SALIR\nElija la opcion que quiera conocer: """).upper()
-#     while opcion_elegida != "A" and  opcion_elegida != "B" and  opcion_elegida != "C" and opcion_elegida != "D" and opcion_elegida != "E"and opcion_elegida != "0":
-#         opcion_elegida = input("OPCION INCORRECTA\nElija la opcion que quiera conocer: A-B-C-D-E o FIN para salir: ").upper()
+#     opcion_elegida = input(f"""\n-A - {inciso_a} \n-B - {inciso_b}\n-C - {inciso_c}\n-D - {inciso_d}\n-E - {inciso_e}\n-F - {inciso_f}\n-G - {inciso_g}\n-H - {inciso_h}\n-I - {inciso_i}\n-J - {inciso_j}\n-0 - SALIR\nElija la opcion que quiera conocer: """).upper()
 
 #     match opcion_elegida:
 #         case 'A':
-#             for personaje in lista_personajes:
-#                 for clave in personaje:
-#                     print(f"{clave}: {personaje[clave]}")
-#                 print("\n")
+#             pass
 #         case 'B':
-#             for personaje in lista_personajes_con_fuerza_mayor:
-#                 print('')
-#                 for clave in personaje:
-#                     if clave == "identidad" or clave == "peso":
-#                         print(f"{clave}: {personaje[clave]}")
-#                 print('')
+#             pass
 #         case 'C':
-#             print(f"\n{mensaje_c}")
+#            pass
 #         case 'D':
-#             print(f"\n{mensaje_d}")
+#            pass
 #         case 'E':
-#             for personaje in lista_superan_fuerza_femenina_promedio:
-#                 for clave in personaje:
-#                     print(f"{clave}: {personaje[clave]}")
-#                 print('')
-
+#             pass
+#         case 'F':
+#             pass
+#         case 'G':
+#             pass
+#         case 'H':
+#             pass
+#         case 'I':
+#            pass
+#         case 'J':
+#            pass
 #         case '0':
 #             print('Hasta Pronto!!!')
 #             flag = False
+#         case _:
+#             print("\nOPCION INCORRECTA\nElija la opcion que quiera conocer: A-B-C-D-E o FIN para salir: ")
