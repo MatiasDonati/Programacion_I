@@ -77,11 +77,13 @@ while flag:
 
     match opcion_elegida:
         case 'A':
+            print(f"{opcion_elegida}: ")
             for personaje in lista_personajes:
                 for clave in personaje:
                     print(f"{clave}: {personaje[clave]}")
                 print("\n")
         case 'B':
+            print(f"{opcion_elegida}: ")
             for personaje in lista_personajes_con_fuerza_mayor:
                 print('')
                 for clave in personaje:
@@ -89,15 +91,15 @@ while flag:
                         print(f"{clave}: {personaje[clave]}")
                 print('')
         case 'C':
-            print(f"\n{mensaje_c}")
+            print(f"\n{opcion_elegida}: {mensaje_c}")
         case 'D':
-            print(f"\n{mensaje_d}")
+            print(f"\n{opcion_elegida}: {mensaje_d}")
         case 'E':
+            print(f"{opcion_elegida}:\n")
             for personaje in lista_superan_fuerza_femenina_promedio:
                 for clave in personaje:
                     print(f"{clave}: {personaje[clave]}")
                 print('')
-
         case '0':
             print('Hasta Pronto!!!')
             flag = False
