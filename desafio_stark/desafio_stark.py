@@ -43,7 +43,6 @@ for personaje in lista_personajes:
         cantidad_femenino += 1
         suma_fuerza_femenino += float(personaje["fuerza"])
 
-mensaje_b = f"El personaje con mayor fuerza es de identidad: {mayor_fuerza_identidad} y pesa: {mayor_fuerza_peso}"
 mensaje_c = f"{menor_altura_nombre} es el personaje mas bajo y es de identidad: {menor_altura_identidad}"
 
 promedio_peso_masculinos = suma_peso_masculinos / cantidad_masculinos
