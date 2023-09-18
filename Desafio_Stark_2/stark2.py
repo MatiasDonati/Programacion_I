@@ -27,23 +27,26 @@ while flag:
         case 'B':
             print(f"{opcion_elegida}: {mostrar_femenino_mas_alto(lista_personajes)}")
         case 'C':
-            print(f"{opcion_elegida}: {mostrar_femenino_mas_alto(lista_personajes)}")
+            print(f"{opcion_elegida}: {mostrar_masculino_mas_alto(lista_personajes)}")
         case 'D':
             print(f"{opcion_elegida}: {mostrar_masculino_mas_debil(lista_personajes)}")
         case 'E':
-            pass
+            print(f"{opcion_elegida}: {mostrar_debil_NB(lista_personajes)}")
         case 'F':
-            pass
+            print(f"{opcion_elegida}: {mostrar_fuerza_promedio_NB(lista_personajes)}")
         case 'G':
-            pass
+            print(f"{opcion_elegida}:")
+            mostrar_cuantos_hay_por_tipos_de_ojos(lista_personajes)
         case 'H':
-            pass
+            print(f"{opcion_elegida}:")
+            mostrar_cuantos_hay_por_tipos_de_color_pelo(lista_personajes)
         case 'I':
-           pass
+            print(f"{opcion_elegida}:")
+            listar_personajes_por_color_de_ojos(lista_personajes)
         case 'J':
-           pass
+            print(f"{listar_personajes_por_tipo_inteligencia(lista_personajes)}")
         case '0':
             print('Hasta Pronto.')
             flag = False
         case _:
-            print("\nOPCION INCORRECTA\nElija la opcion que quiera conocer: A-B-C-D-E o FIN para salir: ")
+            print("\nOPCION INCORRECTA\nElija la opcion que correcta que quiera conocer  ó '0' para salir: ")
