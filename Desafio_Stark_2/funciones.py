@@ -78,7 +78,6 @@ def mostrar_fuerza_promedio_NB(lista_personajes):
     else:
         mensaje = "No hay NB"
 
-
     return mensaje
 
 # G
