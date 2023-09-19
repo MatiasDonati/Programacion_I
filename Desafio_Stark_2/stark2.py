@@ -23,7 +23,8 @@ while flag:
 
     match opcion_elegida:
         case 'A':
-            print(f"{opcion_elegida}: {recorrer_lista_NB(lista_personajes)}")
+            print(f"{opcion_elegida}:")
+            recorrer_lista_NB(lista_personajes)
         case 'B':
             print(f"{opcion_elegida}: {mostrar_femenino_mas_alto(lista_personajes)}")
         case 'C':
@@ -44,7 +45,7 @@ while flag:
             print(f"{opcion_elegida}:")
             listar_personajes_por_color_de_ojos(lista_personajes)
         case 'J':
-            print(f"{listar_personajes_por_tipo_inteligencia(lista_personajes)}")
+            listar_personajes_por_tipo_inteligencia(lista_personajes)
         case '0':
             print('Hasta Pronto.')
             flag = False

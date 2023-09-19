@@ -1,18 +1,17 @@
 # A
 def recorrer_lista_NB(lista_personajes):
-    lista_personajes_NB = []
+    '''Printea los personajes con genero "NB"'''
+    contador = 0
     for personaje in lista_personajes:
         if personaje["genero"] == "NB":
-            lista_personajes_NB.append(personaje["nombre"])
-    if len(lista_personajes_NB) == 0:
-        mensaje = "\nNo hay personajes NB"
-    else:
-        mensaje = lista_personajes_NB
-
-    return mensaje
+            print(f"{personaje['nombre']} es de genero 'NB'")
+            contador += 1
+    if contador == 0:
+        print("\nNo hay personajes NB")
 
 # B
 def mostrar_femenino_mas_alto(lista_personajes):
+    '''Devuelve el personaje femenino mas alo'''
     femenino_mas_alto = None
     for personaje in lista_personajes:
         if personaje["genero"] == "F":
@@ -25,6 +24,7 @@ def mostrar_femenino_mas_alto(lista_personajes):
 
 # C
 def mostrar_masculino_mas_alto(lista_personajes):
+    '''Devuelve el personaje masculino mas alto'''
     masculino_mas_alto = None
     for personaje in lista_personajes:
         if personaje["genero"] == "M":
@@ -37,6 +37,7 @@ def mostrar_masculino_mas_alto(lista_personajes):
 
 # D
 def mostrar_masculino_mas_debil(lista_personajes):
+    '''Devuelve el personaje masculino mas debil'''
     masculino_mas_debil =  None
     for personaje in lista_personajes:
         if personaje["genero"] == "M":
@@ -49,6 +50,7 @@ def mostrar_masculino_mas_debil(lista_personajes):
 
 # E
 def mostrar_debil_NB(lista_personajes):
+    '''Devuelve el personaje NB mas debil'''
     nb_mas_debil = None
     for personaje in lista_personajes:
         if personaje["genero"] == "NB":
@@ -65,6 +67,7 @@ def mostrar_debil_NB(lista_personajes):
 
 # F
 def mostrar_fuerza_promedio_NB(lista_personajes):
+    '''Muestra la fuerza promedio de genero NB'''
     suma_fuerza_NB = 0
     cantidad_NB = 0
     for personaje in lista_personajes:
@@ -124,7 +127,7 @@ def mostrar_cuantos_hay_por_tipos_de_color_pelo(lista_personajes):
         diccionario_color_pelos[color_pelo] = contador
 
     for clave, valor in diccionario_color_pelos.items():
-        print(f"Personajes con ojos de color '{clave}': {valor}")
+        print(f"Personajes con pelo de color '{clave}': {valor}")
 
 # I
 def listar_personajes_por_color_de_ojos(lista_personajes, flag=False):
@@ -133,7 +136,7 @@ def listar_personajes_por_color_de_ojos(lista_personajes, flag=False):
     for elemento in lista:
         primera_clave = list(elemento.keys())[0]
         segundo_valor = list(elemento.values())[1]
-        print(f"{primera_clave}: ")
+        print(f"Ojos color: {primera_clave}: ")
         for nombre in segundo_valor:
             print(f"  {nombre}")
 
