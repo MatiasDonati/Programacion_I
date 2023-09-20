@@ -1,10 +1,25 @@
 # MATIAS EDUARDO DONATI
 # DESAFIO STARK 3
 
+from data_stark import lista_personajes
+
+
 def stark_normalizar_datos(lista_heroes:list):
-    pass
 
+    for personaje in lista_heroes:
+        for clave, valor in personaje.items():
+            valor_sin_decimal = valor.replace(".", "")
+            if valor_sin_decimal.isdigit() == True:
+                if "." in valor:
+                    print("FLOTANTE")
+                    valor_float = float(valor)
+                    print(valor_float)
+                else:
+                    print("ENTERO")
+                    valor_int = int(valor)
+                    print(valor_int)
 
+stark_normalizar_datos(lista_personajes)
 
 
 
