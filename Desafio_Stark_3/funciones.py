@@ -1,3 +1,74 @@
+# MATIAS EDUARDO DONATI
+# DESAFIO STARK 3
+
+def stark_normalizar_datos(lista_heroes:list):
+    pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # A
 def recorrer_lista_NB(lista_personajes):
     '''Printea los personajes con genero "NB"'''
