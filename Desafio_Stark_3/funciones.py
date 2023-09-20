@@ -13,11 +13,11 @@ def stark_normalizar_datos(lista_heroes:list):
                 if "." in valor:
                     print("FLOTANTE")
                     valor_float = float(valor)
-                    print(valor_float)
+                    print(clave, valor_float)
                 else:
                     print("ENTERO")
                     valor_int = int(valor)
-                    print(valor_int)
+                    print(clave, valor_int)
 
 stark_normalizar_datos(lista_personajes)
 
