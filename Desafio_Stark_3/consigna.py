@@ -3,6 +3,7 @@ Desafío #03: (con biblioteca propia: stark_biblioteca)
 
 En base a lo resuelto en la parte 1, deberían crearse las siguientes funciones
 IMPORTANTE: Para todas y cada una de las funciones creadas, documentarlas escribiendo que es lo que hacen, que son los parámetros que reciben (si es una lista, un string, etc y que contendrá) y que es lo que retorna la función!
+
 0. Crearlafunción'stark_normalizar_datos()'lacualrecibiráporparámetrola lista de héroes. La función deberá:
 ● Recorrer la lista y convertir al tipo de dato correcto las keys (solo con las keys que representan datos numéricos) por ejemplo fuerza (int), altura (float), etc
 ● Validar primero que el tipo de dato no sea del tipo al cual será casteado. Por ejemplo si una key debería ser entero (ejemplo fuerza) verificar antes que no se encuentre ya en ese tipo de dato.

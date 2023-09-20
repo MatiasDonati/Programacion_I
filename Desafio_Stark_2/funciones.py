@@ -1,8 +1,8 @@
 # A
-def recorrer_lista_NB(lista_personajes):
+def recorrer_lista_NB(lista):
     '''Printea los personajes con genero "NB"'''
     contador = 0
-    for personaje in lista_personajes:
+    for personaje in lista:
         if personaje["genero"] == "NB":
             print(f"{personaje['nombre']} es de genero 'NB'")
             contador += 1

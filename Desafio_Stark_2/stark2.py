@@ -1,5 +1,5 @@
 from data_stark import lista_personajes
-from funciones import *
+from funciones_mejorado import *
 
 # MATIAS EDUARDO DONATI
 # DESAFIO STARK 2
@@ -26,26 +26,26 @@ while flag:
             print(f"{opcion_elegida}:")
             recorrer_lista_NB(lista_personajes)
         case 'B':
-            print(f"{opcion_elegida}: {mostrar_femenino_mas_alto(lista_personajes)}")
+            print(f"{opcion_elegida}: {mostrar_mas_alto(lista_personajes, 'F')}")
         case 'C':
-            print(f"{opcion_elegida}: {mostrar_masculino_mas_alto(lista_personajes)}")
+            print(f"{opcion_elegida}: {mostrar_mas_alto(lista_personajes, 'M')}")
         case 'D':
-            print(f"{opcion_elegida}: {mostrar_masculino_mas_debil(lista_personajes)}")
+            print(f"{opcion_elegida}: {mostrar_mas_debil(lista_personajes, 'M')}")
         case 'E':
-            print(f"{opcion_elegida}: {mostrar_debil_NB(lista_personajes)}")
+            print(f"{opcion_elegida}: {mostrar_mas_debil(lista_personajes, 'NB')}")
         case 'F':
             print(f"{opcion_elegida}: {mostrar_fuerza_promedio_NB(lista_personajes)}")
         case 'G':
             print(f"{opcion_elegida}:")
-            mostrar_cuantos_hay_por_tipos_de_ojos(lista_personajes)
+            mostrar_cuantos_hay_por_tipos_clave(lista_personajes, "color_ojos")
         case 'H':
             print(f"{opcion_elegida}:")
-            mostrar_cuantos_hay_por_tipos_de_color_pelo(lista_personajes)
+            mostrar_cuantos_hay_por_tipos_clave(lista_personajes, "color_pelo")
         case 'I':
             print(f"{opcion_elegida}:")
-            listar_personajes_por_color_de_ojos(lista_personajes)
+            listar_personajes_por_clave(lista_personajes,"color_ojos")
         case 'J':
-            listar_personajes_por_tipo_inteligencia(lista_personajes)
+            listar_personajes_por_clave(lista_personajes,"inteligencia")
         case '0':
             print('Hasta Pronto.')
             flag = False
