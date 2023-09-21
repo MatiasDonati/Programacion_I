@@ -57,6 +57,9 @@ def obtener_nombre_y_dato(heroe:dict, clave:str):
     return respuesta
 
 
+def obtener_maximo(lista:list, clave:str):
+    '''Recibe una lista y una clave, y calculará la cantidad maxima de esa clave'''
+    pass
 
 
 
