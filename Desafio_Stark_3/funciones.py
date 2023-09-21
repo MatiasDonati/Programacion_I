@@ -26,19 +26,20 @@ def stark_normalizar_datos(lista_heroes:list):
 # print(lista_personajes[5]['nombre'])
 # print(stark_normalizar_datos(lista_personajes))
 
-def obtener_dato(heroe:dict, clave_heroe:str):
+def obtener_dato(heroe:dict, clave:str):
 
-    # VALIDAR CON EXPRESIONES REGULARES
-    # VALIDAR CON EXPRESIONES REGULARES
-    # VALIDAR CON EXPRESIONES REGULARES
+# VER EL PARAMETRO CLAVE PARA Q LO USARIA !
+# VER EL PARAMETRO CLAVE PARA Q LO USARIA !
+# VER EL PARAMETRO CLAVE PARA Q LO USARIA !
 
     respuesta = False
 
     if len(heroe) == 0:
         return respuesta
 
-    for clave in heroe:
-        if clave == "nombre":
+    for clave_recorrida in heroe:
+
+        if re.search(r'\bnombre\b', clave_recorrida):
             respuesta = True
 
     return respuesta
