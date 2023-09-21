@@ -2,32 +2,46 @@
 # DESAFIO STARK 3
 
 from data_stark import lista_personajes
+import re
 
 
 def stark_normalizar_datos(lista_heroes:list):
+    respuesta = False
 
-    for personaje in lista_heroes:
-        for clave, valor in personaje.items():
-            valor_sin_decimal = valor.replace(".", "")
-            if valor_sin_decimal.isdigit() == True:
-                if "." in valor:
-                    print("FLOTANTE")
-                    valor_float = float(valor)
-                    print(clave, valor_float)
-                else:
-                    print("ENTERO")
-                    valor_int = int(valor)
-                    print(clave, valor_int)
+    if len(lista_heroes) == 0:
+        return respuesta
 
-stark_normalizar_datos(lista_personajes)
+    for heroes in lista_heroes:
+        for clave, valor in heroes.items():
+            if type(valor) != int and type(valor) != float:
+                if re.match(r'^[0-9]+\.[0-9]+$', valor):
+                    heroes[clave] = float(valor)
+                    respuesta = True
+                elif re.match(r'^[0-9]+$', valor):
+                    heroes[clave] = int(valor)
+                    respuesta = True
 
+    return respuesta
 
+# print(lista_personajes[5]['nombre'])
+# print(stark_normalizar_datos(lista_personajes))
 
+def obtener_dato(heroe:dict, clave_heroe:str):
 
+    # VALIDAR CON EXPRESIONES REGULARES
+    # VALIDAR CON EXPRESIONES REGULARES
+    # VALIDAR CON EXPRESIONES REGULARES
 
+    respuesta = False
 
+    if len(heroe) == 0:
+        return respuesta
 
+    for clave in heroe:
+        if clave == "nombre":
+            respuesta = True
 
+    return respuesta
 
 
 
