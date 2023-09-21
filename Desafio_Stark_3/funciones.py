@@ -4,7 +4,6 @@
 from data_stark import lista_personajes
 import re
 
-
 def stark_normalizar_datos(lista_heroes:list):
     respuesta = False
 
@@ -23,14 +22,7 @@ def stark_normalizar_datos(lista_heroes:list):
 
     return respuesta
 
-# print(lista_personajes[5]['nombre'])
-# print(stark_normalizar_datos(lista_personajes))
-
-def obtener_dato(heroe:dict, clave:str):
-
-# VER EL PARAMETRO CLAVE PARA Q LO USARIA !
-# VER EL PARAMETRO CLAVE PARA Q LO USARIA !
-# VER EL PARAMETRO CLAVE PARA Q LO USARIA !
+def obtener_dato(heroe:dict):
 
     respuesta = False
 
@@ -41,6 +33,23 @@ def obtener_dato(heroe:dict, clave:str):
 
         if re.search(r'\bnombre\b', clave_recorrida):
             respuesta = True
+
+    return respuesta
+
+def obtener_nombre(heroe:dict):
+
+    if obtener_dato(heroe):
+        respuesta = f"Nombre: {heroe['nombre']}"
+    else:
+        respuesta = False
+
+    return respuesta
+
+def obtener_nombre_y_dato(heroe:dict, clave:str):
+    respuesta = False
+    nombre = obtener_nombre(heroe)
+    if nombre:
+        respuesta = f"{nombre} | {clave}: {heroe[clave]}"
 
     return respuesta
 
