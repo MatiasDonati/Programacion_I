@@ -5,6 +5,7 @@ from data_stark import lista_personajes
 import re
 
 def stark_normalizar_datos(lista_heroes:list):
+    '''Recibe una lista, en caso de no estar vacia, cambia datos numericos que sean traidos de modo "str" a "int" o "float" segun corresponda. Devuelve un Boolean'''
     respuesta = False
 
     if len(lista_heroes) == 0:
@@ -23,7 +24,7 @@ def stark_normalizar_datos(lista_heroes:list):
     return respuesta
 
 def obtener_dato(heroe:dict):
-
+    '''Recibe en diccionario, de no estar vacio, busca si posee la clave "nombre". Devulve un Boolean'''
     respuesta = False
 
     if len(heroe) == 0:
@@ -37,6 +38,7 @@ def obtener_dato(heroe:dict):
     return respuesta
 
 def obtener_nombre(heroe:dict):
+    '''Recibe un diccionario, de no estar vacio retorna mensaje con nombre. Caso contrario "False"'''
 
     if obtener_dato(heroe):
         respuesta = f"Nombre: {heroe['nombre']}"
@@ -46,6 +48,7 @@ def obtener_nombre(heroe:dict):
     return respuesta
 
 def obtener_nombre_y_dato(heroe:dict, clave:str):
+    '''Recibe un diccionario y una clave"str", de no ser vacio, devuelve un mensaje con los datos. Caso contrario "False"'''
     respuesta = False
     nombre = obtener_nombre(heroe)
     if nombre:
