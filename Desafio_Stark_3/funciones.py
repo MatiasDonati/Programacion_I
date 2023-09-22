@@ -143,3 +143,11 @@ def sumar_dato_heroe(lista:list, valor:str):
 # suma_fuerzas = sumar_dato_heroe(lista_personajes, "fuerza")
 # print(suma_fuerzas)
 
+def dividir(numero1:int or float, numero2:int or float):
+    respuesta = False
+    if numero2 == 0:
+        return respuesta
+    respuesta = numero1 / numero2
+
+    return respuesta
+
