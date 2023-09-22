@@ -112,16 +112,34 @@ def obtener_dato_cantidad(lista:list, valor_a_buscar:int or float, clave:str):
 # print(obtener_dato_cantidad(lista_personajes, minimo_valor, "altura"))
 # print(obtener_dato_cantidad(lista_personajes, mayor_valor, "fuerza"))
 
-def stark_imprimir_heroes(lista):
+def stark_imprimir_heroes(lista:list):
+    '''Recibe una lista de personajes y muestra cada personaje '''
     respuesta = False
     if len(lista) == 0:
         return respuesta
     for heroe in lista:
-        print(heroe)
+        print()
+        for clave ,valor in heroe.items():
+            print(f"{clave.capitalize()}: {valor}")
 
 # # Para Probar
 # stark_normalizar_datos(lista_personajes)
 # mayor_valor = obtener_maximo(lista_personajes, "fuerza")
 # lista_mayor_altura = obtener_dato_cantidad(lista_personajes, mayor_valor, "fuerza")
 # stark_imprimir_heroes(lista_mayor_altura)
+
+def sumar_dato_heroe(lista:list, valor:str):
+    '''Recibe una lista de heroes y un valor(str). Se sumaran todos los valores pasados por parametro de toda la lista.'''
+    respuesta = False
+    suma_total = 0
+    for heroe in lista:
+        if len(heroe) == 0 or type(heroe) != dict:
+            return respuesta
+        suma_total += heroe[valor]
+
+    return suma_total
+
+# stark_normalizar_datos(lista_personajes)
+# suma_fuerzas = sumar_dato_heroe(lista_personajes, "fuerza")
+# print(suma_fuerzas)
 
