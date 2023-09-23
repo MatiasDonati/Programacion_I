@@ -185,10 +185,25 @@ def mostrar_promedio_dato(lista:list, clave:str):
 # print(mostrar_promedio_dato(lista_personajes, "fuerza"))
 
 def imprimir_menu():
-    print('Menu: ')
+    print('Mostrar Menu')
 
 def validar_entero(numero:str):
     if re.match('^[0-9]+$', numero):
         return True
     else:
         return False
+
+def stark_menu_principal(numero:str):
+
+    respuesta = False
+    imprimir_menu()
+    opcion_usuario = input('Ingrese un numero de las opciones: ')
+
+    if validar_entero(opcion_usuario):
+        opcion_usuario = int(opcion_usuario)
+        respuesta = True
+
+    return respuesta
+
+def stark_marvel_app(lista:list):
+    pass
