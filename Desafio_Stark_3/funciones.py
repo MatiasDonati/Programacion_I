@@ -4,7 +4,7 @@ import re
 # MATIAS EDUARDO DONATI
 # DESAFIO STARK 3
 
-def stark_normalizar_datos(lista_heroes:list):
+def stark_normalizar_datos(lista_heroes:list)->bool:
     '''Recibe una lista, en caso de no estar vacia, cambia datos numericos que sean traidos de modo "str" a "int" o "float" segun corresponda. Devuelve un Boolean'''
     respuesta = False
 
@@ -23,7 +23,7 @@ def stark_normalizar_datos(lista_heroes:list):
 
     return respuesta
 
-def obtener_dato(heroe:dict):
+def obtener_dato(heroe:dict, clave)->bool:
     '''Recibe en diccionario, de no estar vacio, busca si posee la clave "nombre". Devulve un Boolean'''
     respuesta = False
 
@@ -37,7 +37,7 @@ def obtener_dato(heroe:dict):
 
     return respuesta
 
-def obtener_nombre(heroe:dict):
+def obtener_nombre(heroe:dict)->str or False:
     '''Recibe un diccionario, de no estar vacio retorna mensaje con nombre. Caso contrario "False"'''
 
     if obtener_dato(heroe):
@@ -47,7 +47,7 @@ def obtener_nombre(heroe:dict):
 
     return respuesta
 
-def obtener_nombre_y_dato(heroe:dict, clave:str):
+def obtener_nombre_y_dato(heroe:dict, clave:str)->str or False:
     '''Recibe un diccionario y una clave"str", de no ser vacio, devuelve un mensaje con los datos. Caso contrario "False"'''
     respuesta = False
     nombre = obtener_nombre(heroe)
@@ -56,7 +56,7 @@ def obtener_nombre_y_dato(heroe:dict, clave:str):
 
     return respuesta
 
-def obtener_maximo(lista:list, clave:str):
+def obtener_maximo(lista:list, clave:str)-> int or float or False:
     '''Recibe una lista y una clave, y calculará la cantidad maxima de esa clave'''
     valor_max = None
     respuesta = False
@@ -78,7 +78,7 @@ def obtener_maximo(lista:list, clave:str):
     return respuesta
 #Ejecutar siempre el nomrmalizador de datos previo a ejecutar cualquier funcion
 
-def obtener_minimo(lista:list, clave:str):
+def obtener_minimo(lista:list, clave:str)-> int or float or False:
     '''Recibe una lista y una clave, y calculará la cantidad minima de esa clave'''
     valor_minimo = None
     respuesta = False
@@ -96,7 +96,7 @@ def obtener_minimo(lista:list, clave:str):
 
     return respuesta
 
-def obtener_dato_cantidad(lista:list, valor_a_buscar:int or float, clave:str):
+def obtener_dato_cantidad(lista:list, valor_a_buscar:int or float, clave:str)->list:
     '''Recibe una lista, un numero y una clave. El numero será utilizado para encontrar personajes que tengan ese valor en la clave indicada.'''
     lista_persaonjes_filtrados = []
     for heroe in lista:
@@ -112,7 +112,7 @@ def obtener_dato_cantidad(lista:list, valor_a_buscar:int or float, clave:str):
 # print(obtener_dato_cantidad(lista_personajes, minimo_valor, "altura"))
 # print(obtener_dato_cantidad(lista_personajes, mayor_valor, "fuerza"))
 
-def stark_imprimir_heroes(lista:list):
+def stark_imprimir_heroes(lista:list)->print or False:
     '''Recibe una lista de personajes y muestra cada personaje '''
     respuesta = False
     if len(lista) == 0:
@@ -128,7 +128,7 @@ def stark_imprimir_heroes(lista:list):
 # lista_mayor_altura = obtener_dato_cantidad(lista_personajes, mayor_valor, "fuerza")
 # stark_imprimir_heroes(lista_mayor_altura)
 
-def sumar_dato_heroe(lista:list, clave:str):
+def sumar_dato_heroe(lista:list, clave:str)->int or float or False:
     '''Recibe una lista de heroes y un clave(str). Se sumaran todos los valores de la clave pasada por parametro de toda la lista.'''
     respuesta = False
     suma_total = 0
@@ -144,7 +144,7 @@ def sumar_dato_heroe(lista:list, clave:str):
 # suma_fuerzas = sumar_dato_heroe(lista_personajes, "fuerza")
 # print(suma_fuerzas)
 
-def dividir(dividendo:int or float, divisor:int or float):
+def dividir(dividendo:int or float, divisor:int or float)-> int or float or False:
     '''Retorna la division de dos numeros recibidos por parametro'''
     respuesta = False
     if divisor == 0:
@@ -185,34 +185,116 @@ def mostrar_promedio_dato(lista:list, clave:str):
 # print(mostrar_promedio_dato(lista_personajes, "fuerza"))
 
 def imprimir_menu():
-    print('Mostrar Menu')
+    print("Menú de opciones:")
+    print("1 - Normalizar Datos")
+    print("2 - Imprimir nombres de héroes de género NB")
+    print("3 - Encontrar el héroe más ALTO de género F")
+    print("4 - Encontrar el héroe más ALTO de género M")
+    print("5 - Encontrar el héroe más DEBIL de género M")
+    print("6 - Encontrar el héroe más DEBIL de género NB")
+    print("7 - Calcular la FUERZA PROMEDIO de héroes de género NB")
+    print("8 - Contar héroes por COLOR DE OJOS")
+    print("9 - Contar héroes por COLOR DE PELO")
+    print("10 - Listar héroes agrupados por COLOR DE OJOS")
+    print("11 - Listar héroes agrupados por TIPO DE INTELIGENCIA")
+    print("0 - Salir")
 
-def validar_entero(numero:str):
+def validar_entero(numero:str)->int or float:
     if re.match('^[0-9]+$', numero):
         return True
     else:
         return False
 
-def stark_menu_principal(numero:str):
+def stark_menu_principal():
 
     respuesta = False
     imprimir_menu()
-    opcion_usuario = input('Ingrese un numero de las opciones: ')
+    opcion_usuario = input('Ingrese una de las opciones: ')
 
     if validar_entero(opcion_usuario):
         opcion_usuario = int(opcion_usuario)
-        respuesta = True
+        respuesta = opcion_usuario
 
     return respuesta
 
-def stark_marvel_app(lista:list):
-    stark_imprimir_heroes(lista)
+def stark_marvel_app(lista):
 
+    flag_inicio = True
 
+    while True:
+        opcion = stark_menu_principal()
+        while flag_inicio:
+            while opcion != 1:
+                print('\nDebera normalizar los datos Ingresndo la opcion 1.\n')
+                opcion = stark_menu_principal()
+            flag_inicio = False
 
+        match opcion:
+            case 1:
+                if stark_normalizar_datos(lista_personajes):
+                    print('\nDatos Normalizados\n')
+                else:
+                    print('\nHubo un error al normalizar los datos. Verifique que la lista no este vacía o que los datos ya no se hayan normalizado anteriormente\n')
+            case 2:
+                pass
+            case 3:
+                pass
+            case 4:
+                pass
+            case 5:
+                pass
+            case 6:
+                pass
+            case 7:
+                pass
+            case 8:
+                pass
+            case 9:
+                pass
+            case 10:
+                pass
+            case False:
+                print('Debera ingresar un numero')
+            case 0:
+                print('Hasta luego!')
+                break
+            case _:
+                print('Opcion Incorrecta. Vuelva a ingresar un numero.')
 
-#     print(stark_normalizar_datos(lista))
-#     stark_imprimir_heroes(lista)
-#     print(stark_menu_principal('7'))
-# stark_marvel_app(lista_personajes)
-    pass
+        # if opcion == False:
+        #     print("Opción incorrecta. Por favor, ingrese un número válido.")
+        # elif opcion == 0:
+        #     print("Hasta pronto.")
+        #     break
+        # elif opcion == 1:
+        #     stark_imprimir_heroes(lista)
+        # elif opcion == 2:
+        #     mas_alto_f = obtener_maximo(lista, "altura")
+        #     lista_mas_alto_f = obtener_dato_cantidad(lista, mas_alto_f, "altura")
+        #     stark_imprimir_heroes(lista_mas_alto_f)
+        # elif opcion == 3:
+        #     mas_alto_m = obtener_maximo(lista, "altura")
+        #     lista_mas_alto_m = obtener_dato_cantidad(lista, mas_alto_m, "altura")
+        #     stark_imprimir_heroes(lista_mas_alto_m)
+        # elif opcion == 4:
+        #     mas_debil_m = obtener_minimo(lista, "fuerza")
+        #     lista_mas_debil_m = obtener_dato_cantidad(lista, mas_debil_m, "fuerza")
+        #     stark_imprimir_heroes(lista_mas_debil_m)
+        # elif opcion == 5:
+        #     mas_debil_nb = obtener_minimo(lista, "fuerza")
+        #     lista_mas_debil_nb = obtener_dato_cantidad(lista, mas_debil_nb, "fuerza")
+        #     stark_imprimir_heroes(lista_mas_debil_nb)
+        # elif opcion == 6:
+        #     if mostrar_promedio_dato(lista, "fuerza"):
+        #         promedio_fuerza = calcular_promedio(lista, "fuerza")
+        #         print(f"La fuerza promedio de los superhéroes de género NB es: {promedio_fuerza}")
+        #     else:
+        #         print("No se pueden calcular promedios, verifique los datos.")
+        # elif opcion == 7:
+        #     pass
+        # elif opcion == 8:
+        #     pass
+        # elif opcion == 9:
+        #     pass
+
+stark_marvel_app(lista_personajes)
