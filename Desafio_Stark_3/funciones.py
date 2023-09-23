@@ -60,11 +60,11 @@ def obtener_maximo(lista:list, clave:str):
     '''Recibe una lista y una clave, y calculará la cantidad maxima de esa clave'''
     valor_max = None
     respuesta = False
-    
+
     # Esto se puede omitir ya q de estar vacia la lista sigue devolviendo Flase, pero lo pide en consigna
     if len(lista) == 0:
         return respuesta
-    
+
     for heroe in lista:
         if clave in heroe:
             if type(heroe[clave]) == int or type(heroe[clave]) == float:
@@ -128,26 +128,67 @@ def stark_imprimir_heroes(lista:list):
 # lista_mayor_altura = obtener_dato_cantidad(lista_personajes, mayor_valor, "fuerza")
 # stark_imprimir_heroes(lista_mayor_altura)
 
-def sumar_dato_heroe(lista:list, valor:str):
-    '''Recibe una lista de heroes y un valor(str). Se sumaran todos los valores pasados por parametro de toda la lista.'''
+def sumar_dato_heroe(lista:list, clave:str):
+    '''Recibe una lista de heroes y un clave(str). Se sumaran todos los valores de la clave pasada por parametro de toda la lista.'''
     respuesta = False
     suma_total = 0
     for heroe in lista:
         if len(heroe) == 0 or type(heroe) != dict:
             return respuesta
-        suma_total += heroe[valor]
+        suma_total += heroe[clave]
 
     return suma_total
 
+# # Para Probar
 # stark_normalizar_datos(lista_personajes)
 # suma_fuerzas = sumar_dato_heroe(lista_personajes, "fuerza")
 # print(suma_fuerzas)
 
-def dividir(numero1:int or float, numero2:int or float):
+def dividir(dividendo:int or float, divisor:int or float):
+    '''Retorna la division de dos numeros recibidos por parametro'''
     respuesta = False
-    if numero2 == 0:
+    if divisor == 0:
         return respuesta
-    respuesta = numero1 / numero2
+    respuesta = dividendo / divisor
 
     return respuesta
 
+def calcular_promedio(lista:list, clave:str):
+    '''Retorna un promedio. Recibe una lista de heroes y la clave de los valores a promediar'''
+    suma = sumar_dato_heroe(lista, clave)
+    cantidad = len(lista)
+    promedio = dividir(suma, cantidad)
+    return promedio
+
+# # Para Probar
+# stark_normalizar_datos(lista_personajes)
+# print(calcular_promedio(lista_personajes, "fuerza"))
+
+def mostrar_promedio_dato(lista:list, clave:str):
+
+    respuesta = False
+
+    if len(lista) == 0:
+        return respuesta
+
+    for heroe in lista:
+        if type(heroe[clave]) == int or type(heroe[clave]) == float:
+            respuesta = True
+        else:
+            respuesta = False
+            return respuesta
+
+    return respuesta
+
+# # PRUEBA
+# stark_normalizar_datos(lista_personajes)
+# print(mostrar_promedio_dato(lista_personajes, "fuerza"))
+
+def imprimir_menu():
+    print('Menu: ')
+
+def validar_entero(numero:str):
+    if re.match('^[0-9]+$', numero):
+        return True
+    else:
+        return False
