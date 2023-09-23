@@ -59,7 +59,8 @@ import re
 # print(re.sub("abc","xyz",otro_texto_bis))
 # print(re.sub("\s+","",otro_texto_bis))
 
-valor = 5
+# valor = 5
 
-# print(re.match(r'^[0-9]+\.[0-9]+$', valor))
-print(valor.replace(".", "").isdigit())
+# # print(re.match(r'^[0-9]+\.[0-9]+$', valor))
+# print(valor.replace(".", "").isdigit())
+

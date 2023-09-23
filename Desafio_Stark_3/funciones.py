@@ -1,8 +1,8 @@
-# MATIAS EDUARDO DONATI
-# DESAFIO STARK 3
-
 from data_stark import lista_personajes
 import re
+
+# MATIAS EDUARDO DONATI
+# DESAFIO STARK 3
 
 def stark_normalizar_datos(lista_heroes:list):
     '''Recibe una lista, en caso de no estar vacia, cambia datos numericos que sean traidos de modo "str" a "int" o "float" segun corresponda. Devuelve un Boolean'''
@@ -206,4 +206,13 @@ def stark_menu_principal(numero:str):
     return respuesta
 
 def stark_marvel_app(lista:list):
+    stark_imprimir_heroes(lista)
+
+
+
+
+#     print(stark_normalizar_datos(lista))
+#     stark_imprimir_heroes(lista)
+#     print(stark_menu_principal('7'))
+# stark_marvel_app(lista_personajes)
     pass
