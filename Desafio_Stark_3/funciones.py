@@ -250,10 +250,10 @@ def stark_menu_principal():
     return respuesta
 
 def stark_marvel_app(lista):
-    print(stark_menu_principal())
 
+    opcion_menu = stark_menu_principal()
 
-stark_marvel_app(lista_personajes)
+    return opcion_menu
 
 
         # if opcion == False:
@@ -291,4 +291,3 @@ stark_marvel_app(lista_personajes)
         #     pass
         # elif opcion == 9:
         #     pass
-
