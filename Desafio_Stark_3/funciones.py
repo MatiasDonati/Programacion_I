@@ -112,7 +112,7 @@ def obtener_minimo(lista:list, clave:str)-> int or float or False:
 # stark_normalizar_datos(lista_personajes)
 # print(obtener_minimo(lista_personajes, "peso"))
 
-def obtener_dato_cantidad(lista:list, valor_a_buscar:int or float, clave:str)->list:
+def obtener_dato_cantidad(lista:list, valor_a_buscar:int or float or str, clave:str)->list:
     '''Recibe una lista, un numero y una clave. El numero será utilizado para encontrar personajes que tengan ese valor en la clave indicada.'''
     lista_persaonjes_filtrados = []
     for heroe in lista:
