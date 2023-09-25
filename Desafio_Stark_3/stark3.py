@@ -5,9 +5,14 @@ from funciones import *
 # DESAFIO STARK 3
 
 opcion_elegida = None
+flag_normalizar_datos = True
 
 while opcion_elegida == None or opcion_elegida != 0:
     opcion_elegida = stark_marvel_app(lista_personajes)
+    while flag_normalizar_datos and opcion_elegida != 1:
+        print('\nDeberá normalizar los Datos ingresando la opcion número 1.\n')
+        opcion_elegida = stark_marvel_app(lista_personajes)
+    flag_normalizar_datos = False
 
     match opcion_elegida:
         case 1:

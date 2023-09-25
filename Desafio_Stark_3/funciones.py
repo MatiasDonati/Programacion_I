@@ -73,7 +73,6 @@ def obtener_maximo(lista:list, clave:str)-> int or float or False:
 
     return respuesta
 
-
 def obtener_minimo(lista:list, clave:str)-> int or float or False:
     '''Recibe una lista y una clave, y calculará la cantidad minima de esa clave'''
     valor_minimo = None
@@ -92,7 +91,7 @@ def obtener_minimo(lista:list, clave:str)-> int or float or False:
     return respuesta
 
 def obtener_dato_cantidad(lista:list, valor_a_buscar:int or float or str, clave:str)->list:
-    '''Recibe una lista, un numero y una clave. El numero será utilizado para encontrar personajes que tengan ese valor en la clave indicada.'''
+    '''Recibe una lista, un valor(int, float o str) y una clave. El numero será utilizado para encontrar personajes que tengan ese valor en la clave indicada.'''
     lista_persaonjes_filtrados = []
     for heroe in lista:
         if heroe[clave] == valor_a_buscar:
@@ -131,7 +130,6 @@ def dividir(dividendo:int or float, divisor:int or float)-> int or float or Fals
 
     return respuesta
 
-
 def calcular_promedio(lista:list, clave:str):
     '''Retorna un promedio. Recibe una lista de heroes y la clave de los valores a promediar'''
     suma = sumar_dato_heroe(lista, clave)
@@ -140,7 +138,6 @@ def calcular_promedio(lista:list, clave:str):
     return promedio
 
 def mostrar_promedio_dato(lista:list, clave:str):
-
     respuesta = False
 
     if len(lista) == 0:
@@ -178,7 +175,6 @@ def validar_entero(numero:str)->int or float:
         return False
 
 def stark_menu_principal():
-
     respuesta = False
 
     imprimir_menu()
