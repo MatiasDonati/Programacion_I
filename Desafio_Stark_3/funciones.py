@@ -252,6 +252,7 @@ def stark_menu_principal():
 def stark_marvel_app(lista):
 
     opcion_menu = stark_menu_principal()
+    
 
     return opcion_menu
 
