@@ -36,4 +36,51 @@ while opcion_elegida == None or opcion_elegida != 0:
             mas_debil = obtener_dato_cantidad(lista_genero, mas_debil, "fuerza")
             stark_imprimir_heroes(mas_debil)
         case 7:
-            pass
+            heroes_NB = obtener_dato_cantidad(lista_personajes, "NB", "genero")
+            promedio = calcular_promedio(heroes_NB, "fuerza")
+            print(promedio)
+
+        case 8 | 9:
+            lista_ojos_pelo = []
+            clave = "color_ojos"
+            if opcion_elegida == 9:
+                clave = "color_pelo"
+
+            for heroe in lista_personajes:
+                tipos_de_ojo_o_pelo = set(heroe[clave] for heroe in lista_personajes)
+
+            for tipo_ojo_o_pelo in tipos_de_ojo_o_pelo:
+                contador = 0
+                for heroe in lista_personajes:
+                    if tipo_ojo_o_pelo == heroe[clave]:
+                        contador += 1
+
+                diccionario_color_pelo_u_ojo = {}
+                diccionario_color_pelo_u_ojo[tipo_ojo_o_pelo] = contador
+
+                lista_ojos_pelo.append(diccionario_color_pelo_u_ojo)
+
+            stark_imprimir_heroes(lista_ojos_pelo)
+
+        case 10 | 11:
+
+            clave = "color_ojos"
+            if opcion_elegida == 11:
+                clave = "inteligencia"
+
+            lista_gral = []
+
+            for heroe in lista_personajes:
+                tipo_ojo_o_inteligencia = set(heroe[clave] for heroe in lista_personajes)
+
+            for ojo_o_inteligencia in tipo_ojo_o_inteligencia:
+                print(f"# {ojo_o_inteligencia}")
+                print('')
+                for heroe in lista_personajes:
+                    if heroe[clave] == ojo_o_inteligencia:
+                        print(obtener_nombre_y_dato(heroe, clave))
+                        print('')
+
+
+
+
