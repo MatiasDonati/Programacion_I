@@ -22,8 +22,8 @@ def stark_normalizar_datos(lista_heroes:list)->bool:
 
     return respuesta
 
-def obtener_dato(heroe:dict, clave="nombre"):
-    '''Recibe un diccionario, de no estar vacio, busca si posee la clave "nombre". Devuelve el diccionario'''
+def obtener_dato(heroe:dict, clave="nombre")->dict or False:
+    '''Recibe un diccionario, de no estar vacio, busca si posee la clave "nombre". Devuelve el diccionario caso contrario False'''
     respuesta = False
 
     if len(heroe) == 0:
@@ -109,7 +109,6 @@ def stark_imprimir_heroes(lista:list)->print or False:
         for clave ,valor in heroe.items():
             print(f"{clave.capitalize()}: {valor}")
 
-
 def sumar_dato_heroe(lista:list, clave:str)->int or float or False:
     '''Recibe una lista de heroes y un clave(str). Se sumaran todos los valores de la clave pasada por parametro de toda la lista.'''
     respuesta = False
@@ -153,7 +152,7 @@ def mostrar_promedio_dato(lista:list, clave:str):
     return respuesta
 
 def imprimir_menu():
-
+    '''Imprime Menu.'''
     print("Menú de opciones:")
     print("1.  Normalizar datos")
     print("2.  Recorrer la lista imprimiendo por consola el nombre de cada superhéroe de género NB")
@@ -169,12 +168,14 @@ def imprimir_menu():
     print("0.  Salir")
 
 def validar_entero(numero:str)->int or float:
+    '''Verifica el parametro este formado únicamente por dígitos.'''
     if re.match('^[0-9]+$', numero):
         return True
     else:
         return False
 
 def stark_menu_principal():
+    '''Ejecutaa la funcion "imprimir_menu", pide un numero y hace las respectivas validaciones para saber si es un numero que coincida con las opciones del menú. Devuelve un numero.'''
     respuesta = False
 
     imprimir_menu()
@@ -194,7 +195,7 @@ def stark_menu_principal():
 
     return respuesta
 
-def stark_marvel_app(lista):
+def stark_marvel_app():
 
     opcion_menu = stark_menu_principal()
 
