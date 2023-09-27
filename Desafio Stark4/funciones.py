@@ -46,8 +46,9 @@ def definir_iniciales_nombre(heroe:dict):
 # print(heroe)
 
 def agregar_iniciales_nombre(lista_heroes:list):
+    '''Recibe una lista, valida que no esta vacia y que sea de tipo lista. Luego a cada diccionario le agrega el valor "iniciales" ejecutando la funcion "definir_iniciales_nombre". Devuelve un Boolean'''
 
-    if len(lista_heroes) == 0 or type(lista_heroes) != dict:
+    if len(lista_heroes) == 0 or type(lista_heroes) != list:
         retorno = False
 
     for heroe in lista_heroes:
@@ -61,5 +62,29 @@ def agregar_iniciales_nombre(lista_heroes:list):
 
 # print(agregar_iniciales_nombre(lista_personajes))
 # for heroe in lista_personajes:
+#     print(heroe['nombre'])
 #     for clave, valor in heroe.items():
-#         print(f'\n{clave}: {valor}\n')
+#         if clave == 'iniciales':
+#             print(f'\n{clave}: {valor}\n')
+
+
+def stark_imprimir_nombres_con_iniciales(lista_heroes:list):
+
+    if len(lista_heroes) == 0 or type(lista_heroes) != list:
+        retorno = False
+
+    agregar_iniciales_nombre(lista_heroes)
+    for heroe in lista_heroes:
+        print(f"* {heroe['nombre']} ({heroe['iniciales']})")
+
+# stark_imprimir_nombres_con_iniciales(lista_personajes)
+
+def generar_codigo_heroe(id_heroe:int, genero_heroe:str):
+    retorno = False
+    if type(id_heroe) == int and genero_heroe == "M" or genero_heroe == "F" or genero_heroe == "NB":
+        retorno = f"{genero_heroe}-{id_heroe:010}"
+    return retorno
+
+# print(generar_codigo_heroe(12, "M"))
+# print(generar_codigo_heroe(1, "F"))
+# print(generar_codigo_heroe(100, "NB"))
