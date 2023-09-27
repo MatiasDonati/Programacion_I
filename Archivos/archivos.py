@@ -1,0 +1,8 @@
+archivo = open('archivo.rtf', 'r')
+archivo2 = open('archivo.txt', 'r')
+texto = archivo.read()
+texto2 = archivo2.read()
+print(texto)
+print(texto2)
+archivo.close()
+archivo2.close()
