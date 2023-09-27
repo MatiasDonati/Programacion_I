@@ -87,4 +87,98 @@ def generar_codigo_heroe(id_heroe:int, genero_heroe:str):
 
 # print(generar_codigo_heroe(12, "M"))
 # print(generar_codigo_heroe(1, "F"))
-# print(generar_codigo_heroe(100, "NB"))
+# print(generar_codigo_heroe(223, "NB"))
+
+def agregar_codigo_heroe(heroe:dict, id_heroe:int):
+
+    retorno = False
+
+    if len(heroe) != 0:
+
+        codigo = generar_codigo_heroe(id_heroe, heroe["genero"])
+
+        codigo_a_validar =  re.sub(r'[a-zA-Z-]','', codigo)
+
+        if len(codigo_a_validar) == 10:
+            heroe['codigo_heroe'] = codigo
+            retorno = True
+
+    return retorno
+
+# print(agregar_codigo_heroe(lista_personajes[23], 8))
+
+def stark_generar_codigos_heroes(lista_heroes:list):
+
+    if len(lista_heroes) != 0:
+
+        contador = 0
+
+        for indice in range(len(lista_heroes)):
+            if type(lista_heroes[indice]) == dict and 'genero' in lista_heroes[indice]:
+                bool_agrega_codigo = agregar_codigo_heroe(lista_heroes[indice], indice+1)
+                if bool_agrega_codigo:
+                    contador += 1
+
+        print(f"Se asignaron {contador} codigos")
+        for heroe in lista_heroes:
+            if 'codigo_heroe' in heroe:
+                print(f"* El código del héroe {heroe['nombre']} es: {heroe['codigo_heroe']}")
+            else:
+                print(f"* El heroe {heroe['nombre']} no posee clave 'codigo_heroe'")
+
+# stark_generar_codigos_heroes(lista_personajes)
+
+def sanitizar_entero(numero_str:str):
+    retorno = -3
+
+    if type(numero_str) == str:
+        numero_str = numero_str.strip()
+
+        if re.search(r'[^0-9-]', numero_str):
+            retorno = -1
+        elif int(numero_str) < 0:
+            retorno = -2
+        else:
+            retorno = int(numero_str)
+
+    return retorno
+
+# print(sanitizar_entero('gfg@F234'))
+
+def sanitizar_flotante(numero_str:str):
+    retorno = -3
+
+    if type(numero_str) == str:
+        numero_str = numero_str.strip()
+
+        if re.search(r'[^0-9-.]', numero_str):
+            retorno = -1
+        elif float(numero_str) < 0:
+            retorno = -2
+        else:
+            retorno = float(numero_str)
+
+    return retorno
+
+# print(sanitizar_flotante('-9.7'))
+
+def sanitizar_string(valor_str:str, valor_por_defecto:str='-'):
+
+    if len(valor_str) == 0 and valor_por_defecto != '-':
+        return valor_por_defecto.lower()
+
+    if not re.search(r'[0-9]', valor_str):
+        valor_str = valor_str.replace('/', ' ').strip()
+        valor_por_defecto = valor_por_defecto.strip()
+        retorno = valor_str.lower()
+    else:
+        retorno = 'N/A'
+
+    return retorno
+
+# print(sanitizar_string('', 'FolkasASDASDASDASDd'))
+# print(sanitizar_string('    Esta/TODO/BiEn    '))
+# print(sanitizar_string('4'))
+
+def sanitizar_dato():
+    pass
