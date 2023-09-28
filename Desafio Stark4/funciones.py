@@ -131,7 +131,7 @@ def stark_generar_codigos_heroes(lista_heroes:list):
 # 3.1
 def sanitizar_entero(numero_str:str):
     retorno = -3
-    
+   
 
     if type(numero_str) == str:
         numero_str = numero_str.strip()
@@ -199,14 +199,14 @@ def sanitizar_dato(heroe: dict, clave: str, tipo_dato: str) -> bool:
     match tipo_dato:
         case 'entero':
             heroe[clave] = sanitizar_entero(heroe[clave])
-            print(heroe[clave])
+            # print(heroe[clave])
         case 'flotante':
             heroe[clave] = sanitizar_flotante(heroe[clave])
-            print(heroe[clave])
+            # print(heroe[clave])
         case _:
             # string
             heroe[clave] = sanitizar_string(heroe[clave])
-            print(heroe[clave])
+            # print(heroe[clave])
 
     return True
 
@@ -230,7 +230,37 @@ def stark_normalizar_datos(lista_heroes:list):
 
     print('Datos Normalizados')
 
-stark_normalizar_datos(lista_personajes)
+# stark_normalizar_datos(lista_personajes)
 
-# SANITIZAR ENTERO ME DEVUELVE -1 SIEMPRE VER  ONDA !
-# SANITIZAR ENTERO ME DEVUELVE -1 SIEMPRE VER  ONDA !
+def generar_indice_nombres(lista_heroes:list):
+
+    # ESTAN MAL LAS VALIDACIONES
+    # ESTAN MAL LAS VALIDACIONES
+    # ESTAN MAL LAS VALIDACIONES
+    # ESTAN MAL LAS VALIDACIONES
+    # VER LA FORMA DE BUSCAR NOMBRE EN LA CLAVE!
+    # VER LA FORMA DE BUSCAR NOMBRE EN LA CLAVE!
+    # VER LA FORMA DE BUSCAR NOMBRE EN LA CLAVE!
+    # no hace falta el "for clave in heroe" me parece
+   
+    mensaje = "El origen de datos no contiene el formato correcto"
+
+    if len(lista_heroes) != 0:
+
+        lista_nueva = []
+       
+        for heroe in lista_heroes:
+            if type(heroe) == dict:
+                for clave in heroe:
+                    if re.search(r'\bnombre\b', clave):
+                        nombre = heroe["nombre"]
+                        nombre_separado = nombre.split()
+                        for palabra in nombre_separado:
+                            lista_nueva.append(palabra)
+            else:
+                return "El origen de datos no contiene el formato correcto"
+
+        mensaje = lista_nueva
+    return mensaje
+
+print(generar_indice_nombres(lista_personajes))
