@@ -128,6 +128,7 @@ def stark_generar_codigos_heroes(lista_heroes:list):
 
 # stark_generar_codigos_heroes(lista_personajes)
 
+# 3.1
 def sanitizar_entero(numero_str:str):
     retorno = -3
 
@@ -145,6 +146,7 @@ def sanitizar_entero(numero_str:str):
 
 # print(sanitizar_entero('gfg@F234'))
 
+# 3.2
 def sanitizar_flotante(numero_str:str):
     retorno = -3
 
@@ -162,6 +164,7 @@ def sanitizar_flotante(numero_str:str):
 
 # print(sanitizar_flotante('-9.7'))
 
+# 3.3
 def sanitizar_string(valor_str:str, valor_por_defecto:str='-'):
 
     if len(valor_str) == 0 and valor_por_defecto != '-':
@@ -180,5 +183,37 @@ def sanitizar_string(valor_str:str, valor_por_defecto:str='-'):
 # print(sanitizar_string('    Esta/TODO/BiEn    '))
 # print(sanitizar_string('4'))
 
-def sanitizar_dato():
+# 3.4
+def sanitizar_dato(heroe: dict, clave: str, tipo_dato: str) -> bool:
+
+    # if not re.match(r'^(string|entero|flotante)$',tipo_dato, re.I ):
+    if tipo_dato.lower() not in ('entero', 'flotante', 'string'):
+        print('Tipo de dato no reconocido.')
+        return False
+
+    if clave not in heroe:
+        print('La clave especificada no existe en el heroe')
+        return False
+
+    match tipo_dato:
+        case 'entero':
+            print(heroe[clave])
+            heroe[clave] = sanitizar_entero(heroe[clave])
+            print(heroe[clave])
+        case 'flotante':
+            print(heroe[clave])
+            heroe[clave] = sanitizar_flotante(heroe[clave])
+            print(heroe[clave])
+        case _:
+            # string
+            print(heroe[clave])
+            heroe[clave] = sanitizar_string(heroe[clave])
+            print(heroe[clave])
+
+    return True
+
+# print(sanitizar_dato(lista_personajes[9],'fuerza', 'entero'))
+
+# 3.5
+def stark_normalizar_datos(lista_heroes:list):
     pass
