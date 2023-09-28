@@ -202,11 +202,11 @@ def sanitizar_dato(heroe: dict, clave: str, tipo_dato: str) -> bool:
             print(heroe[clave])
         case 'flotante':
             heroe[clave] = sanitizar_flotante(heroe[clave])
-            # print(heroe[clave])
+            print(heroe[clave])
         case _:
             # string
             heroe[clave] = sanitizar_string(heroe[clave])
-            # print(heroe[clave])
+            print(heroe[clave])
 
     return True
 
@@ -220,7 +220,7 @@ def stark_normalizar_datos(lista_heroes:list):
     for heroe in lista_personajes:
         for clave in ['altura', 'peso', 'color_ojos', 'color_pelo', 'fuerza', 'inteligencia']:
             if clave in heroe:
-                if clave in ['fuerza', 'inteligencia']:
+                if clave in ['fuerza']:
                     tipo_dato = 'entero'
                 elif clave in ['altura', 'peso']:
                     tipo_dato = 'flotante'
