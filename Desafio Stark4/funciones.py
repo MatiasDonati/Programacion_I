@@ -131,11 +131,12 @@ def stark_generar_codigos_heroes(lista_heroes:list):
 # 3.1
 def sanitizar_entero(numero_str:str):
     retorno = -3
+    
 
     if type(numero_str) == str:
         numero_str = numero_str.strip()
 
-        if re.search(r'[^0-9-]', numero_str):
+        if re.search(r'[^0-9-]', numero_str) or numero_str == '':
             retorno = -1
         elif int(numero_str) < 0:
             retorno = -2
@@ -197,18 +198,15 @@ def sanitizar_dato(heroe: dict, clave: str, tipo_dato: str) -> bool:
 
     match tipo_dato:
         case 'entero':
-            print(heroe[clave])
             heroe[clave] = sanitizar_entero(heroe[clave])
             print(heroe[clave])
         case 'flotante':
-            print(heroe[clave])
             heroe[clave] = sanitizar_flotante(heroe[clave])
-            print(heroe[clave])
+            # print(heroe[clave])
         case _:
             # string
-            print(heroe[clave])
             heroe[clave] = sanitizar_string(heroe[clave])
-            print(heroe[clave])
+            # print(heroe[clave])
 
     return True
 
@@ -216,4 +214,23 @@ def sanitizar_dato(heroe: dict, clave: str, tipo_dato: str) -> bool:
 
 # 3.5
 def stark_normalizar_datos(lista_heroes:list):
-    pass
+    if len(lista_heroes) == 0:
+        print("Error: Lista de héroes vacía")
+
+    for heroe in lista_personajes:
+        for clave in ['altura', 'peso', 'color_ojos', 'color_pelo', 'fuerza', 'inteligencia']:
+            if clave in heroe:
+                if clave in ['fuerza', 'inteligencia']:
+                    tipo_dato = 'entero'
+                elif clave in ['altura', 'peso']:
+                    tipo_dato = 'flotante'
+                else:
+                    tipo_dato = 'string'
+                sanitizar_dato(heroe, clave, tipo_dato)
+
+    print('Datos Normalizados')
+
+stark_normalizar_datos(lista_personajes)
+
+# SANITIZAR ENTERO ME DEVUELVE -1 SIEMPRE VER  ONDA !
+# SANITIZAR ENTERO ME DEVUELVE -1 SIEMPRE VER  ONDA !
