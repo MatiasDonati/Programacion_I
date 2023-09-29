@@ -323,5 +323,33 @@ def imprimir_ficha_heroe(heroe:dict):
     print(f"             COLOR DE PELO:                                    {heroe['color_pelo']}")
 
 
-imprimir_ficha_heroe(lista_personajes[0])
+# imprimir_ficha_heroe(lista_personajes[0])
 
+def stark_navegar_fichas(lista_heroes:list):
+    indice_heroe = 0
+    heroe = lista_heroes[indice_heroe]
+    imprimir_ficha_heroe(heroe)
+
+    while True:
+        opcion = input('[ 1 ] Ir a la izquierda [ 2 ] Ir a la derecha [ S ] Salir\n')
+        while opcion != '1' and opcion != '2' and opcion != 'S':
+            opcion = input('[ 1 ] Ir a la izquierda [ 2 ] Ir a la derecha [ S ] Salir\n')
+        match opcion:
+            case '1':
+                # if indice_heroe == 24:
+                #     indice_heroe = 0
+                indice_heroe = indice_heroe + 1
+                print(indice_heroe)
+                imprimir_ficha_heroe(lista_heroes[indice_heroe])
+            case '2':
+                # if indice_heroe == 0:
+                #     indice_heroe = 24
+                indice_heroe = indice_heroe - 1
+                print(indice_heroe)
+                imprimir_ficha_heroe(lista_heroes[indice_heroe])
+            case _:
+                print('Hasta pronto!')
+                break
+
+
+stark_navegar_fichas(lista_personajes)
