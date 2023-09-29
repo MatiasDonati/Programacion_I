@@ -232,35 +232,65 @@ def stark_normalizar_datos(lista_heroes:list):
 
 # stark_normalizar_datos(lista_personajes)
 
+# 4.1
 def generar_indice_nombres(lista_heroes:list):
 
-    # ESTAN MAL LAS VALIDACIONES
-    # ESTAN MAL LAS VALIDACIONES
-    # ESTAN MAL LAS VALIDACIONES
-    # ESTAN MAL LAS VALIDACIONES
-    # VER LA FORMA DE BUSCAR NOMBRE EN LA CLAVE!
-    # VER LA FORMA DE BUSCAR NOMBRE EN LA CLAVE!
-    # VER LA FORMA DE BUSCAR NOMBRE EN LA CLAVE!
-    # no hace falta el "for clave in heroe" me parece
-   
     mensaje = "El origen de datos no contiene el formato correcto"
 
     if len(lista_heroes) != 0:
 
         lista_nueva = []
-       
+
         for heroe in lista_heroes:
-            if type(heroe) == dict:
-                for clave in heroe:
-                    if re.search(r'\bnombre\b', clave):
-                        nombre = heroe["nombre"]
-                        nombre_separado = nombre.split()
-                        for palabra in nombre_separado:
-                            lista_nueva.append(palabra)
+            if type(heroe) == dict and 'nombre' in heroe:
+                    nombre = heroe["nombre"]
+                    nombre_separado = nombre.split()
+                    for palabra in nombre_separado:
+                        lista_nueva.append(palabra)
             else:
                 return "El origen de datos no contiene el formato correcto"
 
         mensaje = lista_nueva
     return mensaje
 
-print(generar_indice_nombres(lista_personajes))
+# print(generar_indice_nombres(lista_personajes))
+
+# 4.2
+def stark_imprimir_indice_nombre(lista_heroes:list):
+    nombres_separados_por_guion = '-'.join(generar_indice_nombres(lista_heroes))
+    print(nombres_separados_por_guion)
+
+# stark_imprimir_indice_nombre(lista_personajes)
+
+# 5.1
+def convertir_cm_a_mtrs(valor_cm:int or float):
+
+    # if re.match(r'^[0-9]+(\.[0-9]+)?$', valor_cm) and float(valor_cm) > 0:
+    #     valor_m = float(valor_cm) / 100
+
+    if type(valor_cm) == float and valor_cm > 0:
+        valor_m = float(valor_cm) / 100
+        retorno = valor_m
+    else:
+        retorno = -1
+
+    return retorno
+
+# print(convertir_cm_a_mtrs(345.03))
+
+# 5.2
+def generar_separador(patron:str, largo:int, imprimir:bool=True):
+
+    respuesta = "N/A"
+
+    if re.match(r'^.{1,2}$', patron) and int(largo) >=1 and int(largo) <= 235:
+
+        if imprimir:
+            respuesta = ''.join(patron * largo)
+            print(respuesta)
+        else:
+            respuesta = patron
+
+    return respuesta
+
+# print(generar_separador('??', 1, False))
