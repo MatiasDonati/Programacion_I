@@ -159,11 +159,11 @@ def sanitizar_flotante(numero_str:str):
         elif float(numero_str) < 0:
             retorno = -2
         else:
-            retorno = float(numero_str)
+            retorno = round(float(numero_str), 2)
 
     return retorno
 
-# print(sanitizar_flotante('-9.7'))
+# print(sanitizar_flotante('54.545454'))
 
 # 3.3
 def sanitizar_string(valor_str:str, valor_por_defecto:str='-'):
@@ -294,3 +294,34 @@ def generar_separador(patron:str, largo:int, imprimir:bool=True):
     return respuesta
 
 # print(generar_separador('??', 1, False))
+
+# 5.3
+def generar_encabezado(titulo:str):
+
+    print('*' * 120)
+    print(titulo.upper())
+    print('*' * 120)
+
+# generar_encabezado('principal')
+
+# 5.4
+def imprimir_ficha_heroe(heroe:dict):
+
+    generar_encabezado('principal')
+    # print(f"             NOMBRE DEL HÉROE:                          {heroe['nombre']} ({heroe['iniciales']})")
+    print(f"             IDENTIDAD SECRETA:                         {heroe['identidad']}")
+    print(f"             CONSULTORA:                                {heroe['empresa']}")
+    # print(f"             CÓDIGO DEL HÉROE:                          {heroe['codigo_heroe']}")
+
+    generar_encabezado('fisico')
+    print(f"             ALTURA:                                    {heroe['altura']} Mtrs.")
+    print(f"             PESO:                                      {heroe['peso']} Kg.")
+    print(f"             FUERZA:                                    {heroe['fuerza']} N")
+
+    generar_encabezado('señas particulares')
+    print(f"             COLOR DE OJOS:                                    {heroe['color_ojos']}")
+    print(f"             COLOR DE PELO:                                    {heroe['color_pelo']}")
+
+
+imprimir_ficha_heroe(lista_personajes[0])
+
