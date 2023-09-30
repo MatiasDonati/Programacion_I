@@ -131,7 +131,7 @@ def stark_generar_codigos_heroes(lista_heroes:list):
 # 3.1
 def sanitizar_entero(numero_str:str):
     retorno = -3
-   
+
 
     if type(numero_str) == str:
         numero_str = numero_str.strip()
@@ -326,30 +326,54 @@ def imprimir_ficha_heroe(heroe:dict):
 # imprimir_ficha_heroe(lista_personajes[0])
 
 def stark_navegar_fichas(lista_heroes:list):
+
     indice_heroe = 0
     heroe = lista_heroes[indice_heroe]
     imprimir_ficha_heroe(heroe)
 
     while True:
+
         opcion = input('[ 1 ] Ir a la izquierda [ 2 ] Ir a la derecha [ S ] Salir\n')
-        while opcion != '1' and opcion != '2' and opcion != 'S':
-            opcion = input('[ 1 ] Ir a la izquierda [ 2 ] Ir a la derecha [ S ] Salir\n')
+        while opcion != '1' and opcion != '2' and opcion != 'S' and opcion != 's':
+            opcion = input(f' "{opcion}" no es una opcion correcta...\n\n[ 1 ] Ir a la izquierda [ 2 ] Ir a la derecha [ S ] Salir\n')
+        opcion = opcion.upper()
+
         match opcion:
             case '1':
-                # if indice_heroe == 24:
-                #     indice_heroe = 0
                 indice_heroe = indice_heroe + 1
-                print(indice_heroe)
+                if indice_heroe == 24:
+                    indice_heroe = 0
                 imprimir_ficha_heroe(lista_heroes[indice_heroe])
             case '2':
-                # if indice_heroe == 0:
-                #     indice_heroe = 24
                 indice_heroe = indice_heroe - 1
-                print(indice_heroe)
+                if indice_heroe == -1:
+                    indice_heroe = 23
                 imprimir_ficha_heroe(lista_heroes[indice_heroe])
             case _:
                 print('Hasta pronto!')
                 break
 
+# stark_navegar_fichas(lista_personajes)
 
-stark_navegar_fichas(lista_personajes)
+def imprimir_menu():
+    '''Imprime Menu.'''
+    print("Menú de opciones:\n")
+    print(" 1.  Imprimir la lista de nombres junto con sus iniciales")
+    print(" 2.  Generar códigos de héroes")
+    print(" 3.  Normalizar datos")
+    print(" 4.  Imprimir índice de nombres")
+    print(" 5.  Navegar fichas")
+    print("'S' Salir\n")
+
+# imprimir_menu()
+
+def stark_menu_principal():
+    imprimir_menu()
+    opcion_usuario = input('Ingrese una de las opciones: ')
+
+    return opcion_usuario
+
+# print(stark_menu_principal())
+
+def stark_marvel_app_3(lista_heroes:list):
+    pass
