@@ -375,5 +375,8 @@ def stark_menu_principal():
 
 # print(stark_menu_principal())
 
-def stark_marvel_app_3(lista_heroes:list):
-    pass
+def stark_marvel_app_3():
+    opcion_usuario = stark_menu_principal()
+    return opcion_usuario
+
+# print(stark_marvel_app_3())
