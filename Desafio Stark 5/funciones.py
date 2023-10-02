@@ -14,8 +14,8 @@ def parse_json_stark(path:str)->list:
 
 lista_heroes = parse_json_stark('/Users/matiasdonati/Documents/UTN/Programacion_y_Laboratorio/Programacion/Programacion_I/Desafio Stark 5/data_stark.json')
 # lista_heroes = parse_json_stark('Desafio Stark4\data_stark.json')
-# RUTA RELATIVA NO ANDA EN LA MAC EN EL LABURO ANDA
 # print(lista_heroes[0]["nombre"])
+# RUTA RELATIVA NO ANDA EN LA MAC, EN EL LABURO ANDA
 
 def imprimir_menu_desafio_5():
     '''Imprime menu'''
@@ -45,7 +45,7 @@ def stark_menu_principal_desafio_5():
     retorno = -1
     imprimir_menu_desafio_5()
     opcion_usuario = input(f"Ingrese una Opcion")
-    while re.match("[0-9+]", opcion_usuario):
+    while re.match(r'^[a-zA-Z]+$', opcion_usuario) == None:
         opcion_usuario = input(f"{opcion_usuario} no es una opcion valida.\nIngrese una Opcion ")
     opcion_usuario = opcion_usuario.upper
 

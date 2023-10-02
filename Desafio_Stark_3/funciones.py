@@ -99,6 +99,7 @@ def obtener_dato_cantidad(lista:list, valor_a_buscar:int or float or str, clave:
 
     return lista_persaonjes_filtrados
 
+
 def stark_imprimir_heroes(lista:list)->print or False:
     '''Recibe una lista de personajes y muestra cada personaje '''
     respuesta = False
