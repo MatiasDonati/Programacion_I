@@ -12,8 +12,7 @@ def parse_json_stark(path:str)->list:
     archivo.close()
     return dic_json['heroes']
 
-lista_heroes = parse_json_stark('/Users/matiasdonati/Documents/UTN/Programacion_y_Laboratorio/Programacion/Programacion_I/Desafio Stark 5/data_stark.json')
-# lista_heroes = parse_json_stark('Desafio Stark4\data_stark.json')
+lista_heroes = parse_json_stark('Desafio Stark 5/data_stark.json')
 # print(lista_heroes[0]["nombre"])
 # RUTA RELATIVA NO ANDA EN LA MAC, EN EL LABURO ANDA
 
