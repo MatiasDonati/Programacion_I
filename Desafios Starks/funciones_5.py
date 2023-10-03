@@ -15,7 +15,7 @@ def leer_archivo(path:str)->list:
     archivo.close()
     return dic_json['heroes']
 
-lista_heroes = leer_archivo('Desafios Starks\data_stark.json')
+lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
 # print(lista_heroes[0]["nombre"])
 
 def imprimir_menu_desafio_5():
@@ -54,14 +54,12 @@ def stark_menu_principal_desafio_5():
 # print(stark_menu_principal_desafio_5())
 
 def stark_marvel_app_5(lista_heroes:list):
-   
 
     # HACER DE DOS INCICOS UNA SOLA EJECUCION DE FUNCION CON IF
     # HACER DE DOS INCICOS UNA SOLA EJECUCION DE FUNCION CON IF
     # HACER DE DOS INCICOS UNA SOLA EJECUCION DE FUNCION CON IF
     # HACER DE DOS INCICOS UNA SOLA EJECUCION DE FUNCION CON IF
     # HACER DE DOS INCICOS UNA SOLA EJECUCION DE FUNCION CON IF
-
 
    stark_normalizar_datos(lista_heroes)
 
@@ -75,29 +73,29 @@ def stark_marvel_app_5(lista_heroes:list):
             stark_imprimir_heroes(lista_masculino)
         case 'B':
             lista_femenino = obtener_dato_cantidad(lista_personajes, "F", "genero")
-            stark_imprimir_heroes(lista_femenino)        
+            stark_imprimir_heroes(lista_femenino)
         case 'C':
             mas_alto = obtener_maximo(lista_masculino, "altura")
             heroe_con_altura_maxima = obtener_dato_cantidad(lista_masculino, mas_alto, "altura")
-            stark_imprimir_heroes(heroe_con_altura_maxima)    
+            stark_imprimir_heroes(heroe_con_altura_maxima)
         case 'D':
             mas_alto = obtener_maximo(lista_femenino, "altura")
             heroe_con_altura_maxima = obtener_dato_cantidad(lista_femenino, mas_alto, "altura")
-            stark_imprimir_heroes(heroe_con_altura_maxima)    
+            stark_imprimir_heroes(heroe_con_altura_maxima)
         case 'E':
             mas_bajo = obtener_minimo(lista_masculino, "altura")
             heroe_con_altura_minima = obtener_dato_cantidad(lista_masculino, mas_bajo, "altura")
-            stark_imprimir_heroes(heroe_con_altura_minima)            
+            stark_imprimir_heroes(heroe_con_altura_minima)
         case 'F':
             mas_bajo = obtener_minimo(lista_femenino, "altura")
             heroe_con_altura_minima = obtener_dato_cantidad(lista_femenino, mas_bajo, "altura")
-            stark_imprimir_heroes(heroe_con_altura_minima)           
+            stark_imprimir_heroes(heroe_con_altura_minima)
         case 'G':
            lista_masculino = obtener_dato_cantidad(lista_personajes, "M", "genero")
-           print(mostrar_promedio_dato(lista_masculino, "altura")) 
+           print(mostrar_promedio_dato(lista_masculino, "altura"))
         case 'H':
            lista_femenino = obtener_dato_cantidad(lista_personajes, "F", "genero")
-           print(mostrar_promedio_dato(lista_femenino, "altura"))         
+           print(mostrar_promedio_dato(lista_femenino, "altura"))
         case 'I':
             mas_alto = obtener_maximo(lista_masculino, "altura")
             heroe_con_altura_maxima = obtener_dato_cantidad(lista_masculino, mas_alto, "altura")
