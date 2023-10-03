@@ -51,4 +51,46 @@ def stark_menu_principal_desafio_5():
 # print(stark_menu_principal_desafio_5())
 
 def stark_marvel_app_5(lista_heroes:list):
-    return lista_heroes
+
+   while True:
+
+    opcion_usuario = stark_menu_principal_desafio_5()
+
+    match opcion_usuario:
+        case 'A':
+            pass
+        case 'B':
+            pass
+        case 'C':
+            pass
+        case 'D':
+            pass
+        case 'E':
+            pass
+        case 'F':
+            pass
+        case 'G':
+            pass
+        case 'H':
+            pass
+        case 'I':
+            pass
+        case 'J':
+            pass
+        case 'K':
+            pass
+        case 'L':
+            pass
+        case 'M':
+            pass
+        case 'N':
+            pass
+        case 'O':
+            pass
+        case 'Z':
+            print('Hasta luego!')
+            break
+        case -1:
+            print(f"\nIngresó una opcion NO válida.\n")
+
+stark_marvel_app_5(lista_heroes)
