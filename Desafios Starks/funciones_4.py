@@ -68,7 +68,8 @@ def agregar_iniciales_nombre(lista_heroes:list):
 #             print(f'\n{clave}: {valor}\n')
 
 
-def stark_imprimir_nombres_con_iniciales(lista_heroes:list):
+def stark_imprimir_nombres_con_iniciales(lista_heroes:list)->str or False:
+    '''Recibe una lista, agrega iniciales e imprime una cadena de string con las inciales. Si la lista esta vacia o en parametro no es una lista deuelve "False"'''
 
     if len(lista_heroes) == 0 or type(lista_heroes) != list:
         retorno = False
@@ -80,6 +81,7 @@ def stark_imprimir_nombres_con_iniciales(lista_heroes:list):
 # stark_imprimir_nombres_con_iniciales(lista_personajes)
 
 def generar_codigo_heroe(id_heroe:int, genero_heroe:str):
+    '''Recibe un id y un genero por parametro'''
     retorno = False
     if type(id_heroe) == int and genero_heroe == "M" or genero_heroe == "F" or genero_heroe == "NB":
         retorno = f"{genero_heroe}-{id_heroe:010}"
@@ -89,7 +91,8 @@ def generar_codigo_heroe(id_heroe:int, genero_heroe:str):
 # print(generar_codigo_heroe(1, "F"))
 # print(generar_codigo_heroe(223, "NB"))
 
-def agregar_codigo_heroe(heroe:dict, id_heroe:int):
+def agregar_codigo_heroe(heroe:dict, id_heroe:int)->bool:
+    '''Recine un diccionario y un id, utilizando la funcion "generar_codigo_heroe" se agrega el codigo como valor de la clave "codigo_heroe".Previamente valida que la cantidad de numeros del codigo sean 10.'''
 
     retorno = False
 
@@ -108,6 +111,7 @@ def agregar_codigo_heroe(heroe:dict, id_heroe:int):
 # print(agregar_codigo_heroe(lista_personajes[23], 8))
 
 def stark_generar_codigos_heroes(lista_heroes:list):
+    '''Ejecuta "agregar_codigo_heroe". Printea cuandos codigos se asignaron, e imprime detalle de heroes con sus codigos. Tambien informa en caso de que algun diccionario no posea clave "codigo_heroe"'''
 
     if len(lista_heroes) != 0:
 
@@ -130,6 +134,7 @@ def stark_generar_codigos_heroes(lista_heroes:list):
 
 # 3.1
 def sanitizar_entero(numero_str:str):
+    '''Recibe un numero en formato STR y lo devuelve entero. De no ser entero retonar "-3"'''
     retorno = -3
 
 
@@ -149,6 +154,8 @@ def sanitizar_entero(numero_str:str):
 
 # 3.2
 def sanitizar_flotante(numero_str:str):
+    '''Recibe un numero en formato STR y lo devuelve flotante. De no ser flotante retonar "-3"'''
+
     retorno = -3
 
     if type(numero_str) == str:
@@ -167,7 +174,11 @@ def sanitizar_flotante(numero_str:str):
 
 # 3.3
 def sanitizar_string(valor_str:str, valor_por_defecto:str='-'):
-
+    '''Recibe una cadena de texto y un valor por defecto. Retira los espacios vacios a principio y final de la cadena. Reemplaza "/" por espacio. Transforma todo a minuscula.'''
+    # SEGUIR DESCRIPCION!
+    # SEGUIR DESCRIPCION!
+    # SEGUIR DESCRIPCION!
+    # SEGUIR DESCRIPCION!
     if len(valor_str) == 0 and valor_por_defecto != '-':
         return valor_por_defecto.lower()
 
@@ -180,8 +191,9 @@ def sanitizar_string(valor_str:str, valor_por_defecto:str='-'):
 
     return retorno
 
-# print(sanitizar_string('', 'FolkasASDASDASDASDd'))
+# print(sanitizar_string('', 'FolkasASDASDASDASDd,'))
 # print(sanitizar_string('    Esta/TODO/BiEn    '))
+# print(sanitizar_string('   asdasdasd /asd asd asd', '='))
 # print(sanitizar_string('4'))
 
 # 3.4
