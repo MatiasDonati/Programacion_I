@@ -159,7 +159,7 @@ def sanitizar_flotante(numero_str:str):
         elif float(numero_str) < 0:
             retorno = -2
         else:
-            retorno = round(float(numero_str), 2)
+            retorno = float(numero_str)
 
     return retorno
 
@@ -308,10 +308,10 @@ def generar_encabezado(titulo:str):
 def imprimir_ficha_heroe(heroe:dict):
 
     generar_encabezado('principal')
-    # print(f"             NOMBRE DEL HÉROE:                          {heroe['nombre']} ({heroe['iniciales']})")
+    print(f"             NOMBRE DEL HÉROE:                          {heroe['nombre']} ({heroe['iniciales']})")
     print(f"             IDENTIDAD SECRETA:                         {heroe['identidad']}")
     print(f"             CONSULTORA:                                {heroe['empresa']}")
-    # print(f"             CÓDIGO DEL HÉROE:                          {heroe['codigo_heroe']}")
+    print(f"             CÓDIGO DEL HÉROE:                          {heroe['codigo_heroe']}")
 
     generar_encabezado('fisico')
     print(f"             ALTURA:                                    {heroe['altura']} Mtrs.")
