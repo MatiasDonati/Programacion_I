@@ -14,7 +14,6 @@ def parse_json_stark(path:str)->list:
 
 lista_heroes = parse_json_stark('Desafio Stark 5/data_stark.json')
 # print(lista_heroes[0]["nombre"])
-# RUTA RELATIVA NO ANDA EN LA MAC, EN EL LABURO ANDA
 
 def imprimir_menu_desafio_5():
     '''Imprime menu'''
@@ -39,16 +38,17 @@ def imprimir_menu_desafio_5():
 # imprimir_menu_desafio_5()
 
 def stark_menu_principal_desafio_5():
-    # VALIDAR LETRA USANDO REGEX, puwede ser minusucla o mayuscula
-    # VALIDAR LETRA USANDO REGEX, puwede ser minusucla o mayuscula
+
     retorno = -1
+
     imprimir_menu_desafio_5()
-    opcion_usuario = input(f"Ingrese una Opcion")
-    while re.match(r'^[a-zA-Z]+$', opcion_usuario) == None:
-        opcion_usuario = input(f"{opcion_usuario} no es una opcion valida.\nIngrese una Opcion ")
-    opcion_usuario = opcion_usuario.upper
+    opcion_usuario = input(f"Ingrese una Opcion: ")
+    if re.match(r'^[a-zA-Z]$', opcion_usuario) != None:
+        retorno = opcion_usuario.upper()
 
+    return retorno
 
-    # return retorno
+# print(stark_menu_principal_desafio_5())
 
-stark_menu_principal_desafio_5()
+def stark_marvel_app_5(lista_heroes:list):
+    return lista_heroes
