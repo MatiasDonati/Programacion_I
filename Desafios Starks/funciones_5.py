@@ -43,7 +43,6 @@ def stark_menu_principal_desafio_5():
 # print(stark_menu_principal_desafio_5())
 
 def stark_marvel_app_5(lista_heroes:list):
-   
 
     # HACER DE DOS INCICOS UNA SOLA EJECUCION DE FUNCION CON IF
 
@@ -55,12 +54,12 @@ def stark_marvel_app_5(lista_heroes:list):
 
     match opcion_usuario:
         case 'A':
-           
+
             # ACA TENGO Q PASAR LISTA HEROES ME PARECE
             # ACA TENGO Q PASAR LISTA HEROES ME PARECE
             # ACA TENGO Q PASAR LISTA HEROES ME PARECE
             # ACA TENGO Q PASAR LISTA HEROES ME PARECE
-           
+
             lista_masculino = obtener_dato_cantidad(lista_personajes, "M", "genero")
             stark_imprimir_heroes(lista_masculino)
         case 'B':
@@ -126,9 +125,9 @@ def stark_marvel_app_5(lista_heroes:list):
                 for heroe in lista_personajes:
                     if tipo_de_inteligencia == heroe["inteligencia"]:
                         contador += 1
-                               
+
                 diccionario_tipo_inteligencia = {}
-               
+
                 if tipo_de_inteligencia == "":
                     diccionario_tipo_inteligencia["No tiene"] = contador
                 else:
@@ -138,7 +137,7 @@ def stark_marvel_app_5(lista_heroes:list):
 
             stark_imprimir_heroes(listado_por_inteligencia)
         case 'M'| 'N'| 'O':
-           
+
             clave = "color_ojos"
             if opcion_usuario == "N":
                 clave = "color_pelo"
@@ -165,7 +164,7 @@ def leer_archivo(path:str)->list:
     """Recibe un Json y devuelve una Lista"""
 
     with open(path) as file:
-        data = json.load(file)      
+        data = json.load(file)
 
     # archivo = open(path, 'r')
     # dic_json = json.load(archivo)
@@ -173,21 +172,29 @@ def leer_archivo(path:str)->list:
     # return dic_json['heroes']
 
     return data['heroes']
-       
+
 
 lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
-stark_marvel_app_5(lista_heroes)
+# stark_marvel_app_5(lista_heroes)
 
 
 # INSTARLAR RAINBOW VSC
 
 def guardar_archivo(nombre_archivo:str, contenido:str):
+
     archivo = open(nombre_archivo, 'w+')
     archivo.writelines(contenido)
-    archivo.close()
-    print(archivo.mode)
-    print(archivo.name)
-    print(archivo.closed)
-    # return archivo
+    if archivo:
+        booleano = True
+        # print(archivo.mode)
+        # print(archivo.name)
+        # print(archivo.closed)
+        archivo.close()
+        print(f"Se creó el archivo: {archivo.name}")
+    else:
+        booleano = False
+        print(f"Error al crear el archivo: {nombre_archivo}")
 
-guardar_archivo("sarasa.csv", "ESTE ES EL CONTENIDO DEL ARasdasdasdasdasdCHIVO")
+    return booleano
+
+guardar_archivo("Sarasa_Prueba.csv", "ESTE ES EL CONTENIDO DEL ARasdasdasdasdasdCHIVO")
