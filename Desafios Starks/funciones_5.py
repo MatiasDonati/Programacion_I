@@ -178,8 +178,6 @@ lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
 # stark_marvel_app_5(lista_heroes)
 
 
-# INSTARLAR RAINBOW VSC
-
 def guardar_archivo(nombre_archivo:str, contenido:str):
 
     archivo = open(nombre_archivo, 'w+')
@@ -197,4 +195,20 @@ def guardar_archivo(nombre_archivo:str, contenido:str):
 
     return booleano
 
-guardar_archivo("Sarasa_Prueba.csv", "ESTE ES EL CONTENIDO DEL ARasdasdasdasdasdCHIVO")
+# guardar_archivo("Sarasa_Prueba.csv", "Este es el contenido del Archivo")
+
+def capitalizar_palabras(palabra_o_palabras:str):
+
+    separadas = palabra_o_palabras.split()
+
+    for indice in range(len(separadas)):
+        separadas[indice] = separadas[indice].capitalize()
+
+    unir_palabras_lista = ' '.join(separadas)
+
+    return unir_palabras_lista
+
+# print(capitalizar_palabras('hola vengo a probar si la letras se ponen en mayuscula, chau!'))
+
+
+
