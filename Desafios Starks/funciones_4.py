@@ -1,8 +1,8 @@
 from data_stark import lista_personajes
 import re
+
 # MATIAS EDUARDO DONATI
 # DESAFIO STARK 4
-
 
 def extraer_iniciales(nombre_heroe:str)->str:
     '''Recibe un nombre y devuelve sus iniciales en mayusculas separas por un ".", si el nombre contiene "the" lo omite.'''
@@ -174,11 +174,8 @@ def sanitizar_flotante(numero_str:str):
 
 # 3.3
 def sanitizar_string(valor_str:str, valor_por_defecto:str='-'):
-    '''Recibe una cadena de texto y un valor por defecto. Retira los espacios vacios a principio y final de la cadena. Reemplaza "/" por espacio. Transforma todo a minuscula.'''
-    # SEGUIR DESCRIPCION!
-    # SEGUIR DESCRIPCION!
-    # SEGUIR DESCRIPCION!
-    # SEGUIR DESCRIPCION!
+    '''Recibe una cadena de texto y un valor por defecto. Si no es un numerom retira los espacios vacios a principio y final de la cadena. Reemplaza "/" por espacio. Transforma todo a minuscula. Si es un numero retonra "N/A"'''
+
     if len(valor_str) == 0 and valor_por_defecto != '-':
         return valor_por_defecto.lower()
 
@@ -191,15 +188,9 @@ def sanitizar_string(valor_str:str, valor_por_defecto:str='-'):
 
     return retorno
 
-# print(sanitizar_string('', 'FolkasASDASDASDASDd,'))
-# print(sanitizar_string('    Esta/TODO/BiEn    '))
-# print(sanitizar_string('   asdasdasd /asd asd asd', '='))
-# print(sanitizar_string('4'))
-
 # 3.4
 def sanitizar_dato(heroe: dict, clave: str, tipo_dato: str) -> bool:
-
-    # if not re.match(r'^(string|entero|flotante)$',tipo_dato, re.I ):
+    '''Recine un diccionario, una clave y un tipo de dato, si es un dato int, float o string, realiza la sanitizacion correspondiente. De lo contrario retorna "False"'''
     if tipo_dato.lower() not in ('entero', 'flotante', 'string'):
         print('Tipo de dato no reconocido.')
         return False
@@ -211,21 +202,17 @@ def sanitizar_dato(heroe: dict, clave: str, tipo_dato: str) -> bool:
     match tipo_dato:
         case 'entero':
             heroe[clave] = sanitizar_entero(heroe[clave])
-            # print(heroe[clave])
         case 'flotante':
             heroe[clave] = sanitizar_flotante(heroe[clave])
-            # print(heroe[clave])
         case _:
-            # string
             heroe[clave] = sanitizar_string(heroe[clave])
-            # print(heroe[clave])
 
     return True
 
-# print(sanitizar_dato(lista_personajes[9],'fuerza', 'entero'))
-
 # 3.5
 def stark_normalizar_datos(lista_heroes:list):
+    '''Recibe una lista, de no estar vacia, normaliza sus datos ejecutando las funciones de sanitizacion'''
+
     if len(lista_heroes) == 0:
         print("Error: Lista de héroes vacía")
 
@@ -242,10 +229,10 @@ def stark_normalizar_datos(lista_heroes:list):
 
     print('Datos Normalizados')
 
-# stark_normalizar_datos(lista_personajes)
 
 # 4.1
 def generar_indice_nombres(lista_heroes:list):
+    '''Recibe una lista, la recorre y hace un split en los nombres de cada heroe'''
 
     mensaje = "El origen de datos no contiene el formato correcto"
 
@@ -265,10 +252,9 @@ def generar_indice_nombres(lista_heroes:list):
         mensaje = lista_nueva
     return mensaje
 
-# print(generar_indice_nombres(lista_personajes))
-
 # 4.2
 def stark_imprimir_indice_nombre(lista_heroes:list):
+    '''Separa lis indices generados por un "-". '''
     nombres_separados_por_guion = '-'.join(generar_indice_nombres(lista_heroes))
     print(nombres_separados_por_guion)
 
