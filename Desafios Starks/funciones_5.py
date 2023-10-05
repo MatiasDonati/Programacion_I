@@ -180,7 +180,7 @@ lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
 
 def guardar_archivo(nombre_archivo:str, contenido:str):
 
-    archivo = open(nombre_archivo, 'w+')
+    archivo = open(f"Desafios Starks/{nombre_archivo}", 'a')
     archivo.writelines(contenido)
     if archivo:
         booleano = True
@@ -210,5 +210,67 @@ def capitalizar_palabras(palabra_o_palabras:str):
 
 # print(capitalizar_palabras('hola vengo a probar si la letras se ponen en mayuscula, chau!'))
 
+def obtener_nombre_capitalizado(heroe:dict):
+    return capitalizar_palabras(heroe["nombre"])
+
+# print(obtener_nombre_capitalizado(lista_heroes[0]))
+
+def obtener_nombre_y_dato(heroe:dict, clave:str)->str or False:
+    '''Recibe un diccionario y una clave"str", de no ser vacio, devuelve un mensaje con los datos. Caso contrario "False"'''
+    respuesta = False
+    nombre = obtener_nombre_capitalizado(heroe)
+    if nombre:
+        respuesta = f"{nombre} | {clave}: {heroe[clave]}"
+
+    return respuesta
+
+# print(obtener_nombre_y_dato(lista_heroes[0], "fuerza"))
+
+def es_genero(heroe:dict, genero:str):
+    retorno = False
+    if heroe["genero"] == genero:
+        retorno = True
+
+    return retorno
+
+# print(es_genero(lista_heroes[0], "F")) # False
+# print(es_genero(lista_heroes[0], "M")) # True
+
+def stark_guardar_heroe_genero(lista_heroes:list, genero:str):
+
+    retorno = False
+
+    for heroe in lista_heroes:
+        if es_genero(heroe, genero):
+            nombre = obtener_nombre_capitalizado(heroe)
+            print(nombre)
+            guardar_archivo(f"heroes_{genero}.csv", f"{nombre},")
+            retorno = True
+
+    return retorno
+
+# stark_guardar_heroe_genero(lista_heroes, "M")
+
+def calcular_min_genero(lista:list, clave:str):
+    pass
+
+def obtener_minimo(lista:list, clave:str)-> int or float or False:
+    '''Recibe una lista y una clave, y calculará la cantidad minima de esa clave'''
+
+    # ALGO ANDA MAL ACA ... VER BIEN 
+
+    valor_minimo = None
+    respuesta = False
+
+    for heroe in lista:
+        if clave in heroe:
+            if valor_minimo == None or heroe[clave] < valor_minimo:
+                valor_minimo = heroe[clave]
+                nombre = heroe["nombre"]
+            respuesta = valor_minimo
+
+    return respuesta
+
+print(obtener_minimo(lista_heroes, "altura"))
 
 
