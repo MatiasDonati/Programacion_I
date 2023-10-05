@@ -400,24 +400,21 @@ VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O V
 
 def stark_calcular_imprimir_guardar_promedio_altura_genero(lista:list, genero:str):
 
-    """
-    ES SOLO DE ALTURA
-    VER BIEN LA FUNCION HECHA RAPIDA EN EL LABURO
-    """
     respuesta = False
+
     if len(lista) == 0:
         print("Error: Lista de héroes vacía")
         return respuesta
-   
-    respuesta = calcular_promedio_5(lista, "altura", genero)
 
-    contenido = f"Altura promedio género {genero}: {respuesta}"
+    altura_promedio = calcular_promedio_5(lista, "altura", genero)
+
+    contenido = f"Altura promedio género {genero}: {altura_promedio}"
     print(contenido)
 
     nombre = f"heroes_promedio_altura_{genero}.csv"
     guardar_archivo(nombre, contenido)
 
-    return respuesta
-   
+    return True
 
-stark_calcular_imprimir_guardar_promedio_altura_genero(lista_heroes, "F")
+
+# print(stark_calcular_imprimir_guardar_promedio_altura_genero(lista_heroes, "F"))
