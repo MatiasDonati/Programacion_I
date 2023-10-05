@@ -173,17 +173,27 @@ def leer_archivo(path:str)->list:
 
     return data['heroes']
 
-
+# CASA
 lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
+
+# LABURO
+# lista_heroes = leer_archivo('Programacion_I-main\Desafios Starks\data_stark.json')
+# print(lista_heroes)
+
 # stark_marvel_app_5(lista_heroes)
 
 
 def guardar_archivo(nombre_archivo:str, contenido:str):
 
     # Le puse modo "a" para poder realizar "stark_guardar_heroe_genero" y que no se haga una archivo por heroe.
-
+   
+    # CASA
     archivo = open(f"Desafios Starks/{nombre_archivo}", 'a')
+   
+    # LABURO
+    # archivo = open(f"Programacion_I-main\Desafios Starks\{nombre_archivo}", 'a')
     archivo.writelines(contenido)
+
     if archivo:
         booleano = True
         # print(archivo.mode)
@@ -222,7 +232,7 @@ def obtener_nombre_y_dato(heroe:dict, clave:str)->str or False:
     respuesta = False
     nombre = obtener_nombre_capitalizado(heroe)
     if nombre:
-        respuesta = f"{nombre} | {clave}: {heroe[clave]}"
+        respuesta = f"{nombre} | {clave.capitalize()}: {heroe[clave]}"
 
     return respuesta
 
@@ -290,7 +300,7 @@ def calcular_max_genero(lista:list, clave:str, genero:str)->dict:
 def calcular_max_min_dato_genero(lista:list, valor_a_buscar:str, clave:str, genero:str)->list:
 
     # Esta función retornará el héroe o heroína que cumpla con las condiciones pasados por parámetro. Por ejemplo, si se le pasa 'F' y 'minimo', retornará la heroína que tenga el mínimo (altura, peso u otro dato)
-    # Ver si solo necesita dos parametros solamente .. 
+    # Ver si necesita dos parametros solamente ..
 
     stark_normalizar_datos(lista)
 
@@ -304,3 +314,110 @@ def calcular_max_min_dato_genero(lista:list, valor_a_buscar:str, clave:str, gene
     return respuesta
 
 # print(calcular_max_min_dato_genero(lista_heroes, "minimo", "peso", "M"))
+
+def stark_imprimir_heroes(lista:list, valor_a_buscar:str, clave:str, genero:str)->print or False:
+
+    """
+    RETORNA TRUE O FALSE!
+    RETORNA TRUE O FALSE!
+    RETORNA TRUE O FALSE!
+    RETORNA TRUE O FALSE!
+   
+    """
+
+    heroe_buscado = calcular_max_min_dato_genero(lista, valor_a_buscar, clave, genero)
+    if valor_a_buscar == "maximo":
+        maximo_o_minimo = "Mayor"
+    elif valor_a_buscar == "minimo":
+        maximo_o_minimo = "Menor"
+    else:
+        print("Dato incorrecto")
+        return False
+    nombre = obtener_nombre_y_dato(heroe_buscado, clave)
+
+    nombre_archivo = f"heroes_{valor_a_buscar}_{clave}_{genero}.csv"
+    contenido = f"{maximo_o_minimo} {clave.capitalize()}: Nombre: {nombre}"
+    guardar_archivo(nombre_archivo, contenido)
+
+    print(contenido)
+
+    return True
+
+# stark_imprimir_heroes(lista_heroes, "maximo", "altura", "M")
+# stark_imprimir_heroes(lista_heroes, "maximo", "peso", "M")
+
+def sumar_dato_heroe_genero(lista:list, clave:str, genero:str)->int or float or False:
+    '''Recibe una lista de heroes y un clave(str). Se sumaran todos los valores de la clave pasada por parametro de toda la lista.'''
+    """
+    Una vez que cumpla con las condiciones, podrá realizar la suma. La
+    función deberá retornar la suma del valor de la key de los héroes o
+    heroínas que cumplan las condiciones o -1 en caso de que no se
+    cumplan las validaciones
+    """
+    stark_normalizar_datos(lista)
+
+    suma_total = 0
+    for heroe in lista:
+        if len(heroe) == 0 or type(heroe) != dict:
+            return -1
+        if heroe["genero"] == genero:
+            suma_total += heroe[clave]
+
+    return suma_total
+
+# print(sumar_dato_heroe_genero(lista_heroes, "altura", "M"))
+
+def cantidad_heroes_genero(lista:list, genero:str):
+   
+    contador = 0
+   
+    for heroe in lista:
+        if heroe["genero"] == genero:
+            contador += 1
+
+    return contador
+
+# cantidad = cantidad_heroes_genero(lista_heroes, "M")
+# print(cantidad)
+
+def calcular_promedio_5(lista:list, clave:str, genero:str):
+    '''Retorna un promedio. Recibe una lista de heroes y la clave de los valores a promediar'''
+   
+    suma = sumar_dato_heroe_genero(lista, clave, genero)
+    cantidad = cantidad_heroes_genero(lista, genero)
+    promedio = dividir(suma, cantidad)
+    return promedio
+
+# print(calcular_promedio_5(lista_heroes, "altura", "F"))
+
+"""
+VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
+VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
+VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
+VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
+VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
+"""
+
+def stark_calcular_imprimir_guardar_promedio_altura_genero(lista:list, genero:str):
+
+    """
+    ES SOLO DE ALTURA
+    VER BIEN LA FUNCION HECHA RAPIDA EN EL LABURO
+    """
+    respuesta = False
+    if len(lista) == 0:
+        print("Error: Lista de héroes vacía")
+        return respuesta
+   
+    respuesta = calcular_promedio_5(lista, "altura", genero)
+
+    contenido = f"Altura promedio género {genero}: {respuesta}"
+    print(contenido)
+
+    nombre = f"heroes_promedio_altura_{genero}.csv"
+    guardar_archivo(nombre, contenido)
+
+    return respuesta
+   
+
+stark_calcular_imprimir_guardar_promedio_altura_genero(lista_heroes, "F")
