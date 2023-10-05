@@ -17,7 +17,7 @@ while True:
         case '2':
            stark_generar_codigos_heroes(lista_personajes)
         case '3':
-            stark_normalizar_datos(lista_personajes)
+            stark_normalizar_datos_4(lista_personajes)
         case '4':
             stark_imprimir_indice_nombre(lista_personajes)
         case '5':

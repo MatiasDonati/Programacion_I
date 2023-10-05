@@ -180,6 +180,8 @@ lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
 
 def guardar_archivo(nombre_archivo:str, contenido:str):
 
+    # Le puse modo "a" para poder realizar "stark_guardar_heroe_genero" y que no se haga una archivo por heroe.
+
     archivo = open(f"Desafios Starks/{nombre_archivo}", 'a')
     archivo.writelines(contenido)
     if archivo:
@@ -236,11 +238,11 @@ def es_genero(heroe:dict, genero:str):
 # print(es_genero(lista_heroes[0], "F")) # False
 # print(es_genero(lista_heroes[0], "M")) # True
 
-def stark_guardar_heroe_genero(lista_heroes:list, genero:str):
+def stark_guardar_heroe_genero(lista:list, genero:str):
 
     retorno = False
 
-    for heroe in lista_heroes:
+    for heroe in lista:
         if es_genero(heroe, genero):
             nombre = obtener_nombre_capitalizado(heroe)
             print(nombre)
@@ -251,26 +253,54 @@ def stark_guardar_heroe_genero(lista_heroes:list, genero:str):
 
 # stark_guardar_heroe_genero(lista_heroes, "M")
 
-def calcular_min_genero(lista:list, clave:str):
-    pass
+def calcular_min_genero(lista:list, clave:str, genero:str)->dict:
 
-def obtener_minimo(lista:list, clave:str)-> int or float or False:
-    '''Recibe una lista y una clave, y calculará la cantidad minima de esa clave'''
-
-    # ALGO ANDA MAL ACA ... VER BIEN 
+    stark_normalizar_datos(lista)
 
     valor_minimo = None
-    respuesta = False
+    respuesta = None
 
     for heroe in lista:
-        if clave in heroe:
+        if clave in heroe and heroe["genero"] == genero:
             if valor_minimo == None or heroe[clave] < valor_minimo:
                 valor_minimo = heroe[clave]
-                nombre = heroe["nombre"]
-            respuesta = valor_minimo
+                respuesta = heroe
 
     return respuesta
 
-print(obtener_minimo(lista_heroes, "altura"))
+# print(calcular_min_genero(lista_heroes, "peso", "M"))
 
+def calcular_max_genero(lista:list, clave:str, genero:str)->dict:
 
+    stark_normalizar_datos(lista)
+
+    valor_maximo = None
+    respuesta = None
+
+    for heroe in lista:
+        if clave in heroe and heroe["genero"] == genero:
+            if valor_maximo == None or heroe[clave] > valor_maximo:
+                valor_maximo = heroe[clave]
+                respuesta = heroe
+
+    return respuesta
+
+# print(calcular_max_genero(lista_heroes, "peso", "M"))
+
+def calcular_max_min_dato_genero(lista:list, valor_a_buscar:str, clave:str, genero:str)->list:
+
+    # Esta función retornará el héroe o heroína que cumpla con las condiciones pasados por parámetro. Por ejemplo, si se le pasa 'F' y 'minimo', retornará la heroína que tenga el mínimo (altura, peso u otro dato)
+    # Ver si solo necesita dos parametros solamente .. 
+
+    stark_normalizar_datos(lista)
+
+    if valor_a_buscar == "minimo":
+        respuesta = calcular_min_genero(lista, clave, genero)
+    elif valor_a_buscar == "maximo":
+        respuesta = calcular_max_genero(lista, clave, genero)
+    else:
+        respuesta = "Denera ingresar minimo o maximo"
+
+    return respuesta
+
+# print(calcular_max_min_dato_genero(lista_heroes, "minimo", "peso", "M"))

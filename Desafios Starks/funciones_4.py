@@ -210,7 +210,7 @@ def sanitizar_dato(heroe: dict, clave: str, tipo_dato: str) -> bool:
     return True
 
 # 3.5
-def stark_normalizar_datos(lista_heroes:list):
+def stark_normalizar_datos_4(lista_heroes:list):
     '''Recibe una lista, de no estar vacia, normaliza sus datos ejecutando las funciones de sanitizacion'''
 
     if len(lista_heroes) == 0:
