@@ -1,0 +1,19 @@
+{
+    "productos": [
+        {
+            "descripcion": "coca-cola",
+            "precio": 3.5,
+            "stock": 2
+        },
+        {
+            "descripcion": "pepsi",
+            "precio": 2.3,
+            "stock": 9
+        },
+        {
+            "descripcion": "mirinda",
+            "precio": 1.52,
+            "stock": 8
+        }
+    ]
+}
