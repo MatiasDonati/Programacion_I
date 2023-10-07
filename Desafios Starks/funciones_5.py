@@ -439,12 +439,26 @@ def guardar_cantidad_heroes_tipo(dicc_tipos_de_claves:dict, clave_a_buscar:str):
     retorno = False
 
     for clave, valor in dicc_tipos_de_claves.items():
+
         linea_a_guardar = (f"Caracteristica: {clave_a_buscar} {clave} - Cantidad de heroes: {valor}\n")
-        print(linea_a_guardar)
         guardar_archivo(f"heroes_cantidad_{clave_a_buscar}.csv", linea_a_guardar)
+
         retorno = True
 
     return retorno
 
-# guardar_cantidad_heroes_tipo(calcular_cantidad_tipo(lista_heroes, "color_ojos"), "color_ojos")
+# print(guardar_cantidad_heroes_tipo(calcular_cantidad_tipo(lista_heroes, "color_ojos"), "color_ojos"))
+
+def stark_calcular_cantidad_por_tipo(lista:list, clave_ingresada:str):
+
+    retorno = False
+
+    diccionario_tipos_calve =  calcular_cantidad_tipo(lista, clave_ingresada)
+    guardado = guardar_cantidad_heroes_tipo(diccionario_tipos_calve, clave_ingresada)
+    if guardado:
+        retorno = True
+
+    return retorno
+
+# print(stark_calcular_cantidad_por_tipo(lista_heroes, "color_ojos"))
 
