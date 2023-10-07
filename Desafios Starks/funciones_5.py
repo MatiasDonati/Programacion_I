@@ -411,10 +411,27 @@ def stark_calcular_imprimir_guardar_promedio_altura_genero(lista:list, genero:st
     contenido = f"Altura promedio género {genero}: {altura_promedio}"
     print(contenido)
 
-    nombre = f"heroes_promedio_altura_{genero}.csv"
+    nombre = f"PEDOheroes_promedio_altura_{genero}.csv"
     guardar_archivo(nombre, contenido)
 
     return True
 
 
-# print(stark_calcular_imprimir_guardar_promedio_altura_genero(lista_heroes, "F"))
+def calcular_cantidad_tipo(lista:list, clave:str):
+    if len(lista) == 0:
+        return {"Error": "La lista se encuentra vacía"}
+
+    diccionario_gral = {}
+
+    for heroe in lista:
+        tipo_clave = capitalizar_palabras(heroe[clave])
+        if tipo_clave in diccionario_gral:
+            diccionario_gral[tipo_clave] += 1
+        else:
+            diccionario_gral[tipo_clave] = 1
+
+    return diccionario_gral
+
+print(calcular_cantidad_tipo(lista_heroes, "inteligencia"))
+
+
