@@ -462,3 +462,7 @@ def stark_calcular_cantidad_por_tipo(lista:list, clave_ingresada:str):
 
 # print(stark_calcular_cantidad_por_tipo(lista_heroes, "color_ojos"))
 
+def obtener_lista_de_tipos(lista:list, clave_a_buscar:str):
+    pass
+
+# print(obtener_lista_de_tipos(lista_heroes, "color_ojos"))
