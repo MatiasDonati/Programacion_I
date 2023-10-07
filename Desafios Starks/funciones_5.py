@@ -432,6 +432,19 @@ def calcular_cantidad_tipo(lista:list, clave:str):
 
     return diccionario_gral
 
-print(calcular_cantidad_tipo(lista_heroes, "inteligencia"))
+# print(calcular_cantidad_tipo(lista_heroes, "color_pelo"))
 
+def guardar_cantidad_heroes_tipo(dicc_tipos_de_claves:dict, clave_a_buscar:str):
+
+    retorno = False
+
+    for clave, valor in dicc_tipos_de_claves.items():
+        linea_a_guardar = (f"Caracteristica: {clave_a_buscar} {clave} - Cantidad de heroes: {valor}\n")
+        print(linea_a_guardar)
+        guardar_archivo(f"heroes_cantidad_{clave_a_buscar}.csv", linea_a_guardar)
+        retorno = True
+
+    return retorno
+
+# guardar_cantidad_heroes_tipo(calcular_cantidad_tipo(lista_heroes, "color_ojos"), "color_ojos")
 
