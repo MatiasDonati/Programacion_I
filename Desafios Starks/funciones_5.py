@@ -462,7 +462,53 @@ def stark_calcular_cantidad_por_tipo(lista:list, clave_ingresada:str):
 
 # print(stark_calcular_cantidad_por_tipo(lista_heroes, "color_ojos"))
 
-def obtener_lista_de_tipos(lista:list, clave_a_buscar:str):
-    pass
+# def obtener_lista_de_tipos(lista:list, clave_a_buscar:str):
+
+#     lista_nueva = []
+#     tipos_de_clave = set(heroe[clave_a_buscar] for heroe in lista)
+
+#     for clave in tipos_de_clave:
+#         if clave == "":
+#             clave = "N/A"
+#         if clave != "N/A":
+#             clave = (capitalizar_palabras(clave))
+#         lista_nueva.append(clave)
+
+#     return lista_nueva
 
 # print(obtener_lista_de_tipos(lista_heroes, "color_ojos"))
+
+def obtener_lista_de_tipos(lista:list, clave_a_buscar:str):
+
+    claves = []
+
+    for heroe in lista:
+        if clave_a_buscar in heroe:
+            if heroe[clave_a_buscar].strip():
+                heroe[clave_a_buscar] = capitalizar_palabras(heroe[clave_a_buscar])
+            else:
+                 heroe[clave_a_buscar] = "N/A"
+
+            claves.append(heroe[clave_a_buscar])
+
+    lista_sin_duplicados = set(clave for clave in claves)
+
+    return lista_sin_duplicados
+
+# print(obtener_lista_de_tipos(lista_heroes, "color_ojos"))
+
+def normalizar_dato(valor:str, valor_por_defecto:str="N/A"):
+    if valor.strip():
+        return valor
+    else:
+        return valor_por_defecto
+
+# print(normalizar_dato(""))
+# print(normalizar_dato("Green"))
+
+def normalizar_heroe(heroe:dict,key:str):
+    if key in heroe:
+        heroe[key] = capitalizar_palabras(key)
+    # SEGUIR ESTA
+    # SEGUIR ESTA
+    # SEGUIR ESTA
