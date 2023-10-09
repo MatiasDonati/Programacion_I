@@ -42,123 +42,123 @@ def stark_menu_principal_desafio_5():
 
 # print(stark_menu_principal_desafio_5())
 
-def stark_marvel_app_5(lista_heroes:list):
+def stark_marvel_app_5(lista_personajes:list):
 
     # HACER DE DOS INCICOS UNA SOLA EJECUCION DE FUNCION CON IF
 
-   stark_normalizar_datos(lista_heroes)
+    stark_normalizar_datos(lista_personajes)
 
-   while True:
+    while True:
 
-    opcion_usuario = stark_menu_principal_desafio_5()
+        opcion_usuario = stark_menu_principal_desafio_5()
+        lista_masculino = obtener_dato_cantidad(lista_personajes, "M", "genero")
+        lista_femenino = obtener_dato_cantidad(lista_personajes, "F", "genero")
 
-    match opcion_usuario:
-        case 'A':
+        # print(len(lista_personajes))
+        # print(len(lista_masculino))
+        # print(len(lista_femenino))
 
-            # ACA TENGO Q PASAR LISTA HEROES ME PARECE
-            # ACA TENGO Q PASAR LISTA HEROES ME PARECE
-            # ACA TENGO Q PASAR LISTA HEROES ME PARECE
-            # ACA TENGO Q PASAR LISTA HEROES ME PARECE
-
-            lista_masculino = obtener_dato_cantidad(lista_personajes, "M", "genero")
-            stark_imprimir_heroes(lista_masculino)
-        case 'B':
-            lista_femenino = obtener_dato_cantidad(lista_personajes, "F", "genero")
-            stark_imprimir_heroes(lista_femenino)
-        case 'C':
-            mas_alto = obtener_maximo(lista_masculino, "altura")
-            heroe_con_altura_maxima = obtener_dato_cantidad(lista_masculino, mas_alto, "altura")
-            stark_imprimir_heroes(heroe_con_altura_maxima)
-        case 'D':
-            mas_alto = obtener_maximo(lista_femenino, "altura")
-            heroe_con_altura_maxima = obtener_dato_cantidad(lista_femenino, mas_alto, "altura")
-            stark_imprimir_heroes(heroe_con_altura_maxima)
-        case 'E':
-            mas_bajo = obtener_minimo(lista_masculino, "altura")
-            heroe_con_altura_minima = obtener_dato_cantidad(lista_masculino, mas_bajo, "altura")
-            stark_imprimir_heroes(heroe_con_altura_minima)
-        case 'F':
-            mas_bajo = obtener_minimo(lista_femenino, "altura")
-            heroe_con_altura_minima = obtener_dato_cantidad(lista_femenino, mas_bajo, "altura")
-            stark_imprimir_heroes(heroe_con_altura_minima)
-        case 'G':
-           lista_masculino = obtener_dato_cantidad(lista_personajes, "M", "genero")
-           print(mostrar_promedio_dato(lista_masculino, "altura"))
-        case 'H':
-           lista_femenino = obtener_dato_cantidad(lista_personajes, "F", "genero")
-           print(mostrar_promedio_dato(lista_femenino, "altura"))
-        case 'I':
-            mas_alto = obtener_maximo(lista_masculino, "altura")
-            heroe_con_altura_maxima = obtener_dato_cantidad(lista_masculino, mas_alto, "altura")
-            if len(heroe_con_altura_maxima) == 1:
-                heroe = heroe_con_altura_maxima[0]
-                print(obtener_nombre(heroe))
-        case 'J' | 'K':
-            lista_ojos_pelo = []
-            clave = "color_ojos"
-            if opcion_usuario == 'K':
-                clave = "color_pelo"
-
-            for heroe in lista_personajes:
-                tipos_de_ojo_o_pelo = set(heroe[clave] for heroe in lista_personajes)
-
-            for tipo_ojo_o_pelo in tipos_de_ojo_o_pelo:
-                contador = 0
-                for heroe in lista_personajes:
-                    if tipo_ojo_o_pelo == heroe[clave]:
-                        contador += 1
-
-                diccionario_color_pelo_u_ojo = {}
-                diccionario_color_pelo_u_ojo[tipo_ojo_o_pelo] = contador
-
-                lista_ojos_pelo.append(diccionario_color_pelo_u_ojo)
-
-            stark_imprimir_heroes(lista_ojos_pelo)
-        case 'L':
-            listado_por_inteligencia = []
-
-            for heroe in lista_personajes:
-                tipos_de_inteligencia = set(heroe["inteligencia"] for heroe in lista_personajes)
-
-            for tipo_de_inteligencia in tipos_de_inteligencia:
-                contador = 0
-                for heroe in lista_personajes:
-                    if tipo_de_inteligencia == heroe["inteligencia"]:
-                        contador += 1
-
-                diccionario_tipo_inteligencia = {}
-
-                if tipo_de_inteligencia == "":
-                    diccionario_tipo_inteligencia["No tiene"] = contador
+        match opcion_usuario:
+            case 'A' | 'B':
+                if opcion_usuario == "A":
+                    lista = lista_masculino
                 else:
-                    diccionario_tipo_inteligencia[tipo_de_inteligencia] = contador
+                    lista = lista_femenino
+                for heroe in lista:
+                    print(heroe["nombre"])
+            case 'C' | 'D':
+                if opcion_usuario == 'C':
+                    lista = lista_masculino
+                else:
+                    lista = lista_femenino
+                mas_alto = obtener_maximo(lista, "altura")
+                heroe_con_altura_maxima = obtener_dato_cantidad(lista, mas_alto, "altura")
+                stark_imprimir_heroes(heroe_con_altura_maxima)
+            case 'E' | 'F':
+                if opcion_usuario == 'C':
+                    lista = lista_masculino
+                else:
+                    lista = lista_femenino
+                mas_bajo = obtener_minimo(lista, "altura")
+                heroe_con_altura_minima = obtener_dato_cantidad(lista, mas_bajo, "altura")
+                stark_imprimir_heroes(heroe_con_altura_minima)
+            case 'G':
+                print(mostrar_promedio_dato(lista_masculino, "altura"))
+            case 'H':
+                print(mostrar_promedio_dato(lista_femenino, "altura"))
+            case 'I':
+                mas_alto = obtener_maximo(lista_masculino, "altura")
+                heroe_con_altura_maxima = obtener_dato_cantidad(lista_masculino, mas_alto, "altura")
+                if len(heroe_con_altura_maxima) == 1:
+                    heroe = heroe_con_altura_maxima[0]
+                    print(obtener_nombre(heroe))
+            case 'J' | 'K':
+                lista_ojos_pelo = []
+                clave = "color_ojos"
+                if opcion_usuario == 'K':
+                    clave = "color_pelo"
 
-                listado_por_inteligencia.append(diccionario_tipo_inteligencia)
-
-            stark_imprimir_heroes(listado_por_inteligencia)
-        case 'M'| 'N'| 'O':
-
-            clave = "color_ojos"
-            if opcion_usuario == "N":
-                clave = "color_pelo"
-            else:
-                clave = "inteligencia"
-
-            for heroe in lista_personajes:
-                tipo_ojo_o_inteligencia = set(heroe[clave] for heroe in lista_personajes)
-
-            for ojo_o_inteligencia in tipo_ojo_o_inteligencia:
-                print(f"# {ojo_o_inteligencia}")
-                print('')
                 for heroe in lista_personajes:
-                    if heroe[clave] == ojo_o_inteligencia:
-                        print(obtener_nombre_y_dato(heroe, clave))
-                        print('')
-        case 'Z':
-            print('Hasta luego!')
-            break
-        case -1:
-            print(f"\nIngresó una opcion NO válida.\n")
+                    tipos_de_ojo_o_pelo = set(heroe[clave] for heroe in lista_personajes)
+
+                for tipo_ojo_o_pelo in tipos_de_ojo_o_pelo:
+                    contador = 0
+                    for heroe in lista_personajes:
+                        if tipo_ojo_o_pelo == heroe[clave]:
+                            contador += 1
+
+                    diccionario_color_pelo_u_ojo = {}
+                    diccionario_color_pelo_u_ojo[tipo_ojo_o_pelo] = contador
+
+                    lista_ojos_pelo.append(diccionario_color_pelo_u_ojo)
+
+                stark_imprimir_heroes(lista_ojos_pelo)
+            case 'L':
+                listado_por_inteligencia = []
+
+                for heroe in lista_personajes:
+                    tipos_de_inteligencia = set(heroe["inteligencia"] for heroe in lista_personajes)
+
+                for tipo_de_inteligencia in tipos_de_inteligencia:
+                    contador = 0
+                    for heroe in lista_personajes:
+                        if tipo_de_inteligencia == heroe["inteligencia"]:
+                            contador += 1
+
+                    diccionario_tipo_inteligencia = {}
+
+                    if tipo_de_inteligencia == "":
+                        diccionario_tipo_inteligencia["No tiene"] = contador
+                    else:
+                        diccionario_tipo_inteligencia[tipo_de_inteligencia] = contador
+
+                    listado_por_inteligencia.append(diccionario_tipo_inteligencia)
+
+                stark_imprimir_heroes(listado_por_inteligencia)
+            case 'M'| 'N'| 'O':
+
+                clave = "color_ojos"
+                if opcion_usuario == "N":
+                    clave = "color_pelo"
+                else:
+                    clave = "inteligencia"
+
+                for heroe in lista_personajes:
+                    tipo_ojo_o_inteligencia = set(heroe[clave] for heroe in lista_personajes)
+
+                for ojo_o_inteligencia in tipo_ojo_o_inteligencia:
+                    print(f"# {ojo_o_inteligencia}")
+                    print('')
+                    for heroe in lista_personajes:
+                        if heroe[clave] == ojo_o_inteligencia:
+                            print(obtener_nombre_y_dato(heroe, clave))
+                            print('')
+            case 'Z':
+                print('Hasta luego!')
+                break
+            case -1:
+                print(f"\nIngresó una opcion NO válida.\n")
+
 
 def leer_archivo(path:str)->list:
     """Recibe un Json y devuelve una Lista"""
@@ -176,9 +176,13 @@ def leer_archivo(path:str)->list:
 # CASA
 lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
 
+
 # LABURO
 # lista_heroes = leer_archivo('Programacion_I-main\Desafios Starks\data_stark.json')
 # print(lista_heroes)
+
+# INICIAR MENU !
+# INICIAR MENU !
 
 # stark_marvel_app_5(lista_heroes)
 
@@ -186,11 +190,11 @@ lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
 def guardar_archivo(nombre_archivo:str, contenido:str):
 
     # Le puse modo "a" para poder realizar "stark_guardar_heroe_genero" y que no se haga una archivo por heroe.
-   
+
     # CASA
     # DEPENDE EL INCISO ME SRIVE "A", "W+"
     archivo = open(f"Desafios Starks/{nombre_archivo}", 'a')
-   
+
     # LABURO
     # archivo = open(f"Programacion_I-main\Desafios Starks\{nombre_archivo}", 'a')
     archivo.writelines(contenido)
@@ -262,7 +266,7 @@ def stark_guardar_heroe_genero(lista:list, genero:str):
 
     return retorno
 
-# stark_guardar_heroe_genero(lista_heroes, "M")
+# stark_guardar_heroe_genero(lista_heroes, "F")
 
 def calcular_min_genero(lista:list, clave:str, genero:str)->dict:
 
@@ -318,14 +322,6 @@ def calcular_max_min_dato_genero(lista:list, valor_a_buscar:str, clave:str, gene
 
 def stark_imprimir_heroes(lista:list, valor_a_buscar:str, clave:str, genero:str)->print or False:
 
-    """
-    RETORNA TRUE O FALSE!
-    RETORNA TRUE O FALSE!
-    RETORNA TRUE O FALSE!
-    RETORNA TRUE O FALSE!
-   
-    """
-
     heroe_buscado = calcular_max_min_dato_genero(lista, valor_a_buscar, clave, genero)
     if valor_a_buscar == "maximo":
         maximo_o_minimo = "Mayor"
@@ -369,9 +365,9 @@ def sumar_dato_heroe_genero(lista:list, clave:str, genero:str)->int or float or 
 # print(sumar_dato_heroe_genero(lista_heroes, "altura", "M"))
 
 def cantidad_heroes_genero(lista:list, genero:str):
-   
+
     contador = 0
-   
+
     for heroe in lista:
         if heroe["genero"] == genero:
             contador += 1
@@ -383,21 +379,13 @@ def cantidad_heroes_genero(lista:list, genero:str):
 
 def calcular_promedio_5(lista:list, clave:str, genero:str):
     '''Retorna un promedio. Recibe una lista de heroes y la clave de los valores a promediar'''
-   
+
     suma = sumar_dato_heroe_genero(lista, clave, genero)
     cantidad = cantidad_heroes_genero(lista, genero)
     promedio = dividir(suma, cantidad)
     return promedio
 
 # print(calcular_promedio_5(lista_heroes, "altura", "F"))
-
-"""
-VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
-VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
-VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
-VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
-VER DE IMPORTAR SOLO LAS FUNCIONES QUE UTILIZO PARA QUE NO HAYA REPETIDAS -- O VER DE CAMBIARLE EL NOMBRE !!!
-"""
 
 def stark_calcular_imprimir_guardar_promedio_altura_genero(lista:list, genero:str):
 
@@ -412,11 +400,12 @@ def stark_calcular_imprimir_guardar_promedio_altura_genero(lista:list, genero:st
     contenido = f"Altura promedio género {genero}: {altura_promedio}"
     print(contenido)
 
-    nombre = f"PEDOheroes_promedio_altura_{genero}.csv"
+    nombre = f"heroes_promedio_altura_{genero}.csv"
     guardar_archivo(nombre, contenido)
 
     return True
 
+# stark_calcular_imprimir_guardar_promedio_altura_genero(lista_heroes, "F")
 
 def calcular_cantidad_tipo(lista:list, clave:str):
     if len(lista) == 0:
@@ -463,22 +452,6 @@ def stark_calcular_cantidad_por_tipo(lista:list, clave_ingresada:str):
 
 # print(stark_calcular_cantidad_por_tipo(lista_heroes, "color_ojos"))
 
-# def obtener_lista_de_tipos(lista:list, clave_a_buscar:str):
-
-#     lista_nueva = []
-#     tipos_de_clave = set(heroe[clave_a_buscar] for heroe in lista)
-
-#     for clave in tipos_de_clave:
-#         if clave == "":
-#             clave = "N/A"
-#         if clave != "N/A":
-#             clave = (capitalizar_palabras(clave))
-#         lista_nueva.append(clave)
-
-#     return lista_nueva
-
-# print(obtener_lista_de_tipos(lista_heroes, "color_ojos"))
-
 def obtener_lista_de_tipos(lista:list, clave_a_buscar:str):
 
     claves = []
@@ -520,7 +493,6 @@ def normalizar_heroe(heroe:dict,key:str):
     return retorno
 
 # print(normalizar_heroe(lista_heroes[0], "nombre"))
-
 
 
 def obtener_heroes_por_tipo(lista, tipos_variedades, clave_a_evaluar):
@@ -573,4 +545,4 @@ def stark_listar_heroes_por_dato(lista:list,clave:str):
 
     guardar_heroes_por_tipo(heroes_por_tipo, clave)
 
-stark_listar_heroes_por_dato(lista_heroes, "color_ojos")
+# stark_listar_heroes_por_dato(lista_heroes, "color_ojos")
