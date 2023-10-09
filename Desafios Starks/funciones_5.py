@@ -188,6 +188,7 @@ def guardar_archivo(nombre_archivo:str, contenido:str):
     # Le puse modo "a" para poder realizar "stark_guardar_heroe_genero" y que no se haga una archivo por heroe.
    
     # CASA
+    # DEPENDE EL INCISO ME SRIVE "A", "W+"
     archivo = open(f"Desafios Starks/{nombre_archivo}", 'a')
    
     # LABURO
@@ -507,8 +508,69 @@ def normalizar_dato(valor:str, valor_por_defecto:str="N/A"):
 # print(normalizar_dato("Green"))
 
 def normalizar_heroe(heroe:dict,key:str):
+
+    retorno = False
+
     if key in heroe:
-        heroe[key] = capitalizar_palabras(key)
-    # SEGUIR ESTA
-    # SEGUIR ESTA
-    # SEGUIR ESTA
+        heroe[key] = normalizar_dato(heroe[key])
+        if heroe[key] != "N/A":
+            heroe[key] = capitalizar_palabras(heroe[key])
+            retorno = heroe[key]
+
+    return retorno
+
+# print(normalizar_heroe(lista_heroes[0], "nombre"))
+
+
+
+def obtener_heroes_por_tipo(lista, tipos_variedades, clave_a_evaluar):
+
+    diccionario = {}
+
+    for tipo in tipos_variedades:
+        diccionario[tipo] = []
+
+    for heroe in lista:
+        if clave_a_evaluar in heroe:
+            heroe[clave_a_evaluar] = normalizar_dato(heroe[clave_a_evaluar])
+            if heroe[clave_a_evaluar] in tipos_variedades:
+                nombre_heroe = normalizar_dato(heroe["nombre"])
+                nombre_heroe = capitalizar_palabras(nombre_heroe)
+                diccionario[heroe[clave_a_evaluar]].append(nombre_heroe)
+
+    return diccionario
+
+dic = (obtener_heroes_por_tipo(lista_heroes, obtener_lista_de_tipos(lista_heroes, "color_ojos"), "color_ojos"))
+# for clave, valor in dic.items():
+#     print(f"{clave}: {valor}\n")
+
+
+def guardar_heroes_por_tipo(diccionario_valores:dict, tipo_dato:str):
+
+    retorno = False
+
+    for clave, valor in diccionario_valores.items():
+        # Realice ese cambio porq no me permitia "N/A" en el archivo csv.
+        if clave == "N/A" or clave == "N/a":
+            clave = "Sin Tipo"
+        valor = ' | '.join(valor)
+        cadena_texto = f"{tipo_dato} {clave}: {valor}"
+        nombre_archivo = f"heroes_segun_{clave}.csv"
+
+        guardar_archivo(nombre_archivo, cadena_texto)
+        retorno = True
+
+    return retorno
+
+# print(guardar_heroes_por_tipo(dic, "color_ojos"))
+
+def stark_listar_heroes_por_dato(lista:list,clave:str):
+
+    lista_tipos = obtener_lista_de_tipos(lista, clave)
+    heroes_por_tipo =  obtener_heroes_por_tipo(lista,lista_tipos,clave)
+
+    print(heroes_por_tipo)
+
+    guardar_heroes_por_tipo(heroes_por_tipo, clave)
+
+stark_listar_heroes_por_dato(lista_heroes, "color_ojos")
