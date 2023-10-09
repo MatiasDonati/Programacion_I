@@ -305,6 +305,8 @@ def generar_encabezado(titulo:str):
 # 5.4
 def imprimir_ficha_heroe(heroe:dict):
 
+    heroe['altura'] = convertir_cm_a_mtrs(heroe['altura'])
+
     generar_encabezado('principal')
     print(f"             NOMBRE DEL HÉROE:                          {heroe['nombre']} ({heroe['iniciales']})")
     print(f"             IDENTIDAD SECRETA:                         {heroe['identidad']}")
