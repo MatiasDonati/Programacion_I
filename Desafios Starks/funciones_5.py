@@ -499,21 +499,37 @@ def obtener_heroes_por_tipo(lista, tipos_variedades, clave_a_evaluar):
     diccionario = {}
 
     for tipo in tipos_variedades:
-        diccionario[tipo] = []
-
-    for heroe in lista:
-        if clave_a_evaluar in heroe:
-            heroe[clave_a_evaluar] = normalizar_dato(heroe[clave_a_evaluar])
-            if heroe[clave_a_evaluar] in tipos_variedades:
+        lista_nombres = []
+        for heroe in lista:
+            if heroe[clave_a_evaluar] == tipo:
                 nombre_heroe = normalizar_dato(heroe["nombre"])
                 nombre_heroe = capitalizar_palabras(nombre_heroe)
-                diccionario[heroe[clave_a_evaluar]].append(nombre_heroe)
+                lista_nombres.append(nombre_heroe)
+
+        diccionario[tipo] = lista_nombres
+
+    # //////////////////////////////////////
+
+    # MEJORADO EN LA FUNCION DE ARRIBA!
+
+    # for tipo in tipos_variedades:
+    #     diccionario[tipo] = []
+
+    # for heroe in lista:
+    #     if clave_a_evaluar in heroe:
+    #         heroe[clave_a_evaluar] = normalizar_dato(heroe[clave_a_evaluar])
+    #         if heroe[clave_a_evaluar] in tipos_variedades:
+    #             nombre_heroe = normalizar_dato(heroe["nombre"])
+    #             nombre_heroe = capitalizar_palabras(nombre_heroe)
+    #             diccionario[heroe[clave_a_evaluar]].append(nombre_heroe)
+
+    # //////////////////////////////////////
 
     return diccionario
 
 dic = (obtener_heroes_por_tipo(lista_heroes, obtener_lista_de_tipos(lista_heroes, "color_ojos"), "color_ojos"))
-# for clave, valor in dic.items():
-#     print(f"{clave}: {valor}\n")
+for clave, valor in dic.items():
+    print(f"{clave}: {valor}\n")
 
 
 def guardar_heroes_por_tipo(diccionario_valores:dict, tipo_dato:str):
@@ -544,4 +560,4 @@ def stark_listar_heroes_por_dato(lista:list,clave:str):
 
     guardar_heroes_por_tipo(heroes_por_tipo, clave)
 
-# stark_listar_heroes_por_dato(lista_heroes, "color_ojos")
+stark_listar_heroes_por_dato(lista_heroes, "color_ojos")
