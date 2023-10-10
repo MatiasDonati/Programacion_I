@@ -86,10 +86,10 @@ def mostrar_fuerza_promedio_NB(lista_personajes):
 # G
 def mostrar_cuantos_hay_por_tipos_de_ojos(lista_personajes, flag=True):
     '''Printea cuantos hay de cada Color de Ojos'''
+
     lista_contador_colores_ojos = []
 
-    for personaje in lista_personajes:
-        tipos_de_ojos = set(personaje["color_ojos"] for personaje in lista_personajes)
+    tipos_de_ojos = set(personaje["color_ojos"] for personaje in lista_personajes)
 
     for color_ojo in tipos_de_ojos:
         contador = 0
@@ -118,8 +118,8 @@ def mostrar_cuantos_hay_por_tipos_de_ojos(lista_personajes, flag=True):
 def mostrar_cuantos_hay_por_tipos_de_color_pelo(lista_personajes):
     '''Printea cuantos hay de cada Color de Pelo'''
     diccionario_color_pelos = {}
-    for personaje in lista_personajes:
-        colores_de_pelos = set(personaje["color_pelo"] for personaje in lista_personajes)
+
+    colores_de_pelos = set(personaje["color_pelo"] for personaje in lista_personajes)
 
     for color_pelo in colores_de_pelos:
         contador = 0

@@ -72,8 +72,8 @@ def mostrar_cuantos_hay_por_tipos_clave(lista_personajes:list , ojos_o_pelo:str 
     '''Printea cuantos hay de cada tipo de clave'''
     lista_contador = []
 
-    for personaje in lista_personajes:
-        valores = set(personaje[ojos_o_pelo] for personaje in lista_personajes)
+
+    valores = set(personaje[ojos_o_pelo] for personaje in lista_personajes)
 
     for color in valores:
         contador = 0
