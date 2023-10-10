@@ -29,20 +29,19 @@ def extraer_iniciales(nombre_heroe:str)->str:
 
     return salida
 
-# print(extraer_iniciales("Howard the Duck"))
+# print(extraer_iniciales("Howard the Duck asdeee"))
 
 def definir_iniciales_nombre(heroe:dict):
     '''Recibe un diccionario evalua q no sea un diccionario y q contenga la clave "nombre". Luego agrega le agrega la clave "iniciales" ejecutando la funcion "extraer_iniciales"'''
 
     if type(heroe) != dict or 'nombre' not in heroe:
-        retorno =  False
+        return False
 
     heroe["iniciales"] = extraer_iniciales(heroe["nombre"])
-    retorno = True
 
-    return retorno
+    return True
 
-# heroe = definir_iniciales_nombre(lista_personajes[20])
+# heroe = definir_iniciales_nombre(lista_personajes[6])
 # print(heroe)
 
 def agregar_iniciales_nombre(lista_heroes:list):
@@ -99,6 +98,9 @@ def agregar_codigo_heroe(heroe:dict, id_heroe:int)->bool:
     if len(heroe) != 0:
 
         codigo = generar_codigo_heroe(id_heroe, heroe["genero"])
+
+        # chequear minusculas, estan al pedo
+        # chequear minusculas, estan al pedo
 
         codigo_a_validar =  re.sub(r'[a-zA-Z-]','', codigo)
 
@@ -174,7 +176,7 @@ def sanitizar_flotante(numero_str:str):
 
 # 3.3
 def sanitizar_string(valor_str:str, valor_por_defecto:str='-'):
-    '''Recibe una cadena de texto y un valor por defecto. Si no es un numerom retira los espacios vacios a principio y final de la cadena. Reemplaza "/" por espacio. Transforma todo a minuscula. Si es un numero retonra "N/A"'''
+    '''Recibe una cadena de texto y un valor por defecto. Si no es un numero retira los espacios vacios a principio y final de la cadena. Reemplaza "/" por espacio. Transforma todo a minuscula. Si es un numero retonra "N/A"'''
 
     if len(valor_str) == 0 and valor_por_defecto != '-':
         return valor_por_defecto.lower()
@@ -217,6 +219,7 @@ def stark_normalizar_datos_4(lista_heroes:list):
         print("Error: Lista de héroes vacía")
 
     for heroe in lista_personajes:
+        # for clave in heroe:
         for clave in ['altura', 'peso', 'color_ojos', 'color_pelo', 'fuerza', 'inteligencia']:
             if clave in heroe:
                 if clave in ['fuerza']:
@@ -229,6 +232,7 @@ def stark_normalizar_datos_4(lista_heroes:list):
 
     print('Datos Normalizados')
 
+# stark_normalizar_datos_4(lista_personajes)
 
 # 4.1
 def generar_indice_nombres(lista_heroes:list):
@@ -251,6 +255,8 @@ def generar_indice_nombres(lista_heroes:list):
 
         mensaje = lista_nueva
     return mensaje
+
+# print(generar_indice_nombres(lista_personajes))
 
 # 4.2
 def stark_imprimir_indice_nombre(lista_heroes:list):
@@ -291,7 +297,8 @@ def generar_separador(patron:str, largo:int, imprimir:bool=True):
 
     return respuesta
 
-# print(generar_separador('??', 1, False))
+# print(generar_separador('?%', 5))
+# print(generar_separador('HOA', 10, False))
 
 # 5.3
 def generar_encabezado(titulo:str):

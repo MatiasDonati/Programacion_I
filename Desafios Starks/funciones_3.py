@@ -32,9 +32,9 @@ def obtener_dato(heroe:dict, clave="nombre")->dict or False:
     for clave_recorrida in heroe:
 
         if re.search(rf'\b{clave}\b', clave_recorrida):
-            respuesta = True
+            respuesta = heroe
 
-    return heroe
+    return respuesta
 
 def obtener_nombre(heroe:dict)->str or False:
     '''Recibe un diccionario, de no estar vacio retorna mensaje con nombre. Caso contrario "False"'''

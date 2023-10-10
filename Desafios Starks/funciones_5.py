@@ -173,13 +173,13 @@ def leer_archivo(path:str)->list:
 
     return data['heroes']
 
-# CASA
+# CASA MAC
 lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
 
 
-# LABURO
+# LABURO WINDOWS - OJO - LA BARRA ES DISTINTA
 # lista_heroes = leer_archivo('Programacion_I-main\Desafios Starks\data_stark.json')
-# print(lista_heroes)
+
 
 # INICIAR MENU !
 
@@ -528,8 +528,8 @@ def obtener_heroes_por_tipo(lista, tipos_variedades, clave_a_evaluar):
     return diccionario
 
 dic = (obtener_heroes_por_tipo(lista_heroes, obtener_lista_de_tipos(lista_heroes, "color_ojos"), "color_ojos"))
-for clave, valor in dic.items():
-    print(f"{clave}: {valor}\n")
+# for clave, valor in dic.items():
+#     print(f"{clave}: {valor}\n")
 
 
 def guardar_heroes_por_tipo(diccionario_valores:dict, tipo_dato:str):
