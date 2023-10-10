@@ -230,7 +230,7 @@ def stark_normalizar_datos_4(lista_heroes:list):
                     tipo_dato = 'string'
                 sanitizar_dato(heroe, clave, tipo_dato)
 
-    print('Datos Normalizados')
+    print('\nDatos Normalizados\n')
 
 # stark_normalizar_datos_4(lista_personajes)
 

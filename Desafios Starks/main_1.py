@@ -72,7 +72,7 @@ while flag:
 
     opcion_elegida = input(f"""\n-A - {inciso_a} \n-B - {inciso_b}\n-C - {inciso_c}\n-D - {inciso_d}\n-E - {inciso_e} \n-0 - SALIR\nElija la opcion que quiera conocer: """).upper()
     while opcion_elegida != "A" and  opcion_elegida != "B" and  opcion_elegida != "C" and opcion_elegida != "D" and opcion_elegida != "E"and opcion_elegida != "0":
-        opcion_elegida = input("OPCION INCORRECTA\nElija la opcion que quiera conocer: A-B-C-D-E o FIN para salir: ").upper()
+        opcion_elegida = input("OPCION INCORRECTA\nElija la opcion que quiera conocer: A-B-C-D-E o '0' para salir: ").upper()
 
     match opcion_elegida:
         case 'A':
