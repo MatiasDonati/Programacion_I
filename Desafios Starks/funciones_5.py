@@ -182,7 +182,6 @@ lista_heroes = leer_archivo('Desafios Starks/data_stark.json')
 # print(lista_heroes)
 
 # INICIAR MENU !
-# INICIAR MENU !
 
 # stark_marvel_app_5(lista_heroes)
 
