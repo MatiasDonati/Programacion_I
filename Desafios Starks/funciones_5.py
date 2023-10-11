@@ -560,4 +560,4 @@ def stark_listar_heroes_por_dato(lista:list,clave:str):
 
     guardar_heroes_por_tipo(heroes_por_tipo, clave)
 
-stark_listar_heroes_por_dato(lista_heroes, "color_ojos")
+# stark_listar_heroes_por_dato(lista_heroes, "color_ojos")

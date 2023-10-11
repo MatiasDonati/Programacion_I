@@ -38,17 +38,30 @@ correo = 'aasd54@asdg.cr'
 # patron3 = r'^[a-zA-Z0-9]+@[a-z]+\.[com]$'
 # patron3 = r'^[a-zA-Z0-9]+@[a-zA-Z]+\.[com]$'
 
-patron3 = r'^[a-zA-Z0-9]+@[a-zA-Z]+\.[com]+$'
+# patron3 = r'^[a-zA-Z0-9]+@[a-zA-Z]+\.[com]+$'
 
-patron = r'^[a-zA-Z0-9]+@[a-zA-Z]+\.(com)$'
+# patron = r'^[a-zA-Z0-9]+@[a-zA-Z]+\.(com)$'
 
-patron4 = r'^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+$'
-
-
-prueba = "Matias2@hotmail.cmo"
+# patron4 = r'^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+$'
 
 
-if re.match(patron, prueba):
-    print(prueba)
-else:
-    print('No')
+# prueba = "Matias2@hotmail.cmo"
+
+
+# if re.match(patron, prueba):
+#     print(prueba)
+# else:
+#     print('No')
+
+# numero =  '32asd'
+# patorn = r"([0-9]+)?[a-z]"
+
+# if re.match(patorn, numero):
+#     print(numero)
+
+corre0 = "dsdaDSADAS0909@gmail.com"
+
+patron_mail = r'^[a-zA-Z0-9]+@[a-z]+\.[a-z]+$'
+
+if re.match(patron_mail, corre0):
+    print(corre0)

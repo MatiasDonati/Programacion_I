@@ -347,14 +347,14 @@ def stark_navegar_fichas(lista_heroes:list):
 
         match opcion:
             case '1':
-                indice_heroe = indice_heroe + 1
-                if indice_heroe == 24:
-                    indice_heroe = 0
-                imprimir_ficha_heroe(lista_heroes[indice_heroe])
-            case '2':
                 indice_heroe = indice_heroe - 1
                 if indice_heroe == -1:
                     indice_heroe = 23
+                imprimir_ficha_heroe(lista_heroes[indice_heroe])
+            case '2':
+                indice_heroe = indice_heroe + 1
+                if indice_heroe == 24:
+                    indice_heroe = 0
                 imprimir_ficha_heroe(lista_heroes[indice_heroe])
             case _:
                 print('Hasta pronto!')
