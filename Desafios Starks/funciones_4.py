@@ -280,7 +280,7 @@ def convertir_cm_a_mtrs(valor_cm:int or float):
 
     return retorno
 
-# print(convertir_cm_a_mtrs(345.03))
+print(convertir_cm_a_mtrs(345.03))
 
 # 5.2
 def generar_separador(patron:str, largo:int, imprimir:bool=True):
