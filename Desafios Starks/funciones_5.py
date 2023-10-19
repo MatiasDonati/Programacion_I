@@ -496,6 +496,7 @@ def stark_marvel_app_5(lista_personajes:list):
                 # if len(heroe_con_altura_maxima) == 1:
                 #     heroe = heroe_con_altura_maxima[0]
                 #     print(obtener_nombre(heroe))
+
             case 'J' | 'K':
                 lista_ojos_pelo = []
                 clave = "color_ojos"
