@@ -44,6 +44,10 @@ VER EN EL LABURO QUIZA ES SIN 3
 # python -m pygame.examples.aliens
 
 """
+INSTALAR GLOBAL!
+"""
+
+"""
 """
 import pygame
 
@@ -60,5 +64,10 @@ while(running):
 
 	window.fill((255, 255, 255)) # Se pinta el fondo de la ventana
 
-	pygame.draw.circle(window, (0, 0, 255), (250, 250), 75)
+	pygame.draw.circle(window, (90, 56, 255), (250, 250), 75)
 	pygame.display.flip()# Muestra los cambios en la pantalla
+
+
+"""
+gestor de paquetes se llama "brew"
+"""
