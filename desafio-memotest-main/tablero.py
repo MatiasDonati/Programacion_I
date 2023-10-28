@@ -7,7 +7,6 @@ def crear_tablero():
     Crea un diccionario con toda la informacion necesaria para el tablero, creando la lista de tarjetas y todos sus parametros.
     Retorna un diccionario con el tablero
     '''
-    dict = {}
 
     #Creo el diccionario del tablero
     pass
@@ -102,4 +101,3 @@ def dibujar_tablero(tablero,pantalla_juego):
     '''
     #Dibuja el tablero con todas las cartas en la pantalla de mi juego
     pass
-     
