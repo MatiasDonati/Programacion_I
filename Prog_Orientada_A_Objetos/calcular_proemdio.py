@@ -15,7 +15,7 @@ def calcular_promedio(cantidad_examenes):
 
 # Modo de prueba ... excusa para ver try except
 try:
-    ingresa_numero = int(input("Ingrese cantidad de examenes"))#esto debe solucionarse con expresion regular
+    ingresa_numero = int(input("Ingrese cantidad de examenes"))#esto debe solucionarse con expresion regularw
     print(calcular_promedio(ingresa_numero))
 except:
     print('Hubo un error')

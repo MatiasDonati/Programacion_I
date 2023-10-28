@@ -42,6 +42,7 @@ VER EN EL LABURO QUIZA ES SIN 3
 """
 # pip3 install -U pygame
 # python -m pygame.examples.aliens
+# python3 -m pygame.examples.aliens
 
 """
 INSTALAR GLOBAL!
@@ -71,3 +72,4 @@ while(running):
 """
 gestor de paquetes se llama "brew"
 """
+

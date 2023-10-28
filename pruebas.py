@@ -65,3 +65,4 @@ patron_mail = r'^[a-zA-Z0-9]+@[a-z]+\.[a-z]+$'
 
 if re.match(patron_mail, corre0):
     print(corre0)
+
