@@ -39,11 +39,7 @@ clock_fps = pygame.time.Clock() # Creamos un Clock para poder fijar los FPS
 
 esta_corriendo = True
 
-# tarjeta_uno = tarjeta.crear_tarjeta('./recursos/00.png',1,'./recursos/01.png',0, 0, ANCHO_TARJETA, ALTO_TARJETA)
-# print(tarjeta_uno)
-
 lista_de_tarjetas = tablero.generar_lista_tarjetas(CANTIDAD_TARJETAS_H, CANTIDAD_TARJETAS_V, ANCHO_TARJETA, ALTO_TARJETA)
-
 
 while esta_corriendo:
     tiempo = clock_fps.tick(FPS)
@@ -52,20 +48,18 @@ while esta_corriendo:
         if event.type == pygame.QUIT:
             esta_corriendo = False
 
-        # if event.type == pygame.MOUSEBUTTONDOWN:
-        #     if tarjeta_uno['rectangulo'].collidepoint(event.pos):
-        #         tarjeta_uno['visible'] = True
-
     pantalla_juego.fill(COLOR_BLANCO)
 
     for card in lista_de_tarjetas:
-        pantalla_juego.blit(card['imagen_escondida'], card['rectangulo'])
+        if card['visible'] == True:
+            pantalla_juego.blit(card['imagen_escondida'], card['rectangulo'])
+        else:
+            pantalla_juego.blit(card['imagen'], card['rectangulo'])
 
-    # if tarjeta_uno['visible'] == True:
-    #     pantalla_juego.blit(tarjeta_uno['imagen_escondida'], tarjeta_uno['rectangulo'])
-    # else:
-    #     pantalla_juego.blit(tarjeta_uno['imagen'], tarjeta_uno['rectangulo'])
 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if card['rectangulo'].collidepoint(event.pos):
+                card['visible'] = True
 
     pygame.display.flip()
 

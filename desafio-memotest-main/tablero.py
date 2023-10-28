@@ -7,6 +7,8 @@ def crear_tablero():
     Crea un diccionario con toda la informacion necesaria para el tablero, creando la lista de tarjetas y todos sus parametros.
     Retorna un diccionario con el tablero
     '''
+    dict = {}
+
     #Creo el diccionario del tablero
     pass
 
@@ -29,12 +31,11 @@ def generar_lista_tarjetas(tarjetas_horizontal:int, tarjetas_vertical:int, ancho
             pos_y = ALTO_TARJETA * y
             print(pos_x, pos_y)
             path = f"./recursos/0{lista_id[indice]}.png"
-            img = tarjeta.crear_tarjeta(path, lista_id[indice],"./recursos/00.png", pos_x, pos_y, ANCHO_TARJETA, ALTO_TARJETA)
+            img = tarjeta.crear_tarjeta("./recursos/00.png", lista_id[indice],path, pos_x, pos_y, ANCHO_TARJETA, ALTO_TARJETA)
             indice += 1
             lista_tarjetas.append(img)
 
     return lista_tarjetas
-    #Guardo cada una de las tarjetas (Tener en cuenta la posicion X e Y de las mismas)
 
 
 def generar_lista_ids_tarjetas(cantidad_de_tarjetas_unicas:int):
