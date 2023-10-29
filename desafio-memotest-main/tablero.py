@@ -56,27 +56,24 @@ def generar_lista_ids_tarjetas(cantidad_de_tarjetas_unicas:int):
 
     return lista_ids
 
-# print(generar_lista_ids_tarjetas(CANTIDAD_TARJETAS_UNICAS))
-
-    #Creo la lista con los id de todas las tarjetas que voy a jugar
-    #Ordeno aleatoriamente los id de las mismas
-    # pass
-# generar_lista_tarjetas(CANTIDAD_TARJETAS_H, CANTIDAD_TARJETAS_V, ANCHO_TARJETA, ALTO_TARJETA)
-
 
 def detectar_colision(tablero, pos_xy):
 
-    if tablero["primer_tarjeta_seleccionada"] and tablero["segunda_tarjeta_seleccionada"]:
-        return
+    # if tablero["primer_tarjeta_seleccionada"] and tablero["segunda_tarjeta_seleccionada"]:
+    #     return
 
     for tarjeta in tablero["tarjetas"]:
 
         if tarjeta["rectangulo"].collidepoint(pos_xy) and tarjeta["visible"] == False:
             tarjeta["visible"] = True
 
+            print(tablero["primer_tarjeta_seleccionada"])
+
             if tablero["primer_tarjeta_seleccionada"] == None:
                 tablero["primer_tarjeta_seleccionada"] = tarjeta
             else:
+                print(tablero["primer_tarjeta_seleccionada"])
+
                 tablero["segunda_tarjeta_seleccionada"] = tarjeta
                 tablero["tiempo_ultimo_destape"] = pygame.time.get_ticks()
 
@@ -94,14 +91,7 @@ def actualizar_tablero(tablero):
             if not card['descubierto']:
                 card['visible'] = False
 
-        print('Primera:\n')
-        print(tablero['primer_tarjeta_seleccionada'])
-
-        print('Segunda:\n')
-        print(tablero['segunda_tarjeta_seleccionada'])
-
         if tablero['primer_tarjeta_seleccionada'] and tablero['segunda_tarjeta_seleccionada']:
-            # Si hay dos tarjetas seleccionadas, verificar si coinciden
             tarjeta1 = tablero['primer_tarjeta_seleccionada']
             tarjeta2 = tablero['segunda_tarjeta_seleccionada']
 
@@ -109,17 +99,17 @@ def actualizar_tablero(tablero):
                 # Si coinciden, marcarlas como descubiertas
                 tarjeta1['descubierto'] = True
                 tarjeta2['descubierto'] = True
-
+                print("MATCHEOOOOOOO")
             else:
-                # Si no coinciden, ocultarlas nuevamente
-                tarjeta1['visible'] = False
-                tarjeta2['visible'] = False
+                print(" NO NO NO NO NO MATCHEOOOOOOO")
+                '''ACA HAY UN PROBLEMA'''
+                # for tarjeta in tablero['tarjetas']:
+                #     if tarjeta['identificador'] == tablero['primer_tarjeta_seleccionada']['identificador']:
+                #         tarjeta['visible'] = False
 
-
-
-            # Reiniciar las tarjetas seleccionadas
             tablero['primer_tarjeta_seleccionada'] = None
             tablero['segunda_tarjeta_seleccionada'] = None
+
 
 
 
@@ -160,9 +150,9 @@ def dibujar_tablero(tablero,pantalla_juego):
 
     for card in tablero['tarjetas']:
         if card['visible'] == True:
-            pantalla_juego.blit(card['imagen_escondida'], card['rectangulo'])
-        else:
             pantalla_juego.blit(card['imagen'], card['rectangulo'])
+        else:
+            pantalla_juego.blit(card['imagen_escondida'], card['rectangulo'])
 
 
         # if event.type == pygame.MOUSEBUTTONDOWN:

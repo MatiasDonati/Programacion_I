@@ -3,6 +3,12 @@ from constantes import *
 
 
 def crear_tarjeta(nombre_imagen: str, identificador: int, nombre_imagen_escondida: str, x: int, y: int, ancho:int, alto:int) -> dict:
+    '''
+    Crea una nueva tarjeta
+    Recibe como parametro el path donde estan los recursos, el nombre de la imagen y el tamaño que esta debera tener
+    Retorna el diccionario que hace referencia a la tarjeta creada
+    '''
+
     dict_tarjeta = {}
     dict_tarjeta['imagen'] = pygame.image.load(nombre_imagen)
     dict_tarjeta['imagen'] = pygame.transform.scale(dict_tarjeta['imagen'], (ancho, alto))
@@ -14,15 +20,8 @@ def crear_tarjeta(nombre_imagen: str, identificador: int, nombre_imagen_escondid
     dict_tarjeta['rectangulo'] = dict_tarjeta['imagen'].get_rect()
     dict_tarjeta['rectangulo'].x = x
     dict_tarjeta['rectangulo'].y = y
-    return dict_tarjeta
 
-    '''
-    Crea una nueva tarjeta
-    Recibe como parametro el path donde estan los recursos, el nombre de la imagen y el tamaño que esta debera tener
-    Retorna el diccionario que hace referencia a la tarjeta creada
-    '''
-    #Creo el diccionario de tarjeta
-    # pass
+    return dict_tarjeta
 
 def obtener_cantidad_cartas(lista_tarjetas, estado):
     '''
