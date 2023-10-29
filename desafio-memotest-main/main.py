@@ -39,7 +39,8 @@ clock_fps = pygame.time.Clock() # Creamos un Clock para poder fijar los FPS
 
 esta_corriendo = True
 
-lista_de_tarjetas = tablero.generar_lista_tarjetas(CANTIDAD_TARJETAS_H, CANTIDAD_TARJETAS_V, ANCHO_TARJETA, ALTO_TARJETA)
+# lista_de_tarjetas = tablero.generar_lista_tarjetas(CANTIDAD_TARJETAS_H, CANTIDAD_TARJETAS_V, ANCHO_TARJETA, ALTO_TARJETA)
+tablero_juego = tablero.crear_tablero()
 
 while esta_corriendo:
     tiempo = clock_fps.tick(FPS)
@@ -48,18 +49,11 @@ while esta_corriendo:
         if event.type == pygame.QUIT:
             esta_corriendo = False
 
-    pantalla_juego.fill(COLOR_BLANCO)
 
-    for card in lista_de_tarjetas:
-        if card['visible'] == True:
-            pantalla_juego.blit(card['imagen_escondida'], card['rectangulo'])
-        else:
-            pantalla_juego.blit(card['imagen'], card['rectangulo'])
-
-
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if card['rectangulo'].collidepoint(event.pos):
-                card['visible'] = True
+    tablero.dibujar_tablero(tablero_juego, pantalla_juego)
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        tablero.detectar_colision(tablero_juego, event.pos)
+    tablero.actualizar_tablero(tablero_juego)
 
     pygame.display.flip()
 

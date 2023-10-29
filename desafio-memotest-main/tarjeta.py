@@ -30,5 +30,6 @@ def obtener_cantidad_cartas(lista_tarjetas, estado):
         Recibe la lista de listas y un estado (True o False) si es True me devuelve las cartas descubieras sino me devuelve las cubiertas.
         Retorna dicha cantidad
     '''
+    
     #contador
     pass
