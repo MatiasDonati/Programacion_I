@@ -111,10 +111,6 @@ def actualizar_tablero(tablero):
             tablero['segunda_tarjeta_seleccionada'] = None
 
 
-
-
-
-
 def descubrir_tarjetas(lista_tarjetas, identificador):
     '''
         Función que se encarga de cambiarle la bandera a las tarjetas a las que el usuario haya acertado en el memotest y por ende mostrarlas.
