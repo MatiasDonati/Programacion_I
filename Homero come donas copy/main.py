@@ -2,6 +2,12 @@ import pygame
 import constantes
 import personaje
 
+# DESCARGAR Prettier - Code formatter
+# DESCARGAR Prettier - Code formatter
+# DESCARGAR Prettier - Code formatter
+# DESCARGAR Prettier - Code formatter
+# DESCARGAR Prettier - Code formatter
+
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
 ALTO_BRUJA = constantes.ALTO_BRUJA
