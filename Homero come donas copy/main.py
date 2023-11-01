@@ -1,9 +1,12 @@
 import pygame
-import colores
+import constantes
 import personaje
 
-ANCHO_VENTANA = 1200
-ALTO_VENTANA = 800
+ANCHO_VENTANA = constantes.ANCHO_VENTANA
+ALTO_VENTANA = constantes.ALTO_VENTANA
+ALTO_BRUJA = constantes.ALTO_BRUJA
+ANCHO_BRUJA = constantes.ANCHO_BRUJA
+COLOR_FONDO = constantes.GRIS
 
 pygame.init()
 
@@ -11,14 +14,14 @@ pygame.init()
 ventana_ppal = pygame.display.set_mode((ANCHO_VENTANA,ALTO_VENTANA))
 
 # TITULO DE LA VENTANA
-pygame.display.set_caption("PYGAME HOMERO COME DONAS")
+pygame.display.set_caption("La Bruja Frida")
 
 # TIMER
 timer = pygame.USEREVENT + 0
 pygame.time.set_timer(timer,100)
 
 # CREACIN DE ELEMENTOS
-player = personaje.crear(ANCHO_VENTANA/2,ALTO_VENTANA-150,150,150)
+player = personaje.crear(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
 #Velocidades
 velocidad_base = 2
@@ -45,13 +48,17 @@ while flag_run:
 
     if lista_teclas[pygame.K_LEFT]:
 
-        personaje.update(player,-velocidad, "left")
+        personaje.update(player, -velocidad, 0 , "izquierda")
 
     if lista_teclas[pygame.K_RIGHT]:
-        personaje.update(player,velocidad, "right")
+        personaje.update(player, velocidad , 0 , "derecha")
+
+    if lista_teclas[pygame.K_UP]:
+        personaje.update(player, 0 , 3 , "salto")
+
 
     #VOLCAR CAMBIOS
-    ventana_ppal.fill(colores.GRIS)
+    ventana_ppal.fill(COLOR_FONDO)
     personaje.actualizar_pantalla(player,ventana_ppal)
 
     pygame.display.flip()
