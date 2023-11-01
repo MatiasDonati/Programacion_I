@@ -17,8 +17,8 @@ def crear(x, y, ancho, alto):
 
 def actualizar_pantalla(personaje, ventana_ppal):
     ventana_ppal.blit(personaje["surface"], personaje["rect_avatar"])
-    #pygame.draw.rect(ventana_ppal, colores.ROJO, personaje["rect_avatar"])
-    #pygame.draw.rect(ventana_ppal, colores.NEGRO, personaje["rect_mano"])
+    pygame.draw.rect(ventana_ppal, colores.ROJO, personaje["rect_avatar"])
+    pygame.draw.rect(ventana_ppal, colores.NEGRO, personaje["rect_mano"])
 
 def update(personaje, incremento_x, incremento_y):
     nueva_x = personaje["rect_avatar"].x + incremento_x
