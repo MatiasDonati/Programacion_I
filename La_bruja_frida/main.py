@@ -30,8 +30,8 @@ pygame.time.set_timer(timer,100)
 player = personaje.crear(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
 #Bloques
-bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA - alto_bloque, ancho_bloque, alto_bloque)
-bloque_dos= bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA - alto_bloque, ancho_bloque, alto_bloque)
+bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
+bloque_dos= bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
 
 print(ALTO_BRUJA)
 print(ALTO_VENTANA - ALTO_BRUJA)
@@ -84,7 +84,7 @@ while flag_run:
     else:
 
         posicion_original_y = player["rect_bruja"].y
-        print(f"Posicion bruja ANTES salto: {posicion_original_y}")
+        # print(f"Posicion bruja ANTES salto: {posicion_original_y}")
 
 
         if jumpCount >= -10:
@@ -95,8 +95,14 @@ while flag_run:
             jumpCount = 10
             isJump = False
             # player["rect_bruja"].y = posicion_original_y
-            print(f"Posicion bruja DESPUES salto: {player['rect_bruja'].y}")
+            # print(f"Posicion bruja DESPUES salto: {player['rect_bruja'].y}")
 
+    # if player["rect_bruja"].colliderect(bloque_uno.rect_bloque) or player["rect_bruja"].colliderect(bloque_dos.rect_bloque):
+    #     print("COLISION")
+    #     if player["rect_bruja"].y + ALTO_BRUJA == bloque_uno.rect_bloque.y:
+    #         print("mismo YYYYYYYY")
+    # else:
+    #     print("NOT COLISOI NOO")
 
 
     #VOLCAR CAMBIOS

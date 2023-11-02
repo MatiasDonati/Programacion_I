@@ -10,4 +10,4 @@ class Bloque:
 
     def actualizar_pantalla(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_bloque)
-        # pygame.draw.rect(ventana_ppal, constantes.ROJO, self.rect_bloque)
+        # pygame.draw.rect(ventana_ppal, constantes.VERDE, self.rect_bloque)
