@@ -44,7 +44,8 @@ velocidad_shift = 6
 #Salto
 isJump = False
 jumpCount = 10
-velocidad_vertical_acumulativa = 0
+
+sobre_bloque = False
 
 #LGICA DEL JUEGO
 flag_run = True
@@ -78,31 +79,45 @@ while flag_run:
         personaje.update(player, 0 , -velocidad , "abajo")
 
 
+
     if not isJump:
+        if not sobre_bloque:
+            personaje.update(player, 0 , -6 , "abajo")
+
         if lista_teclas[pygame.K_SPACE]:
             isJump = True
+            print(f"Posicion bruja ANTES salto: {player['rect_bruja'].y}")
     else:
 
-        posicion_original_y = player["rect_bruja"].y
-        # print(f"Posicion bruja ANTES salto: {posicion_original_y}")
-
+        # posicion_original_y = player["rect_bruja"].y
 
         if jumpCount >= -10:
-            velocidad = -(jumpCount * abs(jumpCount)) * 0.5  # Cambia el signo de la velocidad vertical
-            personaje.update(player, 0, -velocidad, "arriba")
+            velocidad = -(jumpCount * abs(jumpCount)) * 0.4  # Cambia el signo de la velocidad vertical
+            # print(f"Salto Eje y:     {velocidad}  Posicion y: {player['rect_bruja'].y}")
             jumpCount -= 1
         else:
             jumpCount = 10
             isJump = False
-            # player["rect_bruja"].y = posicion_original_y
             # print(f"Posicion bruja DESPUES salto: {player['rect_bruja'].y}")
+        personaje.update(player, 0, - velocidad, "arriba")
 
-    # if player["rect_bruja"].colliderect(bloque_uno.rect_bloque) or player["rect_bruja"].colliderect(bloque_dos.rect_bloque):
-    #     print("COLISION")
+    if not player["rect_bruja"].colliderect(bloque_uno.rect_bloque) and not player["rect_bruja"].colliderect(bloque_dos.rect_bloque):
+            sobre_bloque = False
+
+    if isJump == True:
+        if player["rect_bruja"].colliderect(bloque_uno.rect_bloque) or player["rect_bruja"].colliderect(bloque_dos.rect_bloque):
+            velocidad -= 10
+            jumpCount = 10
+            isJump = False
+            sobre_bloque = True
+            player['rect_bruja'].y = (bloque_uno.rect_bloque.y - ALTO_BRUJA ) + 20
+
     #     if player["rect_bruja"].y + ALTO_BRUJA == bloque_uno.rect_bloque.y:
     #         print("mismo YYYYYYYY")
     # else:
     #     print("NOT COLISOI NOO")
+
+
 
 
     #VOLCAR CAMBIOS
