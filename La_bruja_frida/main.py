@@ -1,12 +1,15 @@
 import pygame
 import constantes
 import personaje
+import bloque
 
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
 ALTO_BRUJA = constantes.ALTO_BRUJA
 ANCHO_BRUJA = constantes.ANCHO_BRUJA
 COLOR_FONDO = constantes.GRIS
+ancho_bloque = ANCHO_VENTANA /4
+alto_bloque = ALTO_VENTANA / 10
 
 pygame.init()
 
@@ -26,6 +29,14 @@ pygame.time.set_timer(timer,100)
 # CREACIN DE ELEMENTOS
 player = personaje.crear(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
+#Bloques
+bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA - alto_bloque, ancho_bloque, alto_bloque)
+bloque_dos= bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA - alto_bloque, ancho_bloque, alto_bloque)
+
+print(ALTO_BRUJA)
+print(ALTO_VENTANA - ALTO_BRUJA)
+
+
 #Velocidades
 velocidad_base = 2
 velocidad_shift = 6
@@ -33,6 +44,7 @@ velocidad_shift = 6
 #Salto
 isJump = False
 jumpCount = 10
+velocidad_vertical_acumulativa = 0
 
 #LGICA DEL JUEGO
 flag_run = True
@@ -65,18 +77,27 @@ while flag_run:
     if lista_teclas[pygame.K_DOWN]:
         personaje.update(player, 0 , -velocidad , "abajo")
 
+
     if not isJump:
         if lista_teclas[pygame.K_SPACE]:
             isJump = True
     else:
+
+        posicion_original_y = player["rect_bruja"].y
+        print(f"Posicion bruja ANTES salto: {posicion_original_y}")
+
+
         if jumpCount >= -10:
             velocidad = -(jumpCount * abs(jumpCount)) * 0.5  # Cambia el signo de la velocidad vertical
-
             personaje.update(player, 0, -velocidad, "arriba")
             jumpCount -= 1
         else:
             jumpCount = 10
             isJump = False
+            # player["rect_bruja"].y = posicion_original_y
+            print(f"Posicion bruja DESPUES salto: {player['rect_bruja'].y}")
+
+
 
     #VOLCAR CAMBIOS
     ventana_ppal.fill(COLOR_FONDO)
@@ -85,6 +106,9 @@ while flag_run:
     ventana_ppal.blit(fondo, (0, 0))
 
     personaje.actualizar_pantalla(player,ventana_ppal)
+
+    bloque_uno.actualizar_pantalla(ventana_ppal)
+    bloque_dos.actualizar_pantalla(ventana_ppal)
 
     pygame.display.flip()
 pygame.quit()

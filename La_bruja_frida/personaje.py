@@ -24,6 +24,8 @@ def actualizar_pantalla(personaje,ventana_ppal):
 
 def update(personaje,incremento_x,incremento_y, direccion):
 
+    
+
     nueva_x = personaje["rect_bruja"].x + incremento_x
     nueva_y = personaje["rect_bruja"].y - incremento_y
 
@@ -41,3 +43,5 @@ def update(personaje,incremento_x,incremento_y, direccion):
         personaje["surface"] = pygame.image.load("./imgs/bruja_color.png")
 
     personaje["surface"] = pygame.transform.scale(personaje["surface"],(ANCHO_BRUJA,ALTO_BRUJA))
+
+    # print(f" La bruja esta en el y: {personaje['rect_bruja'].y}")
