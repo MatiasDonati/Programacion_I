@@ -27,7 +27,7 @@ def update(personaje,incremento_x,incremento_y, direccion):
     nueva_x = personaje["rect_bruja"].x + incremento_x
     nueva_y = personaje["rect_bruja"].y - incremento_y
 
-    if nueva_x > 0 and nueva_x < 1050:
+    if nueva_x > 0 and nueva_x < ANCHO_VENTANA-ANCHO_BRUJA:
         personaje["rect_bruja"].x = personaje["rect_bruja"].x + incremento_x
 
     if nueva_y > 0 and nueva_y < ALTO_VENTANA-ALTO_BRUJA:
@@ -41,4 +41,3 @@ def update(personaje,incremento_x,incremento_y, direccion):
         personaje["surface"] = pygame.image.load("./imgs/bruja_color.png")
 
     personaje["surface"] = pygame.transform.scale(personaje["surface"],(ANCHO_BRUJA,ALTO_BRUJA))
-
