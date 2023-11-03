@@ -31,7 +31,9 @@ player = personaje.crear(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, AL
 
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
-bloque_dos= bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
+bloque_dos = bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
+bloque_tres = bloque.Bloque(ANCHO_VENTANA / 3.5,(ALTO_VENTANA - ALTO_BRUJA * 2) - alto_bloque, ancho_bloque, alto_bloque)
+
 
 print(ALTO_BRUJA)
 print(ALTO_VENTANA - ALTO_BRUJA)
@@ -130,6 +132,7 @@ while flag_run:
 
     bloque_uno.actualizar_pantalla(ventana_ppal)
     bloque_dos.actualizar_pantalla(ventana_ppal)
+    bloque_tres.actualizar_pantalla(ventana_ppal)
 
     pygame.display.flip()
 pygame.quit()
