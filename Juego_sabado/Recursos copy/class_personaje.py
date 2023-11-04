@@ -1,4 +1,5 @@
 from configuraciones import *
+
 class Personaje:
     def __init__(self, animaciones, pos_x, pos_y, tamaño:tuple, velocidad, direccion) -> None:
         self.animaciones = animaciones

@@ -2,11 +2,17 @@ import re
 import pygame
 import constantes
 
+
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
 ANCHO_BRUJA = constantes.ANCHO_BRUJA
 ALTO_BRUJA = constantes.ALTO_BRUJA
 
+
+"""
+CONVERTIRLO A CLASE !!
+ACOMODAR EL MAIN PARA TAL ACCION!
+"""
 
 def crear(x,y,ancho,alto):
 
@@ -18,7 +24,7 @@ def crear(x,y,ancho,alto):
     dict_personaje["surface"] = pygame.image.load("./imgs/bruja_color.png")
     dict_personaje["surface"] = pygame.transform.scale(dict_personaje["surface"],(ancho,alto))
     dict_personaje["rect_bruja"] = pygame.Rect(x,y,ancho,alto)
-    dict_personaje["score"] = 0
+    # dict_personaje["animaciones"] = animaciones
 
     return dict_personaje
 
