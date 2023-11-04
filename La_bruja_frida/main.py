@@ -32,7 +32,10 @@ player = personaje.crear(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, AL
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
 bloque_dos = bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
-bloque_tres = bloque.Bloque(ANCHO_VENTANA /3 ,(ALTO_VENTANA - ALTO_BRUJA * 2) - alto_bloque, ancho_bloque, alto_bloque)
+bloque_tres = bloque.Bloque(ANCHO_VENTANA /2 - ancho_bloque /2  ,(ALTO_VENTANA - ALTO_BRUJA * 3) - alto_bloque, ancho_bloque, alto_bloque)
+
+bloques = [bloque_uno, bloque_dos, bloque_tres]
+
 
 
 print(ALTO_BRUJA)
@@ -74,8 +77,11 @@ while flag_run:
     if lista_teclas[pygame.K_RIGHT]:
         personaje.update(player, velocidad , 0 , "derecha")
 
-    if lista_teclas[pygame.K_UP]:
-        personaje.update(player, 0 , velocidad , "arriba")
+    #TRUCO VOLAR
+    if lista_teclas[pygame.K_w]:
+        if lista_teclas[pygame.K_UP]:
+            sobre_bloque = True
+            personaje.update(player, 0 , velocidad , "arriba")
 
     if lista_teclas[pygame.K_DOWN]:
         personaje.update(player, 0 , -velocidad , "abajo")
@@ -85,43 +91,36 @@ while flag_run:
 
         if not sobre_bloque:
             personaje.update(player, 0 , -6 , "abajo")
-       
+
         if lista_teclas[pygame.K_SPACE]:
             isJump = True
-            print(f"Posicion bruja ANTES salto: {player['rect_bruja'].y}")
     else:
 
         if jumpCount >= -10:
-            velocidad = -(jumpCount * abs(jumpCount)) * 0.4  # Cambia el signo de la velocidad vertical
+            velocidad = -(jumpCount * abs(jumpCount)) * 0.4
             jumpCount -= 1
         else:
             jumpCount = 10
             isJump = False
         personaje.update(player, 0, - velocidad, "arriba")
-   
-        if player["rect_bruja"].colliderect(bloque_uno.rect_bloque) or player["rect_bruja"].colliderect(bloque_dos.rect_bloque):
-            velocidad -= 10
-            jumpCount = 10
-            isJump = False
-            sobre_bloque = True
-            player['rect_bruja'].y = (bloque_uno.rect_bloque.y - ALTO_BRUJA ) + 20
 
 
-    # ACA HAY ALGO CERCANO A LO QUE QUIEROP HACER !!
-    # ACA HAY ALGO CERCANO A LO QUE QUIEROP HACER !!
-    if player["rect_bruja"].colliderect(bloque_uno.rect_bloque) == False and player["rect_bruja"].colliderect(bloque_dos.rect_bloque) == False:
+        #HACER QUE LA COLISION NO TENGA EFECTO SI TOCA LA CARA  DE LA BRUJA CON EL BLOQUE (si la bruja se choca con un objeto a la altura de su rectangulo)
+        for bloque_actual in bloques:
+            if player['rect_bruja'].colliderect(bloque_actual.rect_bloque):
+                velocidad -= 10
+                jumpCount = 10
+                isJump = False
+                sobre_bloque = True
+                player['rect_bruja'].y = (bloque_actual.rect_bloque.y - ALTO_BRUJA ) + ALTO_BRUJA * 1/7
+            else:
+                sobre_bloque = False
+
+
+    if player["rect_bruja"].colliderect(bloque_uno.rect_bloque) == False and player["rect_bruja"].colliderect(bloque_dos.rect_bloque) == False and player["rect_bruja"].colliderect(bloque_tres.rect_bloque) == False:
           sobre_bloque = False
     else:
         sobre_bloque = True
-       
-    # if player["rect_bruja"].colliderect(bloque_dos.rect_bloque) == False:
-    #       sobre_bloque = False
-    # else:
-    #     sobre_bloque = True
-        # if not player["rect_bruja"].colliderect(bloque_uno.rect_bloque) and not player["rect_bruja"].colliderect(bloque_dos.rect_bloque):
-        #         sobre_bloque = False
-
-       
 
 
     #VOLCAR CAMBIOS
