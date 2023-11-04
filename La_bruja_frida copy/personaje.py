@@ -7,7 +7,6 @@ ALTO_VENTANA = constantes.ALTO_VENTANA
 ANCHO_BRUJA = constantes.ANCHO_BRUJA
 ALTO_BRUJA = constantes.ALTO_BRUJA
 
-
 def crear(x,y,ancho,alto):
 
     dict_personaje = {}
@@ -38,7 +37,6 @@ def update(personaje,incremento_x,incremento_y, direccion):
     if nueva_y > 0 and nueva_y < ALTO_VENTANA-ALTO_BRUJA:
         personaje["rect_bruja"].y = personaje["rect_bruja"].y - incremento_y
 
-
     if direccion == "izquierda":
         personaje["surface"] = pygame.image.load("./imgs/bruja_color_izq.png")
 
@@ -46,5 +44,3 @@ def update(personaje,incremento_x,incremento_y, direccion):
         personaje["surface"] = pygame.image.load("./imgs/bruja_color.png")
 
     personaje["surface"] = pygame.transform.scale(personaje["surface"],(ANCHO_BRUJA,ALTO_BRUJA))
-
-    #update se va a llamar en una funcion q sea presionar tecla aca...

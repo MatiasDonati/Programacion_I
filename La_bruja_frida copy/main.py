@@ -9,7 +9,7 @@ ALTO_BRUJA = constantes.ALTO_BRUJA
 ANCHO_BRUJA = constantes.ANCHO_BRUJA
 COLOR_FONDO = constantes.GRIS
 ancho_bloque = ANCHO_VENTANA /4
-alto_bloque = ALTO_VENTANA / 15
+alto_bloque = ALTO_VENTANA / 10
 
 pygame.init()
 
@@ -24,7 +24,6 @@ fondo = pygame.image.load('./imgs/nebulosa.jpg')
 timer = pygame.USEREVENT + 0
 pygame.time.set_timer(timer,100)
 
-
 #Creacion de Elementos
 player = personaje.crear(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
@@ -32,11 +31,9 @@ player = personaje.crear(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, AL
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
 bloque_dos = bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
 bloque_tres = bloque.Bloque(ANCHO_VENTANA /2 - ancho_bloque /2  ,(ALTO_VENTANA - ALTO_BRUJA * 3) - alto_bloque, ancho_bloque, alto_bloque)
-bloque_cuatro = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 6 - alto_bloque, ancho_bloque, alto_bloque)
-bloque_cinco = bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 6 - alto_bloque, ancho_bloque, alto_bloque)
 
-bloques = [bloque_uno, bloque_dos, bloque_tres, bloque_cuatro, bloque_cinco]
-
+#Lista de bloques
+bloques = [bloque_uno, bloque_dos, bloque_tres]
 
 #Velocidades
 velocidad_base = 2
@@ -45,6 +42,7 @@ velocidad_shift = 6
 #Salto
 isJump = False
 jumpCount = 10
+
 
 sobre_bloque = False
 
@@ -64,9 +62,6 @@ while flag_run:
                 pass
 
     lista_teclas = pygame.key.get_pressed()
-    # personaje.presionar_tecla(lista_teclas)
-
-
 
     velocidad = velocidad_shift if lista_teclas[pygame.K_LSHIFT] else velocidad_base
 
@@ -117,7 +112,7 @@ while flag_run:
             else:
                 sobre_bloque = False
 
-    if player["rect_bruja"].colliderect(bloque_uno.rect_bloque) == False and player["rect_bruja"].colliderect(bloque_dos.rect_bloque) == False and player["rect_bruja"].colliderect(bloque_tres.rect_bloque) == False and player["rect_bruja"].colliderect(bloque_cuatro.rect_bloque) == False and player["rect_bruja"].colliderect(bloque_cinco.rect_bloque) == False:
+    if player["rect_bruja"].colliderect(bloque_uno.rect_bloque) == False and player["rect_bruja"].colliderect(bloque_dos.rect_bloque) == False and player["rect_bruja"].colliderect(bloque_tres.rect_bloque) == False:
           sobre_bloque = False
     else:
         sobre_bloque = True
@@ -134,8 +129,6 @@ while flag_run:
     bloque_uno.actualizar_pantalla(ventana_ppal)
     bloque_dos.actualizar_pantalla(ventana_ppal)
     bloque_tres.actualizar_pantalla(ventana_ppal)
-    bloque_cuatro.actualizar_pantalla(ventana_ppal)
-    bloque_cinco.actualizar_pantalla(ventana_ppal)
 
     pygame.display.flip()
 pygame.quit()
