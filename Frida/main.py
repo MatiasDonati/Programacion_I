@@ -93,12 +93,20 @@ while flag_run:
     fondo = pygame.transform.scale(fondo, (ANCHO_VENTANA, ALTO_VENTANA))
     ventana_ppal.blit(fondo, (0, 0))
 
-    frida.actualizar_pantalla(ventana_ppal)
+    # frida.actualizar_pantalla(ventana_ppal)
 
     for enemigo_ in enemigos:
         enemigo_.actualizar_pantalla(ventana_ppal)
 
-    colision.colisionar(frida, enemigos)
+    colisionar = colision.colisionar(frida, enemigos)
+    print(colisionar)
+
+    if not colisionar:
+        frida.actualizar_pantalla(ventana_ppal)
+    else:
+        # flag_run = False
+        pass
+
 
     for bloque_ in bloques:
         bloque_.actualizar_pantalla(ventana_ppal)

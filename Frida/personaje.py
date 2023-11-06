@@ -18,9 +18,11 @@ class Personaje:
         self.rect_frida = pygame.Rect(x, y, ancho, alto)
         self.isJump = False
         self.jumpCount = 10
+        self.vidas = 3
 
     def actualizar_pantalla(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_frida)
+        pygame.draw.rect(ventana_ppal, constantes.ROJO, self.rect_frida)
 
     def update(self, incremento_x, incremento_y, direccion):
         nueva_x = self.rect_frida.x + incremento_x
