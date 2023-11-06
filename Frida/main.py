@@ -27,7 +27,7 @@ pygame.time.set_timer(timer,100)
 
 
 #Creacion de Elementos
-player = Personaje(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
+frida = Personaje(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
@@ -64,42 +64,7 @@ while flag_run:
                 pass
 
     lista_teclas = pygame.key.get_pressed()
-    player.presionar_tecla(lista_teclas, bloques)
-
-    if not isJump:
-
-        if not sobre_bloque:
-            player.update(0 , -6 , "abajo")
-
-        if lista_teclas[pygame.K_SPACE]:
-            isJump = True
-    else:
-
-        if jumpCount >= -10:
-            velocidad = -(jumpCount * abs(jumpCount)) * 0.4
-            jumpCount -= 1
-        else:
-            jumpCount = 10
-            isJump = False
-        player.update( 0, - velocidad, "arriba")
-
-        #HACER QUE LA COLISION NO TENGA EFECTO SI TOCA LA CARA  DE LA BRUJA CON EL BLOQUE (si la bruja se choca con un objeto a la altura de su rectangulo)
-        #Q EL PISO SEA UN RECTANGULO DONDE COLISIONA!!!!
-        #Q EL PISO SEA UN RECTANGULO DONDE COLISIONA!!!!
-        for bloque_actual in bloques:
-            if player.rect_bruja.colliderect(bloque_actual.rect_bloque):
-                velocidad -= 10
-                jumpCount = 10
-                isJump = False
-                sobre_bloque = True
-                player.rect_bruja.y = (bloque_actual.rect_bloque.y - ALTO_BRUJA ) + ALTO_BRUJA * 1/7
-            else:
-                sobre_bloque = False
-
-    if player.rect_bruja.colliderect(bloque_uno.rect_bloque) == False and player.rect_bruja.colliderect(bloque_dos.rect_bloque) == False and player.rect_bruja.colliderect(bloque_tres.rect_bloque) == False and player.rect_bruja.colliderect(bloque_cuatro.rect_bloque) == False and player.rect_bruja.colliderect(bloque_cinco.rect_bloque) == False:
-          sobre_bloque = False
-    else:
-        sobre_bloque = True
+    frida.presionar_tecla(lista_teclas, bloques)
 
     #VOLCAR CAMBIOS
     ventana_ppal.fill(COLOR_FONDO)
@@ -107,7 +72,7 @@ while flag_run:
     fondo = pygame.transform.scale(fondo, (ANCHO_VENTANA, ALTO_VENTANA))
     ventana_ppal.blit(fondo, (0, 0))
 
-    player.actualizar_pantalla(ventana_ppal)
+    frida.actualizar_pantalla(ventana_ppal)
 
     for bloque_ in bloques:
         bloque_.actualizar_pantalla(ventana_ppal)
