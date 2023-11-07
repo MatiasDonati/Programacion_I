@@ -14,7 +14,7 @@ class Enemigo:
 
     def actualizar_pantalla(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_enemigo)
-        pygame.draw.rect(ventana_ppal, constantes.VERDE, self.rect_enemigo)
+        # pygame.draw.rect(ventana_ppal, constantes.VERDE, self.rect_enemigo)
         self.update()
     def update(self):
 

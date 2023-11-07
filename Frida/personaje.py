@@ -15,7 +15,7 @@ class Personaje:
     def __init__(self, x, y, ancho, alto):
         self.surface = pygame.image.load("./imgs/bruja_color.png")
         self.surface = pygame.transform.scale(self.surface, (ancho, alto))
-        self.rect_frida = pygame.Rect(x, y, ancho, alto)
+        self.rect_frida = pygame.Rect(x , y, ancho , alto)
         self.isJump = False
         self.jumpCount = 10
         self.vidas = 3
@@ -64,7 +64,7 @@ class Personaje:
                 self.isJump = True
         else:
             if self.jumpCount >= -10:
-                velocidad = -(self.jumpCount * abs(self.jumpCount)) * 0.4
+                velocidad = -(self.jumpCount * abs(self.jumpCount)) * 0.6
                 self.jumpCount -= 1
             else:
                 self.jumpCount = 10

@@ -18,8 +18,8 @@ ANCHO_ENEMIGO = constantes.ANCHO_ENEMIGO
 
 # COLOR_FONDO = constantes.GRIS
 
-ancho_bloque = ANCHO_VENTANA / 4
-alto_bloque = ALTO_VENTANA / 15
+ANCHO_BLOQUE = constantes.ANCHO_BLOQUE
+ALTO_BLOQUE = constantes.ALTO_BLOQUE
 
 pygame.init()
 
@@ -43,11 +43,11 @@ pygame.time.set_timer(timer,100)
 
 
 #Bloques
-bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
-bloque_dos = bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - alto_bloque, ancho_bloque, alto_bloque)
-bloque_tres = bloque.Bloque(ANCHO_VENTANA /2 - ancho_bloque /2  ,(ALTO_VENTANA - ALTO_BRUJA * 3) - alto_bloque, ancho_bloque, alto_bloque)
-bloque_cuatro = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 6 - alto_bloque, ancho_bloque, alto_bloque)
-bloque_cinco = bloque.Bloque(ANCHO_VENTANA - ancho_bloque - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 6 - alto_bloque, ancho_bloque, alto_bloque)
+bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
+bloque_dos = bloque.Bloque(ANCHO_VENTANA - ANCHO_BLOQUE - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
+bloque_tres = bloque.Bloque(ANCHO_VENTANA /2 - ANCHO_BLOQUE /2  ,(ALTO_VENTANA - ALTO_BRUJA * 3) - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
+bloque_cuatro = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 6 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
+bloque_cinco = bloque.Bloque(ANCHO_VENTANA - ANCHO_BLOQUE - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 6 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
 
 bloques = [bloque_uno, bloque_dos, bloque_tres, bloque_cuatro, bloque_cinco]
 
@@ -99,7 +99,7 @@ while flag_run:
         enemigo_.actualizar_pantalla(ventana_ppal)
 
     colisionar = colision.colisionar(frida, enemigos)
-    print(colisionar)
+
 
     if not colisionar:
         frida.actualizar_pantalla(ventana_ppal)
