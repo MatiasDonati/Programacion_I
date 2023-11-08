@@ -1,6 +1,7 @@
 import re
 import pygame
 import constantes
+from disparo import *
 
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
@@ -8,17 +9,18 @@ ANCHO_BRUJA = constantes.ANCHO_BRUJA
 ALTO_BRUJA = constantes.ALTO_BRUJA
 
 # Velocidades
-velocidad_base = 2
-velocidad_shift = 6
+velocidad_base = 4
+velocidad_shift = 7
 
 class Personaje:
     def __init__(self, x, y, ancho, alto):
         self.surface = pygame.image.load("./imgs/bruja_color.png")
         self.surface = pygame.transform.scale(self.surface, (ancho, alto))
-        self.rect_frida = pygame.Rect(x , y, ancho , alto)
+        self.rect_frida = pygame.Rect(x, y, ancho, alto)
         self.isJump = False
         self.jumpCount = 10
         self.vidas = 3
+
 
     def actualizar_pantalla(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_frida)
@@ -52,6 +54,8 @@ class Personaje:
             self.update(velocidad, 0, "derecha")
         if lista_eventos[pygame.K_DOWN]:
             self.update(0, -velocidad, "abajo")
+        if lista_eventos[pygame.K_r]:
+            print('PUM!! PUM!! PUM!! PUM!! DISPARA FRIDA PUN PUN')
 
         if lista_eventos[pygame.K_w] and lista_eventos[pygame.K_UP]:
                 sobre_bloque = True
@@ -64,7 +68,7 @@ class Personaje:
                 self.isJump = True
         else:
             if self.jumpCount >= -10:
-                velocidad = -(self.jumpCount * abs(self.jumpCount)) * 0.6
+                velocidad = - (self.jumpCount * abs(self.jumpCount)) * 0.6
                 self.jumpCount -= 1
             else:
                 self.jumpCount = 10

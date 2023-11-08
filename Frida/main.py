@@ -6,6 +6,7 @@ from personaje import *
 from enemigo import *
 from configuraciones import *
 import colision
+from disparo import *
 
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
@@ -41,7 +42,6 @@ fondo = pygame.image.load('./imgs/nebulosa.jpg')
 timer = pygame.USEREVENT + 0
 pygame.time.set_timer(timer,100)
 
-
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
 bloque_dos = bloque.Bloque(ANCHO_VENTANA - ANCHO_BLOQUE - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
@@ -54,22 +54,16 @@ bloques = [bloque_uno, bloque_dos, bloque_tres, bloque_cuatro, bloque_cinco]
 #Creacion de Elementos
 frida = Personaje(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
-enemigo = Enemigo(bloque_cinco.rect_bloque.x,bloque_cinco.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques)
-enemigo_dos = Enemigo(bloque_cuatro.rect_bloque.x * 1.6,bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques)
+#disparo
+bala = Disparo(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
-enemigos = [enemigo, enemigo_dos]
+enemigo = Enemigo(bloque_cinco.rect_bloque.x,bloque_cinco.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
+enemigo_dos = Enemigo(bloque_cuatro.rect_bloque.x * 1.6,bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
+enemigo_tres = Enemigo(bloque_tres.rect_bloque.x,bloque_tres.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 
-#Velocidades
-velocidad_base = 2
-velocidad_shift = 6
+enemigos = [enemigo, enemigo_dos, enemigo_tres]
 
-#Salto
-isJump = False
-jumpCount = 10
-
-sobre_bloque = False
-
-#LGICA DEL JUEGO
+#LOGICA DEL JUEGO
 flag_run = True
 while flag_run:
 
@@ -96,7 +90,7 @@ while flag_run:
     # frida.actualizar_pantalla(ventana_ppal)
 
     for enemigo_ in enemigos:
-        enemigo_.actualizar_pantalla(ventana_ppal)
+        enemigo_.update(ventana_ppal)
 
     colisionar = colision.colisionar(frida, enemigos)
 
@@ -107,9 +101,14 @@ while flag_run:
         # flag_run = False
         pass
 
+    # bala.actualizar_pantalla(ventana_ppal)
 
     for bloque_ in bloques:
         bloque_.actualizar_pantalla(ventana_ppal)
 
     pygame.display.flip()
+
+    #Delay para ralentar un poco la velocidad del juego
+    pygame.time.delay(3)
+
 pygame.quit()
