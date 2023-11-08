@@ -24,7 +24,7 @@ class Personaje:
 
     def actualizar_pantalla(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_frida)
-        pygame.draw.rect(ventana_ppal, constantes.ROJO, self.rect_frida)
+        # pygame.draw.rect(ventana_ppal, constantes.ROJO, self.rect_frida)
 
     def update(self, incremento_x, incremento_y, direccion):
         nueva_x = self.rect_frida.x + incremento_x
@@ -82,3 +82,7 @@ class Personaje:
                 # sobre_bloque = False
                 if lista_eventos[pygame.K_SPACE]:
                     self.isJump = True
+
+    def restar_vida(self):
+        self.vidas -= 1
+        print(self.vidas)

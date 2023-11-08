@@ -21,7 +21,7 @@ class Enemigo:
 
     def update(self, ventana_ppal):
 
-        pygame.draw.rect(ventana_ppal, constantes.VERDE, self.rect_enemigo)
+        # pygame.draw.rect(ventana_ppal, constantes.VERDE, self.rect_enemigo)
 
         for bloque_actual in self.bloques:
             if self.rect_enemigo.colliderect(bloque_actual.rect_bloque):
