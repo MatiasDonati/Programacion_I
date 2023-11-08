@@ -86,3 +86,6 @@ class Personaje:
     def restar_vida(self):
         self.vidas -= 1
         print(self.vidas)
+
+        if self.vidas <= 0:
+            print("¡Game Over!")
