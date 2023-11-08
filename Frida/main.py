@@ -19,7 +19,6 @@ ALTO_BLOQUE = constantes.ALTO_BLOQUE
 
 pygame.init()
 
-
 #Personaje
 diccionario_animaciones = {}
 diccionario_animaciones['derecha'] = personaje_derecha
@@ -42,6 +41,10 @@ fondo_intro = pygame.image.load('./imgs/fondo_inicio.jpg')
 segundos = "30"
 fin_tiempo = False
 timer = pygame.USEREVENT + 0
+
+timer_frida = pygame.USEREVENT + 1
+pygame.time.set_timer(timer_frida,1000)
+
 pygame.time.set_timer(timer,1000)
 #definir musica
 pygame.mixer.init()
@@ -93,7 +96,6 @@ while intro:
 
     pygame.display.flip()
 
-
 flag_run = True
 while flag_run:
 
@@ -105,19 +107,16 @@ while flag_run:
         if evento.type == pygame.QUIT:
             flag_run = False
 
-        #LLEVARLO A UNA FUNCION APARTE
-        # restar_segundos(ventana_ppal, evento.type, fuente)
         if evento.type == pygame.USEREVENT:
             if evento.type == timer:
                 if fin_tiempo == False:
-                    segundos = int(segundos) - 1
+                    segundos = int(segundos) -    1
                     volumen = volumen - 0.01
                     sonido_fondo.set_volume(volumen)
                     if int(segundos) == 0:
                         fin_tiempo = True
                         segundos = 'Tiempo Terminado...'
                         sonido_fondo.stop()
-
 
     lista_teclas = pygame.key.get_pressed()
     frida.presionar_tecla(lista_teclas, bloques)
@@ -128,11 +127,10 @@ while flag_run:
     segundos_texto, segundos_rect = fuente.render(str(segundos), constantes.GRIS)
     ventana_ppal.blit(segundos_texto, (10, 10))
 
-    # frida.actualizar_pantalla(ventana_ppal)
-
     for enemigo_ in enemigos:
         enemigo_.update(ventana_ppal)
 
+    # frida.actualizar_pantalla(ventana_ppal)
     colisionar = colision.colisionar(frida, enemigos)
     if not colisionar:
         frida.actualizar_pantalla(ventana_ppal)

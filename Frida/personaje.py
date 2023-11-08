@@ -12,6 +12,7 @@ ALTO_BRUJA = constantes.ALTO_BRUJA
 velocidad_base = 4
 velocidad_shift = 7
 
+
 class Personaje:
     def __init__(self, x, y, ancho, alto):
         self.surface = pygame.image.load("./imgs/bruja_color.png")
@@ -84,8 +85,8 @@ class Personaje:
                     self.isJump = True
 
     def restar_vida(self):
-        self.vidas -= 1
-        print(self.vidas)
-
-        if self.vidas <= 0:
+        if self.vidas > 0:
+            self.vidas -= 1
+            print(self.vidas)
+        else:
             print("¡Game Over!")
