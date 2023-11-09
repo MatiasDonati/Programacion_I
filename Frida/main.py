@@ -8,6 +8,9 @@ import colision
 from disparo import *
 from tiempo import *
 
+
+vida_frida = False
+
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
 ALTO_BRUJA = constantes.ALTO_BRUJA
@@ -41,17 +44,28 @@ fondo_intro = pygame.image.load('./imgs/fondo_inicio.jpg')
 segundos = "30"
 fin_tiempo = False
 timer = pygame.USEREVENT + 0
-
-timer_frida = pygame.USEREVENT + 1
-pygame.time.set_timer(timer_frida,1000)
-
 pygame.time.set_timer(timer,1000)
+
 #definir musica
 pygame.mixer.init()
 ruta_audio = './audio/DiagramadeVen.mp3'
 sonido_fondo = pygame.mixer.Sound(ruta_audio)
-volumen = 0.30
+volumen = 0.5
 sonido_fondo.set_volume(volumen)
+flag_sonido = False
+
+#ouch sound
+ruta_ouch = './audio/ouch.mp3'
+sonido_ouch = pygame.mixer.Sound(ruta_ouch)
+vol_ouch = 0.5
+sonido_ouch.set_volume(vol_ouch)
+ouch_flag = False
+
+#carcajada sound
+ruta_risa = './audio/carcajada.mp3'
+sonido_risa = pygame.mixer.Sound(ruta_risa)
+sonido_risa.set_volume(0.05)
+risa_reproducida = False
 
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
@@ -71,8 +85,10 @@ enemigo_dos = Enemigo(bloque_cuatro.rect_bloque.x * 1.6,bloque_cuatro.rect_bloqu
 enemigo_tres = Enemigo(bloque_tres.rect_bloque.x,bloque_tres.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigos = [enemigo, enemigo_dos, enemigo_tres]
 
+sonido_risa.play()
 intro = True
 while intro:
+
     lista_eventos = pygame.event.get()
 
     for evento in lista_eventos:
@@ -96,10 +112,14 @@ while intro:
 
     pygame.display.flip()
 
+sonido_risa.stop()
+
 flag_run = True
 while flag_run:
 
-    sonido_fondo.play()
+    if flag_sonido == False:
+        sonido_fondo.play()
+        flag_sonido = True
 
     lista_eventos = pygame.event.get()
 
@@ -110,9 +130,10 @@ while flag_run:
         if evento.type == pygame.USEREVENT:
             if evento.type == timer:
                 if fin_tiempo == False:
-                    segundos = int(segundos) -    1
-                    volumen = volumen - 0.01
-                    sonido_fondo.set_volume(volumen)
+                    segundos = int(segundos) - 1
+                    if int(segundos) <= 5:
+                        volumen = volumen - 0.1
+                        sonido_fondo.set_volume(volumen)
                     if int(segundos) == 0:
                         fin_tiempo = True
                         segundos = 'Tiempo Terminado...'
@@ -127,6 +148,9 @@ while flag_run:
     segundos_texto, segundos_rect = fuente.render(str(segundos), constantes.GRIS)
     ventana_ppal.blit(segundos_texto, (10, 10))
 
+    texto_vidas, texto_rect = fuente.render(f'Vidas: {str(frida.vidas)}', constantes.GRIS)
+    ventana_ppal.blit(texto_vidas, (ANCHO_VENTANA - texto_rect.width - texto_rect.width * 0.5 , 10))
+
     for enemigo_ in enemigos:
         enemigo_.update(ventana_ppal)
 
@@ -135,17 +159,22 @@ while flag_run:
     if not colisionar:
         frida.actualizar_pantalla(ventana_ppal)
     else:
-        frida.restar_vida()
+        muere = frida.restar_vida()
+        if muere == True:
+            if ouch_flag == False:
+                sonido_ouch.play()
+                ouch_flag = True
+                intro = True
 
     # bala.actualizar_pantalla(ventana_ppal)
 
     for bloque_ in bloques:
         bloque_.actualizar_pantalla(ventana_ppal)
 
-
     pygame.display.flip()
 
     pygame.time.delay(7)
 
 sonido_fondo.stop()
+sonido_ouch.stop()
 pygame.quit()

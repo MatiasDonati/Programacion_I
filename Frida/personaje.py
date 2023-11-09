@@ -12,6 +12,12 @@ ALTO_BRUJA = constantes.ALTO_BRUJA
 velocidad_base = 4
 velocidad_shift = 7
 
+#ouch sound
+pygame.mixer.init()
+ruta_ouch = './audio/ouch.mp3'
+sonido_ouch = pygame.mixer.Sound(ruta_ouch)
+vol_ouch = 0.12
+sonido_ouch.set_volume(vol_ouch)
 
 class Personaje:
     def __init__(self, x, y, ancho, alto):
@@ -21,6 +27,7 @@ class Personaje:
         self.isJump = False
         self.jumpCount = 10
         self.vidas = 3
+        self.cooldown_colision = 0
 
 
     def actualizar_pantalla(self, ventana_ppal):
@@ -43,6 +50,10 @@ class Personaje:
             self.surface = pygame.image.load("./imgs/bruja_color.png")
 
         self.surface = pygame.transform.scale(self.surface, (ANCHO_BRUJA, ALTO_BRUJA))
+
+        #para coli
+        if self.cooldown_colision > 0:
+            self.cooldown_colision -= 1
 
     def presionar_tecla(self, lista_eventos, bloques):
 
@@ -85,8 +96,14 @@ class Personaje:
                     self.isJump = True
 
     def restar_vida(self):
-        if self.vidas > 0:
-            self.vidas -= 1
-            print(self.vidas)
-        else:
-            print("¡Game Over!")
+
+        if self.cooldown_colision == 0:
+            if type(self.vidas) == int and self.vidas > 1:
+                self.vidas -= 1
+                print(self.vidas)
+            else:
+                print("¡Game Over!")
+                self.vidas = ' =( No tenes mas vidas '
+                return True
+
+            self.cooldown_colision = 200
