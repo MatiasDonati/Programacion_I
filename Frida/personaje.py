@@ -77,6 +77,12 @@ class Personaje:
             if lista_eventos[pygame.K_SPACE]:
                 self.isJump = True
         else:
+
+            if lista_eventos[pygame.K_LEFT]:
+                self.update(-5, 0, "izquierda")
+            if lista_eventos[pygame.K_RIGHT]:
+                self.update(5, 0, "derecha")
+
             if self.jumpCount >= -10:
                 velocidad = - (self.jumpCount * abs(self.jumpCount)) * 0.6
                 self.jumpCount -= 1
@@ -102,6 +108,7 @@ class Personaje:
             else:
                 print("¡Game Over!")
                 self.vidas = ' =( No tenes mas vidas '
+                return True
 
             sonido_vida_perdida.play()
             self.cooldown_colision = 200

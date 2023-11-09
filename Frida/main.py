@@ -39,6 +39,8 @@ fuente = pygame.freetype.Font(None, 36)
 #Imagenes Fondo
 fondo = pygame.image.load('./imgs/fondo3.jpg')
 fondo_intro = pygame.image.load('./imgs/fondo_inicio.jpg')
+fondo_fin = pygame.image.load('./imgs/fin.jpg')
+
 
 # TIMER
 segundos = "30"
@@ -59,6 +61,11 @@ ruta_risa = './audio/carcajada.mp3'
 sonido_risa = pygame.mixer.Sound(ruta_risa)
 sonido_risa.set_volume(0.05)
 risa_reproducida = False
+
+#carcajada sound
+ruta_musica_fin = './audio/besau.mp3'
+musica_fin = pygame.mixer.Sound(ruta_musica_fin)
+sonido_risa.set_volume(1)
 
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
@@ -152,7 +159,9 @@ while flag_run:
     if not colisionar:
         frida.actualizar_pantalla(ventana_ppal)
     else:
-        frida.restar_vida()
+        muerta = frida.restar_vida()
+        if muerta:
+           flag_run = False 
 
     # bala.actualizar_pantalla(ventana_ppal)
 
@@ -164,4 +173,28 @@ while flag_run:
     pygame.time.delay(7)
 
 sonido_fondo.stop()
+
+pygame.display.set_caption("Fin")
+musica_fin.play()
+
+# pygame.time.delay(100)
+
+flag_final = True
+while flag_final:
+
+    lista_eventos = pygame.event.get()
+
+    for evento in lista_eventos:
+        if evento.type == pygame.QUIT:
+            flag_final = False
+
+    fondo_fin = pygame.transform.scale(fondo_fin, (ANCHO_VENTANA, ALTO_VENTANA))
+    ventana_ppal.blit(fondo_fin, (0, 0))
+
+    texto_superficie, texto_rect = fuente.render("ADIOS!", constantes.NEGRO)
+
+    ventana_ppal.blit(texto_superficie, (500, 300))
+
+    pygame.display.flip()
+
 pygame.quit()
