@@ -15,9 +15,8 @@ velocidad_shift = 7
 #ouch sound
 pygame.mixer.init()
 ruta_ouch = './audio/ouch.mp3'
-sonido_ouch = pygame.mixer.Sound(ruta_ouch)
-vol_ouch = 0.12
-sonido_ouch.set_volume(vol_ouch)
+sonido_vida_perdida = pygame.mixer.Sound(ruta_ouch)
+sonido_vida_perdida.set_volume(0.8)
 
 class Personaje:
     def __init__(self, x, y, ancho, alto):
@@ -28,7 +27,6 @@ class Personaje:
         self.jumpCount = 10
         self.vidas = 3
         self.cooldown_colision = 0
-
 
     def actualizar_pantalla(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_frida)
@@ -104,6 +102,6 @@ class Personaje:
             else:
                 print("¡Game Over!")
                 self.vidas = ' =( No tenes mas vidas '
-                return True
 
+            sonido_vida_perdida.play()
             self.cooldown_colision = 200

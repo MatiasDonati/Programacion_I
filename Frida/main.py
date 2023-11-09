@@ -54,13 +54,6 @@ volumen = 0.5
 sonido_fondo.set_volume(volumen)
 flag_sonido = False
 
-#ouch sound
-ruta_ouch = './audio/ouch.mp3'
-sonido_ouch = pygame.mixer.Sound(ruta_ouch)
-vol_ouch = 0.5
-sonido_ouch.set_volume(vol_ouch)
-ouch_flag = False
-
 #carcajada sound
 ruta_risa = './audio/carcajada.mp3'
 sonido_risa = pygame.mixer.Sound(ruta_risa)
@@ -159,12 +152,7 @@ while flag_run:
     if not colisionar:
         frida.actualizar_pantalla(ventana_ppal)
     else:
-        muere = frida.restar_vida()
-        if muere == True:
-            if ouch_flag == False:
-                sonido_ouch.play()
-                ouch_flag = True
-                intro = True
+        frida.restar_vida()
 
     # bala.actualizar_pantalla(ventana_ppal)
 
@@ -176,5 +164,4 @@ while flag_run:
     pygame.time.delay(7)
 
 sonido_fondo.stop()
-sonido_ouch.stop()
 pygame.quit()
