@@ -18,6 +18,10 @@ ruta_ouch = './audio/ouch.mp3'
 sonido_vida_perdida = pygame.mixer.Sound(ruta_ouch)
 sonido_vida_perdida.set_volume(0.8)
 
+#brujaMuerte
+sonido_muerte_bruja = pygame.mixer.Sound('./audio/bruja_muerte.mp3')
+sonido_muerte_bruja.set_volume(0.7)
+
 class Personaje:
     def __init__(self, x, y, ancho, alto):
         self.surface = pygame.image.load("./imgs/bruja_color.png")
@@ -26,7 +30,10 @@ class Personaje:
         self.isJump = False
         self.jumpCount = 10
         self.vidas = 3
+        self.muerta = False
         self.cooldown_colision = 0
+        self.direccion = 'derecha'
+
 
     def actualizar_pantalla(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_frida)
@@ -59,13 +66,16 @@ class Personaje:
         sobre_bloque = False
 
         if lista_eventos[pygame.K_LEFT]:
+            self.direccion = 'izquierda'
             self.update(-velocidad, 0, "izquierda")
         if lista_eventos[pygame.K_RIGHT]:
             self.update(velocidad, 0, "derecha")
+            self.direccion = 'derecha'
         if lista_eventos[pygame.K_DOWN]:
             self.update(0, -velocidad, "abajo")
-        if lista_eventos[pygame.K_r]:
-            print('PUM!! PUM!! PUM!! PUM!! DISPARA FRIDA PUN PUN')
+        # if lista_eventos[pygame.K_LCTRL]:
+        #     print('PUM!! PUM!! PUM!! PUM!! DISPARA FRIDA PUN PUN')
+
 
         if lista_eventos[pygame.K_w] and lista_eventos[pygame.K_UP]:
                 sobre_bloque = True
@@ -108,7 +118,8 @@ class Personaje:
             else:
                 print("¡Game Over!")
                 self.vidas = ' =( No tenes mas vidas '
-                return True
+                self.muerta = True
+                sonido_muerte_bruja.play()
 
             sonido_vida_perdida.play()
             self.cooldown_colision = 200

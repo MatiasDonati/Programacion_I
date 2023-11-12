@@ -32,3 +32,7 @@ personaje_salta = [pygame.image.load("./imgs2/bruja/jump/jump_1.png"),
                        pygame.image.load("./imgs2/bruja/jump/jump_3.png"),
                        pygame.image.load("./imgs2/bruja/jump/jump_4.png"),
                        pygame.image.load("./imgs2/bruja/jump/jump_5.png")]
+
+img_fueguito = pygame.image.load('./imgs/fueguito.png')
+img_fueguito_derecha = pygame.transform.scale(img_fueguito, (100, 60))
+img_fueguito_izquierda = pygame.transform.flip(img_fueguito_derecha, True, False)
