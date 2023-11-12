@@ -65,6 +65,7 @@ class Enemigo:
 
         if self.cooldown_colision == 0:
             if type(self.vidas) == int and self.vidas > 1:
+                # self.animacion_actual = self.animaciones['explosion']
                 self.vidas -= 1
                 sonido_golpe.play()
                 print(self.vidas)

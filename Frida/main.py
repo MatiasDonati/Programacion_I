@@ -26,6 +26,7 @@ diccionario_animaciones['derecha'] = personaje_derecha
 diccionario_animaciones['izquierda'] = personaje_izquierda
 diccionario_animaciones['quieto'] = personaje_quieto
 diccionario_animaciones['salta'] = personaje_salta
+diccionario_animaciones['explosion'] = explosion
 
 ventana_ppal = pygame.display.set_mode((ANCHO_VENTANA,ALTO_VENTANA))
 pygame.display.set_caption("Frida")
@@ -152,10 +153,8 @@ while flag_run:
 
     mostrar_vidas_y_tiempo(fuente, segundos, frida, ventana_ppal)
 
-    for enemigo_ in enemigos:
-        enemigo_.update(ventana_ppal)
-
     colisionar = colision.colisionar(frida, enemigos)
+
     if not frida.muerta:
         if not colisionar:
             frida.actualizar_pantalla(ventana_ppal)
@@ -164,6 +163,9 @@ while flag_run:
     else:
         flag_run = False
 
+
+    for enemigo_ in enemigos:
+        enemigo_.update(ventana_ppal)
 #######################################################################################################################
 
     tiempo_actual = pygame.time.get_ticks()
@@ -174,11 +176,15 @@ while flag_run:
     if proyectil != None:
         proyectil.actualizar(ventana_ppal)
         for enemigo_actual in enemigos:
-            enemigo_muerto = colision.matar_enemigo(proyectil, enemigos)
-            if enemigo_muerto:
-                se_murio = enemigo_muerto.restar_vida()
-                if enemigo_muerto.muerto:
-                    enemigos.remove(enemigo_muerto)
+            murio = colision.matar_enemigo(proyectil, enemigo_actual)
+            if murio:
+                enemigo_actual.restar_vida()
+                if enemigo_actual.muerto:
+                    enemigos.remove(enemigo_actual)
+            else:
+                # proyectil = None
+                pass
+
 
 ########################################################################################################################
 
