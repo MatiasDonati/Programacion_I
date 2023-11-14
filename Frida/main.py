@@ -20,7 +20,7 @@ ALTO_BLOQUE = constantes.ALTO_BLOQUE
 
 pygame.init()
 
-#Personaje
+#Enemigo animaciones
 diccionario_animaciones = {}
 diccionario_animaciones['derecha'] = personaje_derecha
 diccionario_animaciones['izquierda'] = personaje_izquierda
@@ -40,13 +40,13 @@ fondo = pygame.image.load('./imgs/fondo3.jpg')
 fondo_intro = pygame.image.load('./imgs/fondo_inicio.jpg')
 fondo_fin = pygame.image.load('./imgs/fin.jpg')
 
-# TIMER
+# Timer
 segundos = "30"
 fin_tiempo = False
 timer = pygame.USEREVENT + 0
 pygame.time.set_timer(timer,1000)
 
-#definir musica
+#Musica Juego Nivel 1
 pygame.mixer.init()
 ruta_audio = './audio/DiagramadeVen.mp3'
 sonido_fondo = pygame.mixer.Sound(ruta_audio)
@@ -54,12 +54,19 @@ volumen = 0.5
 sonido_fondo.set_volume(volumen)
 flag_sonido = False
 
-#carcajada sound
+#Carcajada Introduccion
 ruta_risa = './audio/carcajada.mp3'
 sonido_risa = pygame.mixer.Sound(ruta_risa)
 sonido_risa.set_volume(0.7)
 
-#musica final
+
+#Carcajada Introduccion
+sonido_una_risa = pygame.mixer.Sound('./audio/una_carcajada.mp3')
+sonido_una_risa.set_volume(0.7)
+sonido_risa_fin_nivel_reproducido = False
+
+
+#Musica Final
 ruta_musica_fin = './audio/besau.mp3'
 musica_fin = pygame.mixer.Sound(ruta_musica_fin)
 musica_fin.set_volume(1)
@@ -74,13 +81,15 @@ bloques = [bloque_uno, bloque_dos, bloque_tres, bloque_cuatro, bloque_cinco]
 
 #Creacion de Elementos
 frida = Personaje(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
+
+#Proyectil
 proyectil = None
 se_disparo = False
 TIEMPO_ENTRE_DISPAROS = 500
 tiempo_ultimo_disparo = 0
+lista_proyectiles = []
 
-# bala = Disparo(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
-
+#enemigos nivel 1
 enemigo = Enemigo(bloque_cinco.rect_bloque.x,bloque_cinco.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigo_dos = Enemigo(bloque_cuatro.rect_bloque.x * 1.6,bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigo_tres = Enemigo(bloque_tres.rect_bloque.x,bloque_tres.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
@@ -163,27 +172,34 @@ while flag_run:
     else:
         flag_run = False
 
-
     for enemigo_ in enemigos:
         enemigo_.update(ventana_ppal)
+
+    if len(enemigos) == 0 and sonido_risa_fin_nivel_reproducido == False:
+        sonido_una_risa.play()
+        sonido_risa_fin_nivel_reproducido = True
 #######################################################################################################################
 
     tiempo_actual = pygame.time.get_ticks()
     if lista_teclas[pygame.K_r] and tiempo_actual - tiempo_ultimo_disparo > TIEMPO_ENTRE_DISPAROS:
-        proyectil = Disparo(frida.rect_frida.x, frida.rect_frida.centery, frida.direccion)
-        tiempo_ultimo_disparo = tiempo_actual  # Actualiza el tiempo del último disparo
+        if proyectil == None:
+            proyectil = Disparo(frida.rect_frida.x, frida.rect_frida.centery, frida.direccion)
+            lista_proyectiles.append(proyectil)
+        else:
+            proyectil_dos = Disparo(frida.rect_frida.x, frida.rect_frida.centery, frida.direccion)
+            lista_proyectiles.append(proyectil_dos)
+        tiempo_ultimo_disparo = tiempo_actual
 
-    if proyectil != None:
-        proyectil.actualizar(ventana_ppal)
-        for enemigo_actual in enemigos:
-            murio = colision.matar_enemigo(proyectil, enemigo_actual)
-            if murio:
-                enemigo_actual.restar_vida()
-                if enemigo_actual.muerto:
-                    enemigos.remove(enemigo_actual)
-            else:
-                # proyectil = None
-                pass
+    if len(lista_proyectiles) != 0:
+        for proyectil_actual in lista_proyectiles:
+            proyectil_actual.actualizar(ventana_ppal)
+            for enemigo_actual in enemigos:
+                murio = colision.matar_enemigo(proyectil_actual, enemigo_actual)
+                if murio:
+                    enemigo_actual.restar_vida()
+                    if enemigo_actual.muerto:
+                        enemigos.remove(enemigo_actual)
+                    proyectil = None
 
 ########################################################################################################################
 

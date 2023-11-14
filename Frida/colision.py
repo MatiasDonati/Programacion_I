@@ -1,3 +1,5 @@
+
+
 def colisionar(frida, enemigos):
     retorno = False
     for enemigo_actual in enemigos:
@@ -6,6 +8,6 @@ def colisionar(frida, enemigos):
     return retorno
 
 def matar_enemigo(proyectil, enemigo_actual):
-    if proyectil.rectangulo.colliderect(enemigo_actual.rect_enemigo):
+    if proyectil != None and proyectil.rectangulo.colliderect(enemigo_actual.rect_enemigo):
         return True
     return False
