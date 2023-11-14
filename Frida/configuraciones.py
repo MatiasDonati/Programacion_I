@@ -47,3 +47,12 @@ explosion = [pygame.image.load("./imgs2/explosion//1.png"),
 img_fueguito = pygame.image.load('./imgs/fueguito.png')
 img_fueguito_derecha = pygame.transform.scale(img_fueguito, (100, 60))
 img_fueguito_izquierda = pygame.transform.flip(img_fueguito_derecha, True, False)
+
+img_hechizo_1 = pygame.image.load('./imgs/hechizo_1.png')
+img_hechizo_1_derecha = pygame.transform.scale(img_hechizo_1, (100, 60))
+img_hechizo_1_izquierda = pygame.transform.flip(img_hechizo_1_derecha, True, False)
+
+img_hechizo_2 = pygame.image.load('./imgs/hechizo_2.png')
+img_hechizo_2_derecha = pygame.transform.scale(img_hechizo_2, (100, 60))
+img_hechizo_2_izquierda = pygame.transform.flip(img_hechizo_2_derecha, True, False)
+
