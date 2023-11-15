@@ -213,7 +213,7 @@ while flag_run_nivel_dos:
 
     for evento in lista_eventos:
         if evento.type == pygame.QUIT:
-            flag_run = False
+            flag_run_nivel_dos = False
         if evento.type == pygame.MOUSEBUTTONDOWN:
             print(evento.pos)
 
@@ -249,6 +249,11 @@ while flag_run_nivel_dos:
 
     for enemigo_ in enemigos:
         enemigo_.update(ventana_ppal)
+######################################################
+        # enemigo_.disaprar(ventana_ppal)
+######################################################
+
+
 
     for bloque_ in bloques:
         bloque_.actualizar_pantalla(ventana_ppal)

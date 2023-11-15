@@ -3,6 +3,8 @@ import pygame
 import constantes
 from configuraciones import *
 import random
+import disparo
+import colision
 
 #enemigo Golpe
 sonido_golpe = pygame.mixer.Sound('./audio/enemigo_hit.mp3')
@@ -31,6 +33,7 @@ class Enemigo:
 
         #Segundo Nivel
         self.dispara = False
+        self.lista_proyectiles = []
 
 
     def update(self, ventana_ppal):
@@ -79,6 +82,28 @@ class Enemigo:
 
             self.cooldown_colision = 50
 
-    def disaprar(self):
-        #Segundo Nivel
-        pass
+    def disaprar(self, ventana_ppal, retangulo_frida):
+        proyectil = None
+
+        if proyectil == None:
+            proyectil = disparo.Disparo(self.rect_enemigo.x, self.rect_enemigo.centery, self.direccion_actual)
+            self.lista_proyectiles.append(proyectil)
+        else:
+            proyectil_dos = disparo.Disparo(self.rect_enemigo.x, self.rect_enemigo.centery, self.direccion_actual)
+            self.lista_proyectiles.append(proyectil_dos)
+
+        if len(self.lista_proyectiles) != 0:
+            proyectiles_a_eliminar = []
+
+            for proyectil_actual in self.lista_proyectiles:
+                proyectil_actual.actualizar(ventana_ppal)
+
+                murio = colision.matar_enemigo(proyectil_actual, retangulo_frida)
+                if murio:
+                    print('DISPARO A FRIDA!')
+
+                proyectiles_a_eliminar.append(proyectil_actual)
+
+            # Elimina los proyectiles marcados para eliminación
+            for proyectil_a_eliminar in proyectiles_a_eliminar:
+                self.lista_proyectiles.remove(proyectil_a_eliminar)
