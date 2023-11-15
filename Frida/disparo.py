@@ -17,19 +17,17 @@ class Disparo:
 
     def actualizar(self, ventana_ppal):
         if self.direccion == 'derecha':
-            # self.superficie = img_fueguito_derecha
-            # self.superficie = img_hechizo_1_derecha
-            self.superficie = img_hechizo_2_derecha
             if self.fueguito:
                 self.superficie = img_fueguito_derecha
+                self.rectangulo.x += 5
             else:
+                self.superficie = img_hechizo_2_derecha
                 self.rectangulo.x += 10
         elif self.direccion == 'izquierda':
-            # self.superficie = img_fueguito_izquierda
-            # self.superficie = img_hechizo_1_izquierda
             if self.fueguito:
                 self.superficie = img_fueguito_izquierda
+                self.rectangulo.x -= 5
             else:
                 self.superficie = img_hechizo_2_izquierda
-            self.rectangulo.x -= 10
+                self.rectangulo.x -= 10
         ventana_ppal.blit(self.superficie, self.rectangulo)

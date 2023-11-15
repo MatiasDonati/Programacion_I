@@ -134,9 +134,9 @@ class Personaje:
             if proyectil == None:
                 proyectil = disparo.Disparo(self.rect_frida.x, self.rect_frida.centery, self.direccion)
                 self.lista_proyectiles.append(proyectil)
-            else:
-                proyectil_dos = disparo.Disparo(self.rect_frida.x, self.rect_frida.centery, self.direccion)
-                self.lista_proyectiles.append(proyectil_dos)
+            # else:
+            #     proyectil_dos = disparo.Disparo(self.rect_frida.x, self.rect_frida.centery, self.direccion)
+            #     self.lista_proyectiles.append(proyectil_dos)
             self.tiempo_ultimo_disparo = tiempo_actual
 
         if len(self.lista_proyectiles) != 0:

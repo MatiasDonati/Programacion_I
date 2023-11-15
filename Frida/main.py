@@ -186,6 +186,9 @@ while flag_run:
 
 sonido_fondo.stop()
 
+############################################################
+# NVEL DOS
+
 frida = Personaje(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 enemigo = Enemigo(bloque_cinco.rect_bloque.x,bloque_cinco.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigo_dos = Enemigo(bloque_cuatro.rect_bloque.x * 1.6,bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
@@ -251,10 +254,8 @@ while flag_run_nivel_dos:
         enemigo_.update(ventana_ppal)
 
 ######################################################
-        # enemigo_.disaprar(ventana_ppal)
-        ## Ver la funcion enemigo y la clase disparo !
+        enemigo_.disparar(ventana_ppal, frida)
 ######################################################
-
 
 
     for bloque_ in bloques:

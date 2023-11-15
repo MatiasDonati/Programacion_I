@@ -34,7 +34,8 @@ class Enemigo:
         #Segundo Nivel
         self.dispara = False
         self.lista_proyectiles = []
-
+        self.tiempo_ultimo_disparo = 0
+        self.TIEMPO_ENTRE_DISPAROS = 2000
 
     def update(self, ventana_ppal):
 
@@ -82,28 +83,20 @@ class Enemigo:
 
             self.cooldown_colision = 50
 
-    def disaprar(self, ventana_ppal, retangulo_frida):
+    def disparar(self, ventana_ppal, frida):
         proyectil = None
 
-        if proyectil == None:
-            proyectil = disparo.Disparo(self.rect_enemigo.x, self.rect_enemigo.centery, self.direccion_actual)
-            self.lista_proyectiles.append(proyectil)
-        else:
-            proyectil_dos = disparo.Disparo(self.rect_enemigo.x, self.rect_enemigo.centery, self.direccion_actual)
-            self.lista_proyectiles.append(proyectil_dos)
+        tiempo_actual = pygame.time.get_ticks()
+        if tiempo_actual - self.tiempo_ultimo_disparo > self.TIEMPO_ENTRE_DISPAROS:
+            if proyectil == None:
+                proyectil = disparo.Disparo(self.rect_enemigo.x, self.rect_enemigo.centery, self.direccion_actual, True)
+                self.lista_proyectiles.append(proyectil)
+            self.tiempo_ultimo_disparo = tiempo_actual
 
-        if len(self.lista_proyectiles) != 0:
-            proyectiles_a_eliminar = []
-
-            for proyectil_actual in self.lista_proyectiles:
-                proyectil_actual.actualizar(ventana_ppal)
-
-                murio = colision.matar_enemigo(proyectil_actual, retangulo_frida)
-                if murio:
-                    print('DISPARO A FRIDA!')
-
-                proyectiles_a_eliminar.append(proyectil_actual)
-
-            # Elimina los proyectiles marcados para eliminación
-            for proyectil_a_eliminar in proyectiles_a_eliminar:
-                self.lista_proyectiles.remove(proyectil_a_eliminar)
+        for proyectil_actual in self.lista_proyectiles:
+            proyectil_actual.actualizar(ventana_ppal)
+            # ACA CAPTAR LA COLISION
+            choque = colision.atacar_a_frida(proyectil_actual, frida)
+            if choque:
+                frida.restar_vida()
+                #HACER ANIMACION FRIDA COLISIONADA !!
