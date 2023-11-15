@@ -100,3 +100,7 @@ class Enemigo:
             if choque:
                 frida.restar_vida()
                 #HACER ANIMACION FRIDA COLISIONADA !!
+
+                ################################################
+                ################################################
+                # ELIMINAR PROYECTIL CUANDO CHOCA A FRIDA !!!
