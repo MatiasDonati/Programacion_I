@@ -249,8 +249,10 @@ while flag_run_nivel_dos:
 
     for enemigo_ in enemigos:
         enemigo_.update(ventana_ppal)
+
 ######################################################
         # enemigo_.disaprar(ventana_ppal)
+        ## Ver la funcion enemigo y la clase disparo !
 ######################################################
 
 
