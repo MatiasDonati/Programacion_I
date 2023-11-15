@@ -8,6 +8,8 @@ import colision
 from disparo import *
 from eventos import *
 from textos import *
+import obtener_nombre
+import re
 
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
@@ -19,6 +21,11 @@ ANCHO_BLOQUE = constantes.ANCHO_BLOQUE
 ALTO_BLOQUE = constantes.ALTO_BLOQUE
 
 pygame.init()
+
+#Usuario ingreso nombre
+ingreso_nombre = False
+# patron_usuario = re.compile(r'^[a-zA-Z0-9]{4,}$')
+patron_usuario = re.compile(r'^(?=.*[a-zA-Z])[a-zA-Z0-9 ]{4,}$')
 
 #Enemigo animaciones
 diccionario_animaciones = {}
@@ -33,6 +40,8 @@ pygame.display.set_caption("Frida")
 
 #Fuente del Texto
 pygame.freetype.init()
+# ruta_fuente = './fuente/Granesta.ttf'
+# fuente = pygame.font.Font(ruta_fuente, 36)
 fuente = pygame.freetype.Font(None, 36)
 
 #Imagenes Fondo
@@ -82,13 +91,6 @@ bloques = [bloque_uno, bloque_dos, bloque_tres, bloque_cuatro, bloque_cinco]
 #Creacion de Elementos
 frida = Personaje(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
-#Proyectil
-proyectil = None
-se_disparo = False
-TIEMPO_ENTRE_DISPAROS = 500
-tiempo_ultimo_disparo = 0
-lista_proyectiles = []
-
 #enemigos nivel 1
 enemigo = Enemigo(bloque_cinco.rect_bloque.x,bloque_cinco.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigo_dos = Enemigo(bloque_cuatro.rect_bloque.x * 1.6,bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
@@ -102,26 +104,12 @@ while intro:
 
     lista_eventos = pygame.event.get()
 
-    for evento in lista_eventos:
-        if evento.type == pygame.QUIT:
-            pygame.quit()
-    lista_teclas = pygame.key.get_pressed()
-    if lista_teclas[pygame.K_RETURN]:
-        intro = False
-
     fondo_intro = pygame.transform.scale(fondo_intro, (ANCHO_VENTANA, ALTO_VENTANA))
     ventana_ppal.blit(fondo_intro, (0, 0))
 
-    texto_superficie, texto_rect = fuente.render("¡FRIDA!", constantes.GRIS)
-    texto_superficie_2, texto_rect = fuente.render("Presina Enter para Jugar...", constantes.NEGRO)
-
-    x_TEXTO_INTRO = ANCHO_VENTANA // 2 - texto_rect.width // 2
-    y_TEXTO_INTRO = ALTO_VENTANA // 2 - texto_rect.height // 2
-
-    ventana_ppal.blit(texto_superficie, (x_TEXTO_INTRO, y_TEXTO_INTRO))
-    ventana_ppal.blit(texto_superficie_2, (x_TEXTO_INTRO, y_TEXTO_INTRO+50))
-
-    pygame.display.flip()
+    nombre_usuario, ingreso_enter = obtener_nombre.obtener_nombre_usuario(ventana_ppal, fondo_intro)
+    if ingreso_enter and patron_usuario.match(nombre_usuario):
+        intro = False
 
 sonido_risa.stop()
 
@@ -156,11 +144,10 @@ while flag_run:
     lista_teclas = pygame.key.get_pressed()
     frida.presionar_tecla(lista_teclas, bloques)
 
-
     fondo = pygame.transform.scale(fondo, (ANCHO_VENTANA, ALTO_VENTANA))
     ventana_ppal.blit(fondo, (0, 0))
 
-    mostrar_vidas_y_tiempo(fuente, segundos, frida, ventana_ppal)
+    mostrar_vidas_y_tiempo(fuente, segundos, frida, ventana_ppal, nombre_usuario)
 
     colisionar = colision.colisionar(frida, enemigos)
 
@@ -175,36 +162,15 @@ while flag_run:
     for enemigo_ in enemigos:
         enemigo_.update(ventana_ppal)
 
+    for bloque_ in bloques:
+        bloque_.actualizar_pantalla(ventana_ppal)
+
     if len(enemigos) == 0 and sonido_risa_fin_nivel_reproducido == False:
         sonido_una_risa.play()
         sonido_risa_fin_nivel_reproducido = True
-#######################################################################################################################
+        flag_run = False
 
-    tiempo_actual = pygame.time.get_ticks()
-    if lista_teclas[pygame.K_r] and tiempo_actual - tiempo_ultimo_disparo > TIEMPO_ENTRE_DISPAROS:
-        if proyectil == None:
-            proyectil = Disparo(frida.rect_frida.x, frida.rect_frida.centery, frida.direccion)
-            lista_proyectiles.append(proyectil)
-        else:
-            proyectil_dos = Disparo(frida.rect_frida.x, frida.rect_frida.centery, frida.direccion)
-            lista_proyectiles.append(proyectil_dos)
-        tiempo_ultimo_disparo = tiempo_actual
-
-    if len(lista_proyectiles) != 0:
-        for proyectil_actual in lista_proyectiles:
-            proyectil_actual.actualizar(ventana_ppal)
-            for enemigo_actual in enemigos:
-                murio = colision.matar_enemigo(proyectil_actual, enemigo_actual)
-                if murio:
-                    enemigo_actual.restar_vida()
-                    if enemigo_actual.muerto:
-                        enemigos.remove(enemigo_actual)
-                    proyectil = None
-
-########################################################################################################################
-
-    for bloque_ in bloques:
-        bloque_.actualizar_pantalla(ventana_ppal)
+    frida.disparar(lista_teclas, enemigos, ventana_ppal)
 
     pygame.display.flip()
 

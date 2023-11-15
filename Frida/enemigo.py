@@ -29,6 +29,9 @@ class Enemigo:
         self.cooldown_colision = 0
         self.muerto = False
 
+        #Segundo Nivel
+        self.dispara = False
+
 
     def update(self, ventana_ppal):
 
@@ -75,3 +78,7 @@ class Enemigo:
                 self.muerto = True
 
             self.cooldown_colision = 50
+
+    def disaprar(self):
+        #Segundo Nivel
+        pass

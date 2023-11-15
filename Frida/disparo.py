@@ -11,6 +11,7 @@ class Disparo:
         self.rectangulo.centery = y
         self.direccion = direccion
 
+
     def actualizar(self, ventana_ppal):
         if self.direccion == 'derecha':
             # self.superficie = img_fueguito_derecha

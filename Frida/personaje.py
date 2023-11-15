@@ -1,7 +1,8 @@
-import re
+# import re
 import pygame
 import constantes
-from disparo import *
+import disparo
+import colision
 
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
@@ -34,6 +35,9 @@ class Personaje:
         self.cooldown_colision = 0
         self.direccion = 'derecha'
 
+        self.TIEMPO_ENTRE_DISPAROS = 500
+        self.lista_proyectiles = []
+        self.tiempo_ultimo_disparo = 0
 
     def actualizar_pantalla(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_frida)
@@ -56,7 +60,7 @@ class Personaje:
 
         self.surface = pygame.transform.scale(self.surface, (ANCHO_BRUJA, ALTO_BRUJA))
 
-        #para coli
+        #para colision
         if self.cooldown_colision > 0:
             self.cooldown_colision -= 1
 
@@ -73,8 +77,6 @@ class Personaje:
             self.direccion = 'derecha'
         if lista_eventos[pygame.K_DOWN]:
             self.update(0, -velocidad, "abajo")
-        # if lista_eventos[pygame.K_LCTRL]:
-        #     print('PUM!! PUM!! PUM!! PUM!! DISPARA FRIDA PUN PUN')
 
 
         if lista_eventos[pygame.K_w] and lista_eventos[pygame.K_UP]:
@@ -123,3 +125,33 @@ class Personaje:
 
             sonido_vida_perdida.play()
             self.cooldown_colision = 200
+
+    def disparar(self, lista_teclas, enemigos, ventana_ppal):
+        proyectil = None
+
+        tiempo_actual = pygame.time.get_ticks()
+        if lista_teclas[pygame.K_r] and tiempo_actual - self.tiempo_ultimo_disparo > self.TIEMPO_ENTRE_DISPAROS:
+            if proyectil == None:
+                proyectil = disparo.Disparo(self.rect_frida.x, self.rect_frida.centery, self.direccion)
+                self.lista_proyectiles.append(proyectil)
+            else:
+                proyectil_dos = disparo.Disparo(self.rect_frida.x, self.rect_frida.centery, self.direccion)
+                self.lista_proyectiles.append(proyectil_dos)
+            self.tiempo_ultimo_disparo = tiempo_actual
+
+        if len(self.lista_proyectiles) != 0:
+            proyectiles_a_eliminar = []
+
+            for proyectil_actual in self.lista_proyectiles:
+                proyectil_actual.actualizar(ventana_ppal)
+                for enemigo_actual in enemigos:
+                    murio = colision.matar_enemigo(proyectil_actual, enemigo_actual)
+                    if murio:
+                        enemigo_actual.restar_vida()
+                        if enemigo_actual.muerto:
+                            enemigos.remove(enemigo_actual)
+                        proyectiles_a_eliminar.append(proyectil_actual)
+
+            # Elimina los proyectiles marcados para eliminación
+            for proyectil_a_eliminar in proyectiles_a_eliminar:
+                self.lista_proyectiles.remove(proyectil_a_eliminar)
