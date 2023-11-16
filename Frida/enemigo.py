@@ -82,9 +82,11 @@ class Enemigo:
                 self.muerto = True
 
             self.cooldown_colision = 50
+            
 
     def disparar(self, ventana_ppal, frida):
         proyectil = None
+        proyectiles_a_eliminar = []
 
         tiempo_actual = pygame.time.get_ticks()
         if tiempo_actual - self.tiempo_ultimo_disparo > self.TIEMPO_ENTRE_DISPAROS:
@@ -97,10 +99,9 @@ class Enemigo:
             proyectil_actual.actualizar(ventana_ppal)
             # ACA CAPTAR LA COLISION
             choque = colision.atacar_a_frida(proyectil_actual, frida)
+            proyectiles_a_eliminar.append(proyectil_actual)
             if choque:
                 frida.restar_vida()
+                for proyectil_a_eliminar in proyectiles_a_eliminar:
+                    self.lista_proyectiles.remove(proyectil_a_eliminar)
                 #HACER ANIMACION FRIDA COLISIONADA !!
-
-                ################################################
-                ################################################
-                # ELIMINAR PROYECTIL CUANDO CHOCA A FRIDA !!!
