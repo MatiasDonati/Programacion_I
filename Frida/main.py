@@ -5,11 +5,13 @@ from personaje import *
 from enemigo import *
 from configuraciones import *
 import colision
+import recompensas
 from disparo import *
 from eventos import *
 from textos import *
 import obtener_nombre
 import re
+import random
 
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
@@ -74,12 +76,10 @@ ruta_risa = './audio/carcajada.mp3'
 sonido_risa = pygame.mixer.Sound(ruta_risa)
 sonido_risa.set_volume(0.7)
 
-
 #Carcajada Introduccion
 sonido_una_risa = pygame.mixer.Sound('./audio/una_carcajada.mp3')
 sonido_una_risa.set_volume(0.7)
 sonido_risa_fin_nivel_reproducido = False
-
 
 #Musica Final
 ruta_musica_fin = './audio/besau.mp3'
@@ -94,7 +94,7 @@ bloque_cuatro = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA *
 bloque_cinco = bloque.Bloque(ANCHO_VENTANA - ANCHO_BLOQUE - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 6 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
 bloques = [bloque_uno, bloque_dos, bloque_tres, bloque_cuatro, bloque_cinco]
 
-#Creacion de Elementos
+#Frida
 frida = Personaje(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
 #enemigos nivel 1
@@ -102,6 +102,22 @@ enemigo = Enemigo(bloque_cinco.rect_bloque.x,bloque_cinco.rect_bloque.y - ALTO_E
 enemigo_dos = Enemigo(bloque_cuatro.rect_bloque.x * 1.6,bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigo_tres = Enemigo(bloque_tres.rect_bloque.x,bloque_tres.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigos = [enemigo, enemigo_dos, enemigo_tres]
+
+#Recompensas
+lista_recompensas = []
+tipo_recompensa = ['gatito', 'gatito_dos', 'escoba', 'pocion', 'barita']
+for _ in range(5):
+    x = random.randint(0, 1000)
+    y = random.randint(0, 700)
+    """
+    SO HAY COLISION CON BLOQUES QUE SE REACOMODE .. Q NO SE SUPERPONGA
+    SE PUEDE HACER MAS FINO EL RANDOM POR SECTORES DE PANTALLA O SACAR RANDON Y PONER LUGAR FIJO
+    HACER SCORING A LA BRUJA PARA Q SUME PUNTOS
+    """
+    recompensa_aleatoria = random.choice(tipo_recompensa)
+    recompensa = recompensas.Recompensa(x, y, ANCHO_ENEMIGO, ALTO_ENEMIGO, recompensa_aleatoria)
+    lista_recompensas.append(recompensa)
+
 
 pantalla_final_perdido = False
 
@@ -173,10 +189,17 @@ while flag_run:
     for bloque_ in bloques:
         bloque_.actualizar_pantalla(ventana_ppal)
 
-    if len(enemigos) == 0 and sonido_risa_fin_nivel_reproducido == False:
-        sonido_una_risa.play()
-        sonido_risa_fin_nivel_reproducido = True
-        flag_run = False
+    if len(enemigos) == 0:
+
+        for recompensa in lista_recompensas:
+            recompensa.actualizar(ventana_ppal)
+
+        if sonido_risa_fin_nivel_reproducido == False:
+            sonido_una_risa.play()
+            sonido_risa_fin_nivel_reproducido = True
+            """
+            flag_run = False
+            """
 
     frida.disparar(lista_teclas, enemigos, ventana_ppal)
 
@@ -189,11 +212,13 @@ sonido_fondo.stop()
 ############################################################
 # NVEL DOS
 
-frida = Personaje(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
-enemigo = Enemigo(bloque_cinco.rect_bloque.x,bloque_cinco.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
-enemigo_dos = Enemigo(bloque_cuatro.rect_bloque.x * 1.6,bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
-enemigo_tres = Enemigo(bloque_tres.rect_bloque.x,bloque_tres.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
+frida.rect_frida.y = ALTO_VENTANA-ALTO_BRUJA
+frida.rect_frida.x = ANCHO_VENTANA/2
+
 enemigos = [enemigo, enemigo_dos, enemigo_tres]
+for enemigo_ in enemigos:
+    enemigo_.muerto = False
+    enemigo_.vidas = 3
 
 segundos = "30"
 fin_tiempo = False
@@ -264,7 +289,7 @@ while flag_run_nivel_dos:
     if len(enemigos) == 0 and sonido_risa_fin_nivel_reproducido == False:
         sonido_una_risa.play()
         sonido_risa_fin_nivel_reproducido = True
-        flag_run = False
+        flag_run_nivel_dos = False
 
     frida.disparar(lista_teclas, enemigos, ventana_ppal)
 

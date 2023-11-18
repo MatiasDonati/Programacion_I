@@ -82,7 +82,6 @@ class Enemigo:
                 self.muerto = True
 
             self.cooldown_colision = 50
-            
 
     def disparar(self, ventana_ppal, frida):
         proyectil = None
