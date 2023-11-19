@@ -56,3 +56,36 @@ img_hechizo_2 = pygame.image.load('./imgs/hechizo_2.png')
 img_hechizo_2_derecha = pygame.transform.scale(img_hechizo_2, (100, 60))
 img_hechizo_2_izquierda = pygame.transform.flip(img_hechizo_2_derecha, True, False)
 
+
+
+
+########################################################################################
+#################################ENEMIGO FINAL#################################
+########################################################################################
+
+enemigo_final = [pygame.image.load("./imgs/enemigo_final/1.png"),
+                       pygame.image.load("./imgs/enemigo_final/2.png"),
+                       pygame.image.load("./imgs/enemigo_final/3.png"),
+                       pygame.image.load("./imgs/enemigo_final/4.png"),
+                       pygame.image.load("./imgs/enemigo_final/6.png"),
+                       pygame.image.load("./imgs/enemigo_final/7.png"),
+                       pygame.image.load("./imgs/enemigo_final/8.png"),
+                       pygame.image.load("./imgs/enemigo_final/9.png"),
+                       pygame.image.load("./imgs/enemigo_final/10.png"),
+                       pygame.image.load("./imgs/enemigo_final/13.png"),
+                       pygame.image.load("./imgs/enemigo_final/14.png"),
+                       pygame.image.load("./imgs/enemigo_final/15.png"),]
+
+enemigo_final_izquierda = [
+                        # pygame.image.load("./imgs/enemigo_final/mueve_1.png"),
+                        # pygame.image.load("./imgs/enemigo_final/mueve_2.png"),
+                        pygame.image.load("./imgs/enemigo_final/mueve_3.png"),
+                          ]
+
+enemigo_final_derecha = girar_imagenes(enemigo_final_izquierda, True, False)
+
+
+diccionario_enemigo_final = {}
+diccionario_enemigo_final['quieto'] = enemigo_final
+diccionario_enemigo_final['izquierda'] = enemigo_final_izquierda
+diccionario_enemigo_final['derecha'] = enemigo_final_derecha

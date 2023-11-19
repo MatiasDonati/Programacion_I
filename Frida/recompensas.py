@@ -31,3 +31,4 @@ class Recompensa:
         ventana_ppal.blit(self.surface, self.rect_recompensa)
 
 
+
