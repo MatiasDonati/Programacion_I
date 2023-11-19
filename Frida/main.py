@@ -69,8 +69,6 @@ flag_sonido = False
 sonido_nivel_dos = pygame.mixer.Sound('./audio/nivel_2.mp3')
 sonido_nivel_dos.set_volume(0.5)
 
-
-
 #Carcajada Introduccion
 ruta_risa = './audio/carcajada.mp3'
 sonido_risa = pygame.mixer.Sound(ruta_risa)
@@ -86,6 +84,25 @@ ruta_musica_fin = './audio/besau.mp3'
 musica_fin = pygame.mixer.Sound(ruta_musica_fin)
 musica_fin.set_volume(1)
 
+#sonidos Score
+score_uno = pygame.mixer.Sound('./audio/score/score_uno.mp3')
+score_uno.set_volume(0.8)
+
+score_dos = pygame.mixer.Sound('./audio/score/score_dos.mp3')
+score_dos.set_volume(0.8)
+
+score_tres = pygame.mixer.Sound('./audio/score/score_tres.mp3')
+score_tres.set_volume(0.8)
+
+score_cuatro = pygame.mixer.Sound('./audio/score/score_cuatro.mp3')
+score_cuatro.set_volume(0.8)
+
+lista_sonidos_score = [score_uno, score_dos, score_tres, score_cuatro]
+
+score_final = pygame.mixer.Sound('./audio/score/score_final.mp3')
+score_final.set_volume(0.8)
+
+
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
 bloque_dos = bloque.Bloque(ANCHO_VENTANA - ANCHO_BLOQUE - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
@@ -97,27 +114,19 @@ bloques = [bloque_uno, bloque_dos, bloque_tres, bloque_cuatro, bloque_cinco]
 #Frida
 frida = Personaje(ANCHO_VENTANA/2,ALTO_VENTANA-ALTO_BRUJA,ANCHO_BRUJA, ALTO_BRUJA)
 
-#enemigos nivel 1
+#enemigos
 enemigo = Enemigo(bloque_cinco.rect_bloque.x,bloque_cinco.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigo_dos = Enemigo(bloque_cuatro.rect_bloque.x * 1.6,bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigo_tres = Enemigo(bloque_tres.rect_bloque.x,bloque_tres.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigos = [enemigo, enemigo_dos, enemigo_tres]
 
 #Recompensas
-lista_recompensas = []
-tipo_recompensa = ['gatito', 'gatito_dos', 'escoba', 'pocion', 'barita']
-for _ in range(5):
-    x = random.randint(0, 1000)
-    y = random.randint(0, 700)
-    """
-    SO HAY COLISION CON BLOQUES QUE SE REACOMODE .. Q NO SE SUPERPONGA
-    SE PUEDE HACER MAS FINO EL RANDOM POR SECTORES DE PANTALLA O SACAR RANDON Y PONER LUGAR FIJO
-    HACER SCORING A LA BRUJA PARA Q SUME PUNTOS
-    """
-    recompensa_aleatoria = random.choice(tipo_recompensa)
-    recompensa = recompensas.Recompensa(x, y, ANCHO_ENEMIGO, ALTO_ENEMIGO, recompensa_aleatoria)
-    lista_recompensas.append(recompensa)
-
+gatito = recompensas.Recompensa(bloque_uno.rect_bloque.centerx, bloque_uno.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'gatito')
+gatito_dos = recompensas.Recompensa(bloque_dos.rect_bloque.centerx, bloque_dos.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'gatito_dos')
+pocion = recompensas.Recompensa(bloque_tres.rect_bloque.centerx, bloque_tres.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'pocion')
+escoba = recompensas.Recompensa(bloque_cuatro.rect_bloque.centerx, bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'escoba')
+barita_magica = recompensas.Recompensa(bloque_cinco.rect_bloque.centerx, bloque_cinco.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'barita')
+lista_recompensas = [gatito, gatito_dos, pocion, escoba, barita_magica]
 
 pantalla_final_perdido = False
 
@@ -161,7 +170,7 @@ while flag_run:
                         sonido_fondo.set_volume(volumen)
                     if int(segundos) == 0:
                         fin_tiempo = True
-                        segundos = 'Tiempo Terminado...'
+                        segundos = 'Tiempo Terminado'
                         sonido_fondo.stop()
 
     lista_teclas = pygame.key.get_pressed()
@@ -190,9 +199,16 @@ while flag_run:
         bloque_.actualizar_pantalla(ventana_ppal)
 
     if len(enemigos) == 0:
-
         for recompensa in lista_recompensas:
             recompensa.actualizar(ventana_ppal)
+            if colision.agarrar_recompensa(frida, recompensa):
+                lista_recompensas.remove(recompensa)
+                audio_random = random.choice(lista_sonidos_score)
+                audio_random.play()
+
+        if len(lista_recompensas) == 0:
+            score_final.play()
+            flag_run = False
 
         if sonido_risa_fin_nivel_reproducido == False:
             sonido_una_risa.play()

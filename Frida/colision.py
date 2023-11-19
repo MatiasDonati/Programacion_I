@@ -1,5 +1,4 @@
 
-
 def colisionar(frida, enemigos):
     retorno = False
     for enemigo_actual in enemigos:
@@ -16,3 +15,8 @@ def atacar_a_frida(proyectil, frida):
     if proyectil != None and proyectil.rectangulo.colliderect(frida.rect_frida):
         return True
     return False
+
+def agarrar_recompensa(frida, recompensa):
+    if frida.rect_frida.colliderect(recompensa.rect_recompensa):
+        frida.scoring += recompensa.puntuacion
+        return True

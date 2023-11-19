@@ -10,3 +10,6 @@ def mostrar_vidas_y_tiempo(fuente, segundos, frida,  ventana_ppal, nombre_usuari
 
     nombre, nombre_rect = fuente.render(f'Jugador: {str(nombre_usuario)}', constantes.GRIS)
     ventana_ppal.blit(nombre, (constantes.ANCHO_VENTANA /2 , 10))
+
+    scoring, scoring_rect = fuente.render(f'puntos: {frida.scoring}', constantes.GRIS)
+    ventana_ppal.blit(scoring, (constantes.ANCHO_VENTANA /2 , 30))

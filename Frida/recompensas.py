@@ -19,6 +19,9 @@ class Recompensa:
             case 'pocion':
                 ruta_img = './imgs/recompensas/pocion.png'
                 puntaje = 2000
+
+        self.nombre = recompensa
+        self.puntuacion = puntaje
         self.surface = pygame.image.load(ruta_img)
         self.surface = pygame.transform.scale(self.surface, (ancho, alto))
         self.rect_recompensa = pygame.Rect(x, y, ancho, alto)
@@ -26,3 +29,5 @@ class Recompensa:
 
     def actualizar(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_recompensa)
+
+

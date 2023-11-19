@@ -75,9 +75,10 @@ class Enemigo:
                 # self.animacion_actual = self.animaciones['explosion']
                 self.vidas -= 1
                 sonido_golpe.play()
-                print(self.vidas)
+                # print(self.vidas)
+                 
             else:
-                print("Murio Enemigoo!")
+                # print("Murio Enemigoo!")
                 sonido_muerte.play()
                 self.muerto = True
 

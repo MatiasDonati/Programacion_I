@@ -19,6 +19,11 @@ ruta_ouch = './audio/ouch.mp3'
 sonido_vida_perdida = pygame.mixer.Sound(ruta_ouch)
 sonido_vida_perdida.set_volume(0.8)
 
+#Sonido Disparo
+sonido_disparo = pygame.mixer.Sound('./audio/sonido_dispaso_hechizo.mp3')
+sonido_disparo.set_volume(0.5)
+
+
 #brujaMuerte
 sonido_muerte_bruja = pygame.mixer.Sound('./audio/bruja_muerte.mp3')
 sonido_muerte_bruja.set_volume(0.7)
@@ -38,6 +43,8 @@ class Personaje:
         self.TIEMPO_ENTRE_DISPAROS = 500
         self.lista_proyectiles = []
         self.tiempo_ultimo_disparo = 0
+
+        self.scoring = 0
 
     def actualizar_pantalla(self, ventana_ppal):
         ventana_ppal.blit(self.surface, self.rect_frida)
@@ -133,6 +140,7 @@ class Personaje:
         if lista_teclas[pygame.K_r] and tiempo_actual - self.tiempo_ultimo_disparo > self.TIEMPO_ENTRE_DISPAROS:
             if proyectil == None:
                 proyectil = disparo.Disparo(self.rect_frida.x, self.rect_frida.centery, self.direccion)
+                sonido_disparo.play()
                 self.lista_proyectiles.append(proyectil)
             # else:
             #     proyectil_dos = disparo.Disparo(self.rect_frida.x, self.rect_frida.centery, self.direccion)
@@ -145,10 +153,12 @@ class Personaje:
             for proyectil_actual in self.lista_proyectiles:
                 proyectil_actual.actualizar(ventana_ppal)
                 for enemigo_actual in enemigos:
-                    murio = colision.matar_enemigo(proyectil_actual, enemigo_actual)
-                    if murio:
+                    hubo_colision = colision.matar_enemigo(proyectil_actual, enemigo_actual)
+                    if hubo_colision:
                         enemigo_actual.restar_vida()
+                        self.scoring += 10
                         if enemigo_actual.muerto:
+                            self.scoring += 40
                             enemigos.remove(enemigo_actual)
                         proyectiles_a_eliminar.append(proyectil_actual)
 
