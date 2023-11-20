@@ -37,7 +37,7 @@ class EnemigoFinal:
         self.contador_pasos = 0
 
         self.rect_enemigo_final = pygame.Rect(x, y , ancho - 20, alto)
-        # self.direccion_actual = 'quieto'
+        self.direccion = 'derecha'
         self.gravedad = False
         self.vidas = 3
         self.cooldown_colision = 0
@@ -79,10 +79,13 @@ class EnemigoFinal:
             self.rect_enemigo_final.x += self.velocidad
             if self.rect_enemigo_final.x >= 1000:
                 self.animacion_actual = self.animaciones['izquierda']
+                self.direccion = 'izquierda'
+
         else:
             self.rect_enemigo_final.x -= self.velocidad
             if self.rect_enemigo_final.x <= 0:
                 self.animacion_actual = self.animaciones['derecha']
+                self.direccion = 'derecha'
 
         self.animar(ventana_ppal)
                 #para colision
@@ -111,24 +114,24 @@ class EnemigoFinal:
 
     #         self.cooldown_colision = 50
 
-    # def disparar(self, ventana_ppal, frida):
-    #     proyectil = None
-    #     proyectiles_a_eliminar = []
+    def disparar(self, ventana_ppal, frida):
+        proyectil = None
+        proyectiles_a_eliminar = []
 
-    #     tiempo_actual = pygame.time.get_ticks()
-    #     if tiempo_actual - self.tiempo_ultimo_disparo > self.TIEMPO_ENTRE_DISPAROS:
-    #         if proyectil == None:
-    #             proyectil = disparo.Disparo(self.rect_enemigo.x, self.rect_enemigo.centery, self.direccion_actual, True)
-    #             self.lista_proyectiles.append(proyectil)
-    #         self.tiempo_ultimo_disparo = tiempo_actual
+        tiempo_actual = pygame.time.get_ticks()
+        if tiempo_actual - self.tiempo_ultimo_disparo > self.TIEMPO_ENTRE_DISPAROS:
+            if proyectil == None:
+                proyectil = disparo.Disparo(self.rect_enemigo_final.x, self.rect_enemigo_final.centery, self.direccion, True)
+                self.lista_proyectiles.append(proyectil)
+            self.tiempo_ultimo_disparo = tiempo_actual
 
-    #     for proyectil_actual in self.lista_proyectiles:
-    #         proyectil_actual.actualizar(ventana_ppal)
-    #         # ACA CAPTAR LA COLISION
-    #         choque = colision.atacar_a_frida(proyectil_actual, frida)
-    #         proyectiles_a_eliminar.append(proyectil_actual)
-    #         if choque:
-    #             frida.restar_vida()
-    #             for proyectil_a_eliminar in proyectiles_a_eliminar:
-    #                 self.lista_proyectiles.remove(proyectil_a_eliminar)
-    #             #HACER ANIMACION FRIDA COLISIONADA !!
+        for proyectil_actual in self.lista_proyectiles:
+            proyectil_actual.actualizar(ventana_ppal)
+            # ACA CAPTAR LA COLISION
+            choque = colision.atacar_a_frida(proyectil_actual, frida)
+            proyectiles_a_eliminar.append(proyectil_actual)
+            if choque:
+                frida.restar_vida()
+                for proyectil_a_eliminar in proyectiles_a_eliminar:
+                    self.lista_proyectiles.remove(proyectil_a_eliminar)
+                #HACER ANIMACION FRIDA COLISIONADA !!

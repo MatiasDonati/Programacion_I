@@ -79,7 +79,7 @@ enemigo_final = [pygame.image.load("./imgs/enemigo_final/1.png"),
 enemigo_final_izquierda = [
                         # pygame.image.load("./imgs/enemigo_final/mueve_1.png"),
                         # pygame.image.load("./imgs/enemigo_final/mueve_2.png"),
-                        pygame.image.load("./imgs/enemigo_final/mueve_3.png"),
+                        pygame.image.load("./imgs/enemigo_final/fantasma_arreglado.png"),
                           ]
 
 enemigo_final_derecha = girar_imagenes(enemigo_final_izquierda, True, False)

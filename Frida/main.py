@@ -201,9 +201,13 @@ while flag_run:
         # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
         # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
         # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
-        # FALTA Q DISPARE Y RESTARLE VIDA
+        # FALTA Q DISPARE Y RESTARLE VIDA Y COLISION
+        # SE VAN LOS BLOQUES Y APARECE EL ENEMIGO CON UN SONIDO CARACERISTCICO Y SE BORRA ... UN PAR DE VECES HASTA Q SE QUEDA
+        # Y UA MUSICA DE COMBATE
 
         enemigo_final.update(ventana_ppal)
+        enemigo_final.disparar(ventana_ppal, frida)
+
 ##################################################################################################################
 
     if len(enemigos) == 0:
