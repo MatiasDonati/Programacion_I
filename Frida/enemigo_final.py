@@ -55,7 +55,7 @@ class EnemigoFinal:
 
     def update(self, ventana_ppal):
 
-        # pygame.draw.rect(ventana_ppal, constantes.VERDE, self.rect_enemigo)
+        # pygame.draw.rect(ventana_ppal, constantes.VERDE, self.rect_enemigo_final)
 
         tiempo_actual = pygame.time.get_ticks()
         tiempo_transcurrido = tiempo_actual - self.tiempo_inicial
@@ -72,12 +72,12 @@ class EnemigoFinal:
                 self.sube = False
         else:
             self.rect_enemigo_final.y += self.velocidad
-            if self.rect_enemigo_final.y >= 600:
+            if self.rect_enemigo_final.y >= constantes.ALTO_VENTANA - self.rect_enemigo_final.height:
                 self.sube = True
 
-        if self.rect_enemigo_final.x <= 1000 and self.animacion_actual == self.animaciones['derecha']:
+        if self.rect_enemigo_final.x <= constantes.ANCHO_VENTANA - self.rect_enemigo_final.width and self.animacion_actual == self.animaciones['derecha']:
             self.rect_enemigo_final.x += self.velocidad
-            if self.rect_enemigo_final.x >= 1000:
+            if self.rect_enemigo_final.x >= constantes.ANCHO_VENTANA - self.rect_enemigo_final.width:
                 self.animacion_actual = self.animaciones['izquierda']
                 self.direccion = 'izquierda'
 
@@ -100,19 +100,19 @@ class EnemigoFinal:
         ventana_ppal.blit(self.animacion_actual[self.contador_pasos], self.rect_enemigo_final)
         self.contador_pasos += 1
 
-    # def restar_vida(self):
+    def restar_vida(self):
 
-    #     if self.cooldown_colision == 0:
-    #         if type(self.vidas) == int and self.vidas > 1:
-    #             # self.animacion_actual = self.animaciones['explosion']
-    #             self.vidas -= 1
-    #             # print(self.vidas)
+        if self.cooldown_colision == 0:
+            if type(self.vidas) == int and self.vidas > 1:
+                # self.animacion_actual = self.animaciones['explosion']
+                self.vidas -= 1
+                # print(self.vidas)
 
-    #         else:
-    #             # print("Murio Enemigoo!")
-    #             self.muerto = True
+            else:
+                # print("Murio Enemigoo!")
+                self.muerto = True
 
-    #         self.cooldown_colision = 50
+            self.cooldown_colision = 50
 
     def disparar(self, ventana_ppal, frida):
         proyectil = None
@@ -121,7 +121,7 @@ class EnemigoFinal:
         tiempo_actual = pygame.time.get_ticks()
         if tiempo_actual - self.tiempo_ultimo_disparo > self.TIEMPO_ENTRE_DISPAROS:
             if proyectil == None:
-                proyectil = disparo.Disparo(self.rect_enemigo_final.x, self.rect_enemigo_final.centery, self.direccion, True)
+                proyectil = disparo.Disparo(self.rect_enemigo_final.x, self.rect_enemigo_final.centery, self.direccion, 'enemigo_final')
                 self.lista_proyectiles.append(proyectil)
             self.tiempo_ultimo_disparo = tiempo_actual
 

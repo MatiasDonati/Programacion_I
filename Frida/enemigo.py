@@ -76,7 +76,7 @@ class Enemigo:
                 self.vidas -= 1
                 sonido_golpe.play()
                 # print(self.vidas)
-                 
+
             else:
                 # print("Murio Enemigoo!")
                 sonido_muerte.play()
@@ -91,7 +91,7 @@ class Enemigo:
         tiempo_actual = pygame.time.get_ticks()
         if tiempo_actual - self.tiempo_ultimo_disparo > self.TIEMPO_ENTRE_DISPAROS:
             if proyectil == None:
-                proyectil = disparo.Disparo(self.rect_enemigo.x, self.rect_enemigo.centery, self.direccion_actual, True)
+                proyectil = disparo.Disparo(self.rect_enemigo.x, self.rect_enemigo.centery, self.direccion_actual, 'enemigos')
                 self.lista_proyectiles.append(proyectil)
             self.tiempo_ultimo_disparo = tiempo_actual
 

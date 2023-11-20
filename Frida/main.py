@@ -116,7 +116,7 @@ enemigo_cinco = Enemigo(bloque_dos.rect_bloque.x,bloque_dos.rect_bloque.y - ALTO
 enemigos = [enemigo, enemigo_dos, enemigo_tres]
 
 #Enemigo Final
-enemigo_final = EnemigoFinal(0, ALTO_VENTANA - 500, 200, 200, diccionario_enemigo_final,'derecha')
+enemigo_final = EnemigoFinal(0, ALTO_VENTANA - 500, 150, 150, diccionario_enemigo_final,'derecha')
 
 #Recompensas
 gatito = recompensas.Recompensa(bloque_uno.rect_bloque.centerx, bloque_uno.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'gatito')
@@ -143,6 +143,11 @@ while intro:
 
 sonido_risa.stop()
 pygame.display.set_caption("Frida - Nivel 1")
+
+"""
+# NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO
+# NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO
+"""
 
 flag_run = True
 while flag_run:
@@ -195,20 +200,6 @@ while flag_run:
 
     for bloque_ in bloques:
         bloque_.actualizar_pantalla(ventana_ppal)
-
-###################################################################################################################
-
-        # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
-        # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
-        # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
-        # FALTA Q DISPARE Y RESTARLE VIDA Y COLISION
-        # SE VAN LOS BLOQUES Y APARECE EL ENEMIGO CON UN SONIDO CARACERISTCICO Y SE BORRA ... UN PAR DE VECES HASTA Q SE QUEDA
-        # Y UA MUSICA DE COMBATE
-
-        enemigo_final.update(ventana_ppal)
-        enemigo_final.disparar(ventana_ppal, frida)
-
-##################################################################################################################
 
     if len(enemigos) == 0:
 
@@ -438,20 +429,25 @@ while flag_nivel_tres:
 
         if len(lista_recompensas) == 0:
             bloques = []
+            enemigo_final.update(ventana_ppal)
+            enemigo_final.disparar(ventana_ppal, frida)
+###################################################################################################################
+                # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
+                # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
+                # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
+                # FALTA Q DISPARE Y RESTARLE VIDA Y COLISION
+                # SE VAN LOS BLOQUES Y APARECE EL ENEMIGO CON UN SONIDO CARACERISTCICO Y SE BORRA ... UN PAR DE VECES HASTA Q SE QUEDA
+                # Y UA MUSICA DE COMBATE
+##################################################################################################################
             if flag_sonido_final:
                 score_final.play()
                 flag_sonido_final = False
-            enemigo_final.update(ventana_ppal)
-            """
-            SONIDO ENEMIGO FINAL
-            """
 
             # flag_run_nivel_dos = False
 
         if sonido_risa_fin_nivel_reproducido == False:
             sonido_una_risa.play()
             sonido_risa_fin_nivel_reproducido = True
-            
 
     frida.disparar(lista_teclas, enemigos, ventana_ppal)
 

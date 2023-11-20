@@ -20,3 +20,8 @@ def agarrar_recompensa(frida, recompensa):
     if frida.rect_frida.colliderect(recompensa.rect_recompensa):
         frida.scoring += recompensa.puntuacion
         return True
+
+def disparar_enemigo_final(proyectil, enemigo_final):
+    if proyectil != None and proyectil.rectangulo.colliderect(enemigo_final.rect_enemigo_final):
+        return True
+    return False

@@ -139,7 +139,7 @@ class Personaje:
         tiempo_actual = pygame.time.get_ticks()
         if lista_teclas[pygame.K_r] and tiempo_actual - self.tiempo_ultimo_disparo > self.TIEMPO_ENTRE_DISPAROS:
             if proyectil == None:
-                proyectil = disparo.Disparo(self.rect_frida.x, self.rect_frida.centery, self.direccion)
+                proyectil = disparo.Disparo(self.rect_frida.x, self.rect_frida.centery, self.direccion, 'hechizo')
                 sonido_disparo.play()
                 self.lista_proyectiles.append(proyectil)
             # else:

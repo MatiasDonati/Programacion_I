@@ -48,15 +48,14 @@ img_fueguito = pygame.image.load('./imgs/fueguito.png')
 img_fueguito_derecha = pygame.transform.scale(img_fueguito, (100, 60))
 img_fueguito_izquierda = pygame.transform.flip(img_fueguito_derecha, True, False)
 
-img_hechizo_1 = pygame.image.load('./imgs/hechizo_1.png')
-img_hechizo_1_derecha = pygame.transform.scale(img_hechizo_1, (100, 60))
-img_hechizo_1_izquierda = pygame.transform.flip(img_hechizo_1_derecha, True, False)
 
 img_hechizo_2 = pygame.image.load('./imgs/hechizo_2.png')
 img_hechizo_2_derecha = pygame.transform.scale(img_hechizo_2, (100, 60))
 img_hechizo_2_izquierda = pygame.transform.flip(img_hechizo_2_derecha, True, False)
 
-
+img_disparo_enemigo_final = pygame.image.load('./imgs/enemigo_final/disparo_enemigo.png')
+img_disparo_enemigo_final_izquierda = pygame.transform.scale(img_disparo_enemigo_final, (150, 90))
+img_disparo_enemigo_final_derecha = pygame.transform.flip(img_disparo_enemigo_final_izquierda, True, False)
 
 
 ########################################################################################
