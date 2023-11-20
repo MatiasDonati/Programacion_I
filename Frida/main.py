@@ -197,13 +197,17 @@ while flag_run:
         bloque_.actualizar_pantalla(ventana_ppal)
 
 ###################################################################################################################
+
+        # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
+        # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
+        # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
+        # FALTA Q DISPARE Y RESTARLE VIDA
+
         enemigo_final.update(ventana_ppal)
 ##################################################################################################################
 
     if len(enemigos) == 0:
-######################################################
-        # enemigo_final.update(ventana_ppal)
-######################################################
+
         for recompensa in lista_recompensas:
             recompensa.actualizar(ventana_ppal)
             if colision.agarrar_recompensa(frida, recompensa):
