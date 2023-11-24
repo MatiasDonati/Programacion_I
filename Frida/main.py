@@ -115,16 +115,31 @@ enemigo_cuatro = Enemigo(bloque_uno.rect_bloque.x,bloque_uno.rect_bloque.y - ALT
 enemigo_cinco = Enemigo(bloque_dos.rect_bloque.x,bloque_dos.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigos = [enemigo, enemigo_dos, enemigo_tres]
 
+
 #Enemigo Final
 enemigo_final = EnemigoFinal(0, ALTO_VENTANA - 500, 150, 150, diccionario_enemigo_final,'derecha')
+tiempo_inicio_if = None
 
 #Recompensas
-gatito = recompensas.Recompensa(bloque_uno.rect_bloque.centerx, bloque_uno.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'gatito')
-gatito_dos = recompensas.Recompensa(bloque_dos.rect_bloque.centerx, bloque_dos.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'gatito_dos')
-pocion = recompensas.Recompensa(bloque_tres.rect_bloque.centerx, bloque_tres.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'pocion')
-escoba = recompensas.Recompensa(bloque_cuatro.rect_bloque.centerx, bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'escoba')
-barita_magica = recompensas.Recompensa(bloque_cinco.rect_bloque.centerx, bloque_cinco.rect_bloque.y - ALTO_ENEMIGO, ANCHO_ENEMIGO, ALTO_ENEMIGO, 'barita')
+posiciones_iniciales = [
+    (bloque_uno.rect_bloque.centerx, bloque_uno.rect_bloque.y - ALTO_ENEMIGO),
+    (bloque_dos.rect_bloque.centerx, bloque_dos.rect_bloque.y - ALTO_ENEMIGO),
+    (bloque_tres.rect_bloque.centerx, bloque_tres.rect_bloque.y - ALTO_ENEMIGO),
+    (bloque_cuatro.rect_bloque.centerx, bloque_cuatro.rect_bloque.y - ALTO_ENEMIGO),
+    (bloque_cinco.rect_bloque.centerx, bloque_cinco.rect_bloque.y - ALTO_ENEMIGO),
+    ]
+
+random.shuffle(posiciones_iniciales)
+
+gatito = recompensas.Recompensa(posiciones_iniciales[0][0], posiciones_iniciales[0][1], ANCHO_ENEMIGO, ALTO_ENEMIGO, 'gatito')
+gatito_dos = recompensas.Recompensa(posiciones_iniciales[1][0], posiciones_iniciales[1][1], ANCHO_ENEMIGO, ALTO_ENEMIGO, 'gatito_dos')
+pocion = recompensas.Recompensa(posiciones_iniciales[2][0], posiciones_iniciales[2][1], ANCHO_ENEMIGO, ALTO_ENEMIGO, 'pocion')
+escoba = recompensas.Recompensa(posiciones_iniciales[3][0], posiciones_iniciales[3][1], ANCHO_ENEMIGO, ALTO_ENEMIGO, 'escoba')
+barita_magica = recompensas.Recompensa(posiciones_iniciales[4][0], posiciones_iniciales[4][1], ANCHO_ENEMIGO, ALTO_ENEMIGO, 'barita')
+
 lista_recompensas = [gatito, gatito_dos, pocion, escoba, barita_magica]
+
+
 
 pantalla_final_perdido = False
 
@@ -203,6 +218,8 @@ while flag_run:
 
     if len(enemigos) == 0:
 
+        random.shuffle(lista_recompensas)
+
         for recompensa in lista_recompensas:
             recompensa.actualizar(ventana_ppal)
             if colision.agarrar_recompensa(frida, recompensa):
@@ -217,6 +234,7 @@ while flag_run:
         if sonido_risa_fin_nivel_reproducido == False:
             sonido_una_risa.play()
             sonido_risa_fin_nivel_reproducido = True
+
             """
             flag_run = False
             """
@@ -247,6 +265,9 @@ for enemigo_ in enemigos:
 segundos = "30"
 fin_tiempo = False
 flag_sonido = False
+
+sonido_risa_fin_nivel_reproducido = False
+
 
 if pantalla_final_perdido:
     flag_run_nivel_dos = False
@@ -282,6 +303,7 @@ while flag_run_nivel_dos:
                         sonido_fondo.stop()
 
     lista_teclas = pygame.key.get_pressed()
+
     frida.presionar_tecla(lista_teclas, bloques)
 
     fondo_nivel_dos = pygame.transform.scale(fondo_nivel_dos, (ANCHO_VENTANA, ALTO_VENTANA))
@@ -311,6 +333,9 @@ while flag_run_nivel_dos:
         bloque_.actualizar_pantalla(ventana_ppal)
 
     if len(enemigos) == 0:
+        
+        random.shuffle(lista_recompensas)
+
         for recompensa in lista_recompensas:
             recompensa.actualizar(ventana_ppal)
             if colision.agarrar_recompensa(frida, recompensa):
@@ -341,6 +366,7 @@ sonido_nivel_dos.stop()
 frida.rect_frida.y = ALTO_VENTANA-ALTO_BRUJA
 frida.rect_frida.x = ANCHO_VENTANA/2
 frida.vidas = 5
+sonido_risa_fin_nivel_reproducido = False
 
 lista_recompensas = [gatito, gatito_dos, pocion, escoba, barita_magica]
 
@@ -417,9 +443,9 @@ while flag_nivel_tres:
 
 
     if len(enemigos) == 0:
-        """
-        LO IMAGINO MOVIENDOSE RANDOM DENTRO DE LA PANTALLA , DISPARANDO Y LA BRUJA PUEDE VOLAR..
-        """
+
+        random.shuffle(lista_recompensas)
+
         for recompensa in lista_recompensas:
             recompensa.actualizar(ventana_ppal)
             if colision.agarrar_recompensa(frida, recompensa):
@@ -428,9 +454,23 @@ while flag_nivel_tres:
                 audio_random.play()
 
         if len(lista_recompensas) == 0:
+
+            if tiempo_inicio_if == None:
+                tiempo_inicio_if = pygame.time.get_ticks()
+
             bloques = []
+
             enemigo_final.update(ventana_ppal)
             enemigo_final.disparar(ventana_ppal, frida)
+
+            tiempo_actual = pygame.time.get_ticks()
+            tiempo_transcurrido = tiempo_actual - tiempo_inicio_if
+
+            if tiempo_transcurrido > 10000:
+                enemigo_final.velocidad = 3
+
+            if tiempo_transcurrido > 20000:
+                enemigo_final.velocidad = 4
 ###################################################################################################################
                 # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
                 # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3

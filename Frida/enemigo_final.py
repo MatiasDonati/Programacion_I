@@ -1,29 +1,6 @@
-# import pygame
-# from configuraciones import *
-
-# class EnemigoFinal:
-#     def __init__(self, x, y, ancho, alto, animaciones, que_hace):
-#         self.animaciones = animaciones
-#         reescalar_imagenes(self.animaciones, (ancho, alto))
-#         self.que_hace = que_hace
-#         self.animacion_actual = self.animaciones[self.que_hace]
-#         self.contador_pasos = 0
-#         self.rect_enemigo = pygame.Rect(x, y , alto, alto)
-#         self.direccion_actual = 'quieto'
-#         self.vidas = 7
-#         self.dispara = False
-#         self.lista_proyectiles = []
-#         self.tiempo_ultimo_disparo = 0
-#         self.TIEMPO_ENTRE_DISPAROS = 2000
-
-#     def update(self, ventana_ppal):
-#         pass
-
-import re
 import pygame
 import constantes
 from configuraciones import *
-import random
 import disparo
 import colision
 
@@ -43,7 +20,7 @@ class EnemigoFinal:
         self.cooldown_colision = 0
         self.muerto = False
 
-        self.velocidad = 1
+        self.velocidad = 2
         self.tiempo_inicial = pygame.time.get_ticks()
         self.sube = True
 
@@ -60,8 +37,8 @@ class EnemigoFinal:
         tiempo_actual = pygame.time.get_ticks()
         tiempo_transcurrido = tiempo_actual - self.tiempo_inicial
 
-        if tiempo_transcurrido > 10000:
-            self.velocidad = 2
+        # if tiempo_transcurrido > 10000:
+        #     self.velocidad = 2
 
         # if tiempo_transcurrido > 20000:
         #     self.velocidad = 3
@@ -102,17 +79,19 @@ class EnemigoFinal:
 
     def restar_vida(self):
 
-        if self.cooldown_colision == 0:
-            if type(self.vidas) == int and self.vidas > 1:
-                # self.animacion_actual = self.animaciones['explosion']
-                self.vidas -= 1
-                # print(self.vidas)
+            if self.cooldown_colision == 0:
+                if type(self.vidas) == int and self.vidas > 1:
+                    # self.animacion_actual = self.animaciones['explosion']
+                    self.vidas -= 1
+                    # sonido_golpe.play()
+                    print(self.vidas)
 
-            else:
-                # print("Murio Enemigoo!")
-                self.muerto = True
+                else:
+                    print("Murio Enemigoo!")
+                    # sonido_muerte.play()
+                    self.muerto = True
 
-            self.cooldown_colision = 50
+                self.cooldown_colision = 50
 
     def disparar(self, ventana_ppal, frida):
         proyectil = None
