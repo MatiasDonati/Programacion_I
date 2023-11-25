@@ -115,7 +115,7 @@ score_cuatro = pygame.mixer.Sound('./audio/score/score_cuatro.mp3')
 score_cuatro.set_volume(0.8)
 lista_sonidos_score = [score_uno, score_dos, score_tres, score_cuatro]
 score_final = pygame.mixer.Sound('./audio/score/score_final.mp3')
-score_final.set_volume(0.8)
+score_final.set_volume(1)
 
 
 #Bloques
@@ -211,8 +211,14 @@ while flag_run:
                         sonido_fondo.set_volume(volumen)
                     if int(segundos) == 0:
                         fin_tiempo = True
-                        segundos = 'Tiempo Terminado'
+                        # segundos = 'Tiempo Terminado'
                         sonido_fondo.stop()
+                        if len(enemigos) == 0:
+                            flag_run = False
+                            score_final.play()
+                        else:
+                            pantalla_final_perdido = True
+                            flag_run = False
 
     lista_teclas = pygame.key.get_pressed()
     frida.presionar_tecla(lista_teclas, bloques)
@@ -326,9 +332,14 @@ while flag_run_nivel_dos:
                         sonido_fondo.set_volume(volumen)
                     if int(segundos) == 0:
                         fin_tiempo = True
-                        segundos = 'Tiempo Terminado...'
                         sonido_fondo.stop()
-
+                        if len(enemigos) == 0:
+                            flag_run = False
+                            score_final.play()
+                            flag_run_nivel_dos = False
+                        else:
+                            pantalla_final_perdido = True
+                            flag_run_nivel_dos = False
     lista_teclas = pygame.key.get_pressed()
 
     frida.presionar_tecla(lista_teclas, bloques)
@@ -416,6 +427,7 @@ fin_tiempo = False
 flag_sonido = False
 pygame.display.set_caption("Frida - Nivel 3")
 flag_nivel_tres = True
+flag_segundos_enemigo_final = False
 
 if pantalla_final_perdido:
     flag_nivel_tres = False
@@ -445,8 +457,11 @@ while flag_nivel_tres:
                         sonido_fondo.set_volume(volumen)
                     if int(segundos) == 0:
                         fin_tiempo = True
-                        segundos = 'Tiempo Terminado...'
                         sonido_fondo.stop()
+                        if len(enemigos) == 0:
+                            lista_recompensas = []
+                        else:
+                            flag_nivel_tres = False
 
     lista_teclas = pygame.key.get_pressed()
     frida.presionar_tecla(lista_teclas, bloques)
@@ -460,6 +475,10 @@ while flag_nivel_tres:
 
     if enemigo_final:
         colision_enemigo_final = colision.colisionar_con_enemigo_final(frida, enemigo_final)
+
+        if flag_segundos_enemigo_final == False:
+            segundos = "40"
+            flag_segundos_enemigo_final = True
 
         if enemigo_final.muerto:
             flag_nivel_tres = False
