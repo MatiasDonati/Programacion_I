@@ -5,6 +5,7 @@ from personaje import *
 from enemigo import *
 from enemigo_final import *
 from configuraciones import *
+from base_datos import *
 import colision
 import recompensas
 from disparo import *
@@ -13,14 +14,6 @@ from textos import *
 import obtener_nombre
 import re
 import random
-import sqlite3
-
-with sqlite3.connect('./base/base_datos.db') as conexion:
-    try:
-        pass
-    except Exception as e:
-        pass
-
 
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
@@ -104,12 +97,12 @@ musica_fin_ganado.set_volume(1)
 musica_recompensas = pygame.mixer.Sound('./audio/enemigo_final.mp3')
 musica_recompensas.set_volume(1)
 
-#Musica enemigo final 
+#Musica enemigo final
 musica_enemigo_final = pygame.mixer.Sound('./audio/ELCUENTITO.mp3')
 musica_enemigo_final.set_volume(1)
 
 risa_fantasma = pygame.mixer.Sound('./audio/risa_fantasma.mp3')
-risa_fantasma.set_volume(0.8)
+risa_fantasma.set_volume(2)
 
 #sonidos Score
 score_uno = pygame.mixer.Sound('./audio/score/score_uno.mp3')
@@ -123,8 +116,6 @@ score_cuatro.set_volume(0.8)
 lista_sonidos_score = [score_uno, score_dos, score_tres, score_cuatro]
 score_final = pygame.mixer.Sound('./audio/score/score_final.mp3')
 score_final.set_volume(0.8)
-
-
 
 
 #Bloques
@@ -409,12 +400,15 @@ frida.vidas = 5
 sonido_risa_fin_nivel_reproducido = False
 flag_sonido_final = True
 recompensa_flag = True
+flag_cargar_usuario = False
 lista_recompensas = [gatito, gatito_dos, pocion, escoba, barita_magica]
 
 enemigos = [enemigo, enemigo_dos, enemigo_tres, enemigo_cuatro, enemigo_cinco]
 for enemigo_ in enemigos:
     enemigo_.muerto = False
     enemigo_.vidas = 3
+
+musica_enemigo_final_flag = True
 
 flag_sonido_final = True
 segundos = "30"
@@ -540,10 +534,14 @@ while flag_nivel_tres:
                 musica_recompensas.stop()
                 score_final.play()
                 risa_fantasma.play()
-                musica_enemigo_final.play()
+                # musica_enemigo_final.play()
                 flag_sonido_final = False
 
-            # flag_run_nivel_dos = False
+            if tiempo_transcurrido > 3000:
+                if musica_enemigo_final_flag:
+                    musica_enemigo_final.play()
+                    musica_enemigo_final_flag = False
+
 
         if sonido_risa_fin_nivel_reproducido == False:
             sonido_una_risa.play()
@@ -563,6 +561,7 @@ if enemigo_final.muerto:
     sonido_una_risa.play()
 else:
     musica_fin.play()
+    # risa_fantasma.play()
 
 flag_final = True
 while flag_final:
@@ -586,8 +585,23 @@ while flag_final:
     texto_superficie, texto_rect = fuente.render(mensaje, constantes.NEGRO)
     texto_superficie_dos, texto_rect_dos = fuente.render(mensaje_dos, constantes.NEGRO)
 
-    ventana_ppal.blit(texto_superficie, (500, 300))
-    ventana_ppal.blit(texto_superficie_dos, (500, 400))
+    texto_superficie_scorings, texto_rect = fuente.render('Mejores puntajes', constantes.NEGRO)
+    ventana_ppal.blit(texto_superficie_scorings, (500, 400))
+
+    posicion_vertical = 500
+    if flag_cargar_usuario == False:
+        crear_y_cargar_datos(nombre_usuario, frida.scoring)
+        flag_cargar_usuario = True
+    lista_datos = consultar_datos()
+
+    for usuario in lista_datos:
+        mensaje = f"* {usuario['nombre']} - {usuario['score']} puntos"
+        texto_superficie_usuario, texto_rect = fuente.render(mensaje, constantes.NEGRO)
+        ventana_ppal.blit(texto_superficie_usuario, (500, posicion_vertical))
+        posicion_vertical += texto_rect.height + 5
+
+    ventana_ppal.blit(texto_superficie, (500, 200))
+    ventana_ppal.blit(texto_superficie_dos, (500, 300))
 
     pygame.display.flip()
 
