@@ -57,46 +57,17 @@ timer = pygame.USEREVENT + 0
 pygame.time.set_timer(timer,1000)
 
 pygame.mixer.init()
-#Musica Nivel 1
-sonido_fondo = sonidos.sonido_fondo
+
+#Sonido
 flag_sonido = False
-
-#sonido nivel dos
-sonido_nivel_dos = sonidos.sonido_nivel_dos
 volumen = 0.5
-#Danzon
-danzon = sonidos.danzon
-
-#Carcajada Introduccion - Varias carcajadas
-sonido_risa = sonidos.sonido_risa
-
-#Carcajada
-sonido_una_risa = sonidos.sonido_una_risa
 sonido_risa_fin_nivel_reproducido = False
-
-#Musica Final Perdido
 musica_fin = sonidos.musica_fin
+lista_sonidos_score = [sonidos.score_uno, sonidos.score_dos, sonidos.score_tres, sonidos.score_cuatro]
 
-#Musica Final Ganado
-musica_fin_ganado = sonidos.musica_fin_ganado
 
-#musica recompensas
-musica_recompensas = sonidos.musica_recompensas
-
-#Musica enemigo final
-musica_enemigo_final = sonidos.musica_enemigo_final
-
-#Risa Fantasma
-risa_fantasma = sonidos.risa_fantasma
-
-#sonidos Score
-score_uno = sonidos.score_uno
-score_dos = sonidos.score_dos
-score_tres = sonidos.score_tres
-score_cuatro = sonidos.score_cuatro
-lista_sonidos_score = [score_uno, score_dos, score_tres, score_cuatro]
-score_final = sonidos.score_final
-
+##################################################################################################
+############################ MODULARIZAR ELEMENTOS ###############################################
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
 bloque_dos = bloque.Bloque(ANCHO_VENTANA - ANCHO_BLOQUE - ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
@@ -115,7 +86,6 @@ enemigo_tres = Enemigo(bloque_tres.rect_bloque.x,bloque_tres.rect_bloque.y - ALT
 enemigo_cuatro = Enemigo(bloque_uno.rect_bloque.x,bloque_uno.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigo_cinco = Enemigo(bloque_dos.rect_bloque.x,bloque_dos.rect_bloque.y - ALTO_ENEMIGO,ANCHO_ENEMIGO, ALTO_ENEMIGO + ALTO_ENEMIGO * 2/8, bloques, diccionario_animaciones, 'quieto')
 enemigos = [enemigo, enemigo_dos, enemigo_tres]
-
 
 #Enemigo Final
 enemigo_final = EnemigoFinal(0, -1000, 150, 150, diccionario_enemigo_final,'derecha')
@@ -143,7 +113,7 @@ lista_recompensas = [gatito, gatito_dos, pocion, escoba, barita_magica]
 
 pantalla_final_perdido = False
 
-sonido_risa.play()
+sonidos.sonido_risa.play()
 intro = True
 while intro:
 
@@ -156,7 +126,7 @@ while intro:
     if ingreso_enter and patron_usuario.match(nombre_usuario):
         intro = False
 
-sonido_risa.stop()
+sonidos.sonido_risa.stop()
 pygame.display.set_caption("Frida - Nivel 1")
 
 """
@@ -168,7 +138,7 @@ flag_run = True
 while flag_run:
 
     if flag_sonido == False:
-        sonido_fondo.play()
+        sonidos.sonido_fondo.play()
         flag_sonido = True
 
     lista_eventos = pygame.event.get()
@@ -185,14 +155,14 @@ while flag_run:
                     segundos = int(segundos) - 1
                     if int(segundos) <= 5:
                         volumen = volumen - 0.1
-                        sonido_fondo.set_volume(volumen)
+                        sonidos.sonido_fondo.set_volume(volumen)
                     if int(segundos) == 0:
                         fin_tiempo = True
                         # segundos = 'Tiempo Terminado'
-                        sonido_fondo.stop()
+                        sonidos.sonido_fondo.stop()
                         if len(enemigos) == 0:
                             flag_run = False
-                            score_final.play()
+                            sonidos.score_final.play()
                         else:
                             pantalla_final_perdido = True
                             flag_run = False
@@ -234,14 +204,14 @@ while flag_run:
                 audio_random.play()
 
         if len(lista_recompensas) == 0:
-            score_final.play()
+            sonidos.score_final.play()
             flag_run = False
             frida.scoring += int(segundos)
 
         if sonido_risa_fin_nivel_reproducido == False:
-            sonido_una_risa.play()
-            musica_recompensas.play()
-            sonido_fondo.stop()
+            sonidos.sonido_una_risa.play()
+            sonidos.musica_recompensas.play()
+            sonidos.sonido_fondo.stop()
             sonido_risa_fin_nivel_reproducido = True
 
             """
@@ -254,8 +224,8 @@ while flag_run:
 
     pygame.time.delay(7)
 
-sonido_fondo.stop()
-musica_recompensas.stop()
+sonidos.sonido_fondo.stop()
+sonidos.musica_recompensas.stop()
 
 
 """
@@ -290,7 +260,7 @@ pygame.display.set_caption("Frida - Nivel 2")
 while flag_run_nivel_dos:
 
     if flag_sonido == False:
-        danzon.play()
+        sonidos.danzon.play()
         flag_sonido = True
 
     lista_eventos = pygame.event.get()
@@ -307,13 +277,13 @@ while flag_run_nivel_dos:
                     segundos = int(segundos) - 1
                     if int(segundos) <= 5:
                         volumen = volumen - 0.1
-                        sonido_fondo.set_volume(volumen)
+                        sonidos.sonido_fondo.set_volume(volumen)
                     if int(segundos) == 0:
                         fin_tiempo = True
-                        sonido_fondo.stop()
+                        sonidos.sonido_fondo.stop()
                         if len(enemigos) == 0:
                             flag_run = False
-                            score_final.play()
+                            sonidos.score_final.play()
                             flag_run_nivel_dos = False
                         else:
                             pantalla_final_perdido = True
@@ -360,15 +330,15 @@ while flag_run_nivel_dos:
                 audio_random.play()
 
         if len(lista_recompensas) == 0:
-            score_final.play()
+            sonidos.score_final.play()
             flag_run_nivel_dos = False
             frida.scoring += int(segundos)
 
         if sonido_risa_fin_nivel_reproducido == False:
-            sonido_una_risa.play()
-            danzon.stop()
-            musica_recompensas.play()
-            sonido_risa_fin_nivel_reproducido = True
+            sonidos.sonido_una_risa.play()
+            sonidos.danzon.stop()
+            sonidos.musica_recompensas.play()
+            sonidos.sonido_risa_fin_nivel_reproducido = True
 
     frida.disparar(lista_teclas, enemigos, ventana_ppal)
 
@@ -376,8 +346,8 @@ while flag_run_nivel_dos:
 
     pygame.time.delay(7)
 
-danzon.stop()
-musica_recompensas.stop()
+sonidos.danzon.stop()
+sonidos.musica_recompensas.stop()
 
 
 ##### NIVEL 3 ##### ##### NIVEL 3 ##### ##### NIVEL 3 ##### ##### NIVEL 3 ##### ##### NIVEL 3 #####
@@ -398,7 +368,7 @@ for enemigo_ in enemigos:
     enemigo_.muerto = False
     enemigo_.vidas = 3
 
-musica_enemigo_final_flag = True
+sonidos.musica_enemigo_final_flag = True
 
 flag_sonido_final = True
 segundos = "30"
@@ -416,7 +386,7 @@ else:
 while flag_nivel_tres:
 
     if flag_sonido == False:
-        sonido_nivel_dos.play()
+        sonidos.sonido_nivel_dos.play()
         flag_sonido = True
 
     lista_eventos = pygame.event.get()
@@ -433,10 +403,10 @@ while flag_nivel_tres:
                     segundos = int(segundos) - 1
                     if int(segundos) <= 5:
                         volumen = volumen - 0.1
-                        sonido_fondo.set_volume(volumen)
+                        sonidos.sonido_fondo.set_volume(volumen)
                     if int(segundos) == 0:
                         fin_tiempo = True
-                        sonido_fondo.stop()
+                        sonidos.sonido_fondo.stop()
                         if len(enemigos) == 0:
                             lista_recompensas = []
                         else:
@@ -484,9 +454,9 @@ while flag_nivel_tres:
     if len(enemigos) == 0:
 
         if recompensa_flag:
-            sonido_nivel_dos.stop()
-            sonido_una_risa.play()
-            musica_recompensas.play()
+            sonidos.sonido_nivel_dos.stop()
+            sonidos.sonido_una_risa.play()
+            sonidos.musica_recompensas.play()
             recompensa_flag = False
 
         random.shuffle(lista_recompensas)
@@ -515,7 +485,7 @@ while flag_nivel_tres:
 
             enemigo_final.update(ventana_ppal)
             enemigo_final.disparar(ventana_ppal, frida)
-            sonido_nivel_dos.stop()
+            sonidos.sonido_nivel_dos.stop()
             mostrar_vidas_fantasma(fuente,ventana_ppal, enemigo_final)
 
             tiempo_actual = pygame.time.get_ticks()
@@ -530,20 +500,20 @@ while flag_nivel_tres:
 ##################################################################################################################
 
             if flag_sonido_final:
-                musica_recompensas.stop()
-                score_final.play()
-                risa_fantasma.play()
-                # musica_enemigo_final.play()
+                sonidos.musica_recompensas.stop()
+                sonidos.score_final.play()
+                sonidos.risa_fantasma.play()
+                # sonidos.musica_enemigo_final.play()
                 flag_sonido_final = False
 
             if tiempo_transcurrido > 3000:
-                if musica_enemigo_final_flag:
-                    musica_enemigo_final.play()
-                    musica_enemigo_final_flag = False
+                if sonidos.musica_enemigo_final_flag:
+                    sonidos.musica_enemigo_final.play()
+                    sonidos.musica_enemigo_final_flag = False
 
 
         if sonido_risa_fin_nivel_reproducido == False:
-            sonido_una_risa.play()
+            sonidos.sonido_una_risa.play()
             sonido_risa_fin_nivel_reproducido = True
 
     frida.disparar(lista_teclas, enemigos, ventana_ppal, enemigo_final)
@@ -552,15 +522,15 @@ while flag_nivel_tres:
 
     pygame.time.delay(7)
 
-sonido_nivel_dos.stop()
-musica_enemigo_final.stop()
+sonidos.sonido_nivel_dos.stop()
+sonidos.musica_enemigo_final.stop()
 
 if enemigo_final.muerto:
-    musica_fin_ganado.play()
-    sonido_una_risa.play()
+    sonidos.musica_fin_ganado.play()
+    sonidos.sonido_una_risa.play()
 else:
     musica_fin.play()
-    # risa_fantasma.play()
+    # sonidos.risa_fantasma.play()
 
 flag_final = True
 while flag_final:
