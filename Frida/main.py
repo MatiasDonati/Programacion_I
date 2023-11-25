@@ -13,6 +13,14 @@ from textos import *
 import obtener_nombre
 import re
 import random
+import sqlite3
+
+with sqlite3.connect('./base/base_datos.db') as conexion:
+    try:
+        pass
+    except Exception as e:
+        pass
+
 
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
@@ -65,9 +73,13 @@ volumen = 0.5
 sonido_fondo.set_volume(volumen)
 flag_sonido = False
 
+
 sonido_nivel_dos = pygame.mixer.Sound('./audio/nivel_2.mp3')
 sonido_nivel_dos.set_volume(0.5)
 
+#Danzon
+danzon = pygame.mixer.Sound('./audio/MADRUGAR_level_dos.mp3')
+danzon.set_volume(1)
 #Carcajada Introduccion - Varias carcajadas
 ruta_risa = './audio/carcajada.mp3'
 sonido_risa = pygame.mixer.Sound(ruta_risa)
@@ -78,10 +90,26 @@ sonido_una_risa = pygame.mixer.Sound('./audio/una_carcajada.mp3')
 sonido_una_risa.set_volume(0.7)
 sonido_risa_fin_nivel_reproducido = False
 
-#Musica Final
+#Musica Final Perdido
 ruta_musica_fin = './audio/besau.mp3'
 musica_fin = pygame.mixer.Sound(ruta_musica_fin)
 musica_fin.set_volume(1)
+
+#Musica Final Ganado
+musica_fin_ganado = pygame.mixer.Sound('./audio/SAXOS.mp3')
+musica_fin_ganado.set_volume(1)
+
+
+#musica recompensas
+musica_recompensas = pygame.mixer.Sound('./audio/enemigo_final.mp3')
+musica_recompensas.set_volume(1)
+
+#Musica enemigo final 
+musica_enemigo_final = pygame.mixer.Sound('./audio/ELCUENTITO.mp3')
+musica_enemigo_final.set_volume(1)
+
+risa_fantasma = pygame.mixer.Sound('./audio/risa_fantasma.mp3')
+risa_fantasma.set_volume(0.8)
 
 #sonidos Score
 score_uno = pygame.mixer.Sound('./audio/score/score_uno.mp3')
@@ -95,6 +123,9 @@ score_cuatro.set_volume(0.8)
 lista_sonidos_score = [score_uno, score_dos, score_tres, score_cuatro]
 score_final = pygame.mixer.Sound('./audio/score/score_final.mp3')
 score_final.set_volume(0.8)
+
+
+
 
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
@@ -117,8 +148,9 @@ enemigos = [enemigo, enemigo_dos, enemigo_tres]
 
 
 #Enemigo Final
-enemigo_final = EnemigoFinal(0, ALTO_VENTANA - 500, 150, 150, diccionario_enemigo_final,'derecha')
+enemigo_final = EnemigoFinal(0, -1000, 150, 150, diccionario_enemigo_final,'derecha')
 tiempo_inicio_if = None
+enemigo_final_en_accion = False
 
 #Recompensas
 posiciones_iniciales = [
@@ -233,19 +265,23 @@ while flag_run:
 
         if sonido_risa_fin_nivel_reproducido == False:
             sonido_una_risa.play()
+            musica_recompensas.play()
+            sonido_fondo.stop()
             sonido_risa_fin_nivel_reproducido = True
 
             """
             flag_run = False
             """
 
-    frida.disparar(lista_teclas, enemigos, ventana_ppal)
+    frida.disparar(lista_teclas, enemigos, ventana_ppal, enemigo_final)
 
     pygame.display.flip()
 
     pygame.time.delay(7)
 
 sonido_fondo.stop()
+musica_recompensas.stop()
+
 
 """
 # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS
@@ -279,7 +315,7 @@ pygame.display.set_caption("Frida - Nivel 2")
 while flag_run_nivel_dos:
 
     if flag_sonido == False:
-        sonido_nivel_dos.play()
+        danzon.play()
         flag_sonido = True
 
     lista_eventos = pygame.event.get()
@@ -349,6 +385,8 @@ while flag_run_nivel_dos:
 
         if sonido_risa_fin_nivel_reproducido == False:
             sonido_una_risa.play()
+            danzon.stop()
+            musica_recompensas.play()
             sonido_risa_fin_nivel_reproducido = True
 
     frida.disparar(lista_teclas, enemigos, ventana_ppal)
@@ -357,7 +395,9 @@ while flag_run_nivel_dos:
 
     pygame.time.delay(7)
 
-sonido_nivel_dos.stop()
+danzon.stop()
+musica_recompensas.stop()
+
 
 ##### NIVEL 3 ##### ##### NIVEL 3 ##### ##### NIVEL 3 ##### ##### NIVEL 3 ##### ##### NIVEL 3 #####
 ##### NIVEL 3 ##### ##### NIVEL 3 ##### ##### NIVEL 3 ##### ##### NIVEL 3 ##### ##### NIVEL 3 #####
@@ -367,7 +407,8 @@ frida.rect_frida.y = ALTO_VENTANA-ALTO_BRUJA
 frida.rect_frida.x = ANCHO_VENTANA/2
 frida.vidas = 5
 sonido_risa_fin_nivel_reproducido = False
-
+flag_sonido_final = True
+recompensa_flag = True
 lista_recompensas = [gatito, gatito_dos, pocion, escoba, barita_magica]
 
 enemigos = [enemigo, enemigo_dos, enemigo_tres, enemigo_cuatro, enemigo_cinco]
@@ -423,8 +464,14 @@ while flag_nivel_tres:
 
     colisionar = colision.colisionar(frida, enemigos)
 
+    if enemigo_final:
+        colision_enemigo_final = colision.colisionar_con_enemigo_final(frida, enemigo_final)
+
+        if enemigo_final.muerto:
+            flag_nivel_tres = False
+
     if not frida.muerta:
-        if not colisionar:
+        if not colision_enemigo_final and not colisionar:
             frida.actualizar_pantalla(ventana_ppal)
         else:
             frida.restar_vida()
@@ -444,6 +491,12 @@ while flag_nivel_tres:
 
     if len(enemigos) == 0:
 
+        if recompensa_flag:
+            sonido_nivel_dos.stop()
+            sonido_una_risa.play()
+            musica_recompensas.play()
+            recompensa_flag = False
+
         random.shuffle(lista_recompensas)
 
         for recompensa in lista_recompensas:
@@ -455,32 +508,39 @@ while flag_nivel_tres:
 
         if len(lista_recompensas) == 0:
 
-            if tiempo_inicio_if == None:
-                tiempo_inicio_if = pygame.time.get_ticks()
+###################################################################################################################
 
             bloques = []
 
+            if tiempo_inicio_if == None:
+                tiempo_inicio_if = pygame.time.get_ticks()
+
+            if enemigo_final_en_accion == False:
+                enemigo_final.rect_enemigo_final.y = ALTO_VENTANA - 500
+                frida.volar = True
+                enemigo_final_en_accion = True
+
             enemigo_final.update(ventana_ppal)
             enemigo_final.disparar(ventana_ppal, frida)
+            sonido_nivel_dos.stop()
+
 
             tiempo_actual = pygame.time.get_ticks()
             tiempo_transcurrido = tiempo_actual - tiempo_inicio_if
 
             if tiempo_transcurrido > 10000:
-                enemigo_final.velocidad = 3
+                enemigo_final.velocidad = 6
 
             if tiempo_transcurrido > 20000:
-                enemigo_final.velocidad = 4
-###################################################################################################################
-                # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
-                # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
-                # ENEMIGO PARA PROBAR SIN TENER Q IR AL NIVEL 3
-                # FALTA Q DISPARE Y RESTARLE VIDA Y COLISION
-                # SE VAN LOS BLOQUES Y APARECE EL ENEMIGO CON UN SONIDO CARACERISTCICO Y SE BORRA ... UN PAR DE VECES HASTA Q SE QUEDA
-                # Y UA MUSICA DE COMBATE
+                enemigo_final.velocidad = 8
+
 ##################################################################################################################
+
             if flag_sonido_final:
+                musica_recompensas.stop()
                 score_final.play()
+                risa_fantasma.play()
+                musica_enemigo_final.play()
                 flag_sonido_final = False
 
             # flag_run_nivel_dos = False
@@ -489,15 +549,20 @@ while flag_nivel_tres:
             sonido_una_risa.play()
             sonido_risa_fin_nivel_reproducido = True
 
-    frida.disparar(lista_teclas, enemigos, ventana_ppal)
+    frida.disparar(lista_teclas, enemigos, ventana_ppal, enemigo_final)
 
     pygame.display.flip()
 
     pygame.time.delay(7)
 
 sonido_nivel_dos.stop()
+musica_enemigo_final.stop()
 
-musica_fin.play()
+if enemigo_final.muerto:
+    musica_fin_ganado.play()
+    sonido_una_risa.play()
+else:
+    musica_fin.play()
 
 flag_final = True
 while flag_final:
@@ -511,9 +576,18 @@ while flag_final:
     fondo_fin = pygame.transform.scale(fondo_fin, (ANCHO_VENTANA, ALTO_VENTANA))
     ventana_ppal.blit(fondo_fin, (0, 0))
 
-    texto_superficie, texto_rect = fuente.render("ADIOS!", constantes.NEGRO)
+    if enemigo_final.muerto:
+        mensaje = "GANASTE!"
+        mensaje_dos = ''
+    else:
+        mensaje = "ADIOS!"
+        mensaje_dos = 'INTENTALO DE NUEVO'
+
+    texto_superficie, texto_rect = fuente.render(mensaje, constantes.NEGRO)
+    texto_superficie_dos, texto_rect_dos = fuente.render(mensaje_dos, constantes.NEGRO)
 
     ventana_ppal.blit(texto_superficie, (500, 300))
+    ventana_ppal.blit(texto_superficie_dos, (500, 400))
 
     pygame.display.flip()
 

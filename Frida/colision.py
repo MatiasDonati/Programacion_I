@@ -21,6 +21,14 @@ def agarrar_recompensa(frida, recompensa):
         frida.scoring += recompensa.puntuacion
         return True
 
+
+def colisionar_con_enemigo_final(frida, enemigo_final):
+    retorno = False
+    if frida.rect_frida.colliderect(enemigo_final.rect_enemigo_final):
+        retorno = True
+    return retorno
+
+
 def disparar_enemigo_final(proyectil, enemigo_final):
     if proyectil != None and proyectil.rectangulo.colliderect(enemigo_final.rect_enemigo_final):
         return True
