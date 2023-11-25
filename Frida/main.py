@@ -14,6 +14,9 @@ from textos import *
 import obtener_nombre
 import re
 import random
+import json
+import sonidos
+
 
 ANCHO_VENTANA = constantes.ANCHO_VENTANA
 ALTO_VENTANA = constantes.ALTO_VENTANA
@@ -30,20 +33,15 @@ pygame.init()
 ingreso_nombre = False
 patron_usuario = re.compile(r'^(?=.*[a-zA-Z])[a-zA-Z0-9 ]{4,}$')
 
-#Enemigo animaciones
-diccionario_animaciones = {}
-diccionario_animaciones['derecha'] = personaje_derecha
-diccionario_animaciones['izquierda'] = personaje_izquierda
-diccionario_animaciones['quieto'] = personaje_quieto
-diccionario_animaciones['salta'] = personaje_salta
-diccionario_animaciones['explosion'] = explosion
-
 ventana_ppal = pygame.display.set_mode((ANCHO_VENTANA,ALTO_VENTANA))
 pygame.display.set_caption("Frida")
 
 #Fuente del Texto
 pygame.freetype.init()
 fuente = pygame.freetype.Font(None, 36)
+
+# with open('ruta_de_tu_json.json', 'r') as archivo_json:
+#     datos_json = json.load(archivo_json)
 
 #Imagenes Fondo
 fondo = pygame.image.load('./imgs/fondo3.jpg')
@@ -58,65 +56,46 @@ fin_tiempo = False
 timer = pygame.USEREVENT + 0
 pygame.time.set_timer(timer,1000)
 
-#Musica Nivel 1
 pygame.mixer.init()
-ruta_audio = './audio/DiagramadeVen.mp3'
-sonido_fondo = pygame.mixer.Sound(ruta_audio)
-volumen = 0.5
-sonido_fondo.set_volume(volumen)
+#Musica Nivel 1
+sonido_fondo = sonidos.sonido_fondo
 flag_sonido = False
 
-
-sonido_nivel_dos = pygame.mixer.Sound('./audio/nivel_2.mp3')
-sonido_nivel_dos.set_volume(0.5)
-
+#sonido nivel dos
+sonido_nivel_dos = sonidos.sonido_nivel_dos
+volumen = 0.5
 #Danzon
-danzon = pygame.mixer.Sound('./audio/MADRUGAR_level_dos.mp3')
-danzon.set_volume(1)
+danzon = sonidos.danzon
+
 #Carcajada Introduccion - Varias carcajadas
-ruta_risa = './audio/carcajada.mp3'
-sonido_risa = pygame.mixer.Sound(ruta_risa)
-sonido_risa.set_volume(0.7)
+sonido_risa = sonidos.sonido_risa
 
 #Carcajada
-sonido_una_risa = pygame.mixer.Sound('./audio/una_carcajada.mp3')
-sonido_una_risa.set_volume(0.7)
+sonido_una_risa = sonidos.sonido_una_risa
 sonido_risa_fin_nivel_reproducido = False
 
 #Musica Final Perdido
-ruta_musica_fin = './audio/besau.mp3'
-musica_fin = pygame.mixer.Sound(ruta_musica_fin)
-musica_fin.set_volume(1)
+musica_fin = sonidos.musica_fin
 
 #Musica Final Ganado
-musica_fin_ganado = pygame.mixer.Sound('./audio/SAXOS.mp3')
-musica_fin_ganado.set_volume(1)
-
+musica_fin_ganado = sonidos.musica_fin_ganado
 
 #musica recompensas
-musica_recompensas = pygame.mixer.Sound('./audio/enemigo_final.mp3')
-musica_recompensas.set_volume(1)
+musica_recompensas = sonidos.musica_recompensas
 
 #Musica enemigo final
-musica_enemigo_final = pygame.mixer.Sound('./audio/ELCUENTITO.mp3')
-musica_enemigo_final.set_volume(1)
+musica_enemigo_final = sonidos.musica_enemigo_final
 
-risa_fantasma = pygame.mixer.Sound('./audio/risa_fantasma.mp3')
-risa_fantasma.set_volume(2)
+#Risa Fantasma
+risa_fantasma = sonidos.risa_fantasma
 
 #sonidos Score
-score_uno = pygame.mixer.Sound('./audio/score/score_uno.mp3')
-score_uno.set_volume(0.8)
-score_dos = pygame.mixer.Sound('./audio/score/score_dos.mp3')
-score_dos.set_volume(0.8)
-score_tres = pygame.mixer.Sound('./audio/score/score_tres.mp3')
-score_tres.set_volume(0.8)
-score_cuatro = pygame.mixer.Sound('./audio/score/score_cuatro.mp3')
-score_cuatro.set_volume(0.8)
+score_uno = sonidos.score_uno
+score_dos = sonidos.score_dos
+score_tres = sonidos.score_tres
+score_cuatro = sonidos.score_cuatro
 lista_sonidos_score = [score_uno, score_dos, score_tres, score_cuatro]
-score_final = pygame.mixer.Sound('./audio/score/score_final.mp3')
-score_final.set_volume(1)
-
+score_final = sonidos.score_final
 
 #Bloques
 bloque_uno = bloque.Bloque(ANCHO_VENTANA * 0.5/4, ALTO_VENTANA - ALTO_BRUJA * 1.1 - ALTO_BLOQUE, ANCHO_BLOQUE, ALTO_BLOQUE)
@@ -161,8 +140,6 @@ escoba = recompensas.Recompensa(posiciones_iniciales[3][0], posiciones_iniciales
 barita_magica = recompensas.Recompensa(posiciones_iniciales[4][0], posiciones_iniciales[4][1], ANCHO_ENEMIGO, ALTO_ENEMIGO, 'barita')
 
 lista_recompensas = [gatito, gatito_dos, pocion, escoba, barita_magica]
-
-
 
 pantalla_final_perdido = False
 
@@ -259,6 +236,7 @@ while flag_run:
         if len(lista_recompensas) == 0:
             score_final.play()
             flag_run = False
+            frida.scoring += int(segundos)
 
         if sonido_risa_fin_nivel_reproducido == False:
             sonido_una_risa.play()
@@ -384,6 +362,7 @@ while flag_run_nivel_dos:
         if len(lista_recompensas) == 0:
             score_final.play()
             flag_run_nivel_dos = False
+            frida.scoring += int(segundos)
 
         if sonido_risa_fin_nivel_reproducido == False:
             sonido_una_risa.play()
@@ -532,11 +511,12 @@ while flag_nivel_tres:
                 enemigo_final.rect_enemigo_final.y = ALTO_VENTANA - 500
                 frida.volar = True
                 enemigo_final_en_accion = True
+                frida.scoring += int(segundos)
 
             enemigo_final.update(ventana_ppal)
             enemigo_final.disparar(ventana_ppal, frida)
             sonido_nivel_dos.stop()
-
+            mostrar_vidas_fantasma(fuente,ventana_ppal, enemigo_final)
 
             tiempo_actual = pygame.time.get_ticks()
             tiempo_transcurrido = tiempo_actual - tiempo_inicio_if

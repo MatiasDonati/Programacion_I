@@ -88,3 +88,12 @@ diccionario_enemigo_final = {}
 diccionario_enemigo_final['quieto'] = enemigo_final
 diccionario_enemigo_final['izquierda'] = enemigo_final_izquierda
 diccionario_enemigo_final['derecha'] = enemigo_final_derecha
+
+
+#Enemigo animaciones
+diccionario_animaciones = {}
+diccionario_animaciones['derecha'] = personaje_derecha
+diccionario_animaciones['izquierda'] = personaje_izquierda
+diccionario_animaciones['quieto'] = personaje_quieto
+diccionario_animaciones['salta'] = personaje_salta
+diccionario_animaciones['explosion'] = explosion

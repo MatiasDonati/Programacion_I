@@ -1,0 +1,9 @@
+{
+    "imagenes_fondo": {
+      "fondo": "./imgs/fondo3.jpg",
+      "fondo_nivel_dos": "./imgs/fondo_nivel_3.jpg",
+      "fondo_intro": "./imgs/fondo_inicio.jpg",
+      "fondo_nivel_tres": "./imgs/findo_nivel_2.jpg",
+      "fondo_fin": "./imgs/fin.jpg"
+    }
+  }
