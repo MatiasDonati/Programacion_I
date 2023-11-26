@@ -1,9 +1,14 @@
 {
-    "imagenes_fondo": {
-      "fondo": "./imgs/fondo3.jpg",
-      "fondo_nivel_dos": "./imgs/fondo_nivel_3.jpg",
-      "fondo_intro": "./imgs/fondo_inicio.jpg",
-      "fondo_nivel_tres": "./imgs/findo_nivel_2.jpg",
-      "fondo_fin": "./imgs/fin.jpg"
-    }
-  }
+  "ingreso_nombre": false,
+  "patron_usuario": "^(?=.*[a-zA-Z])[a-zA-Z0-9 ]{4,}$",
+  "flag_cargar_usuario": false,
+  "segundos": "30",
+  "fin_tiempo": false,
+  "flag_sonido": false,
+  "volumen": 0.5,
+  "sonido_risa_fin_nivel_reproducido": false,
+  "tiempo_inicio_if": null,
+  "enemigo_final_en_accion": false,
+  "pantalla_final_perdido": false,
+  "se_rio": false
+}

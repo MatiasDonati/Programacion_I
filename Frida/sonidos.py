@@ -53,5 +53,7 @@ score_tres.set_volume(0.8)
 score_cuatro = pygame.mixer.Sound('./audio/score/score_cuatro.mp3')
 score_cuatro.set_volume(0.8)
 
+lista_sonidos_score = [score_uno, score_dos, score_tres, score_cuatro]
+
 score_final = pygame.mixer.Sound('./audio/score/score_final.mp3')
 score_final.set_volume(1)
