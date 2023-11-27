@@ -19,7 +19,7 @@ import json
 from elementos import *
 from fondos_niveles import *
 from json_lectura import *
-
+import mostrar_botones_inicio
 
 pygame.init()
 ventana_ppal = pygame.display.set_mode((ANCHO_VENTANA,ALTO_VENTANA))
@@ -46,7 +46,12 @@ sonidos.sonido_risa.play()
 intro = True
 while intro:
 
+    mostrar_botones_inicio.mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente)
+
     nombre_usuario, ingreso_enter = obtener_nombre.obtener_nombre_usuario(ventana_ppal, fondo_intro)
+
+    print('Hola')
+
     if ingreso_enter and patron_usuario.match(nombre_usuario):
         intro = False
 
@@ -70,7 +75,7 @@ while flag_run:
 
     for evento in lista_eventos:
         if evento.type == pygame.QUIT:
-            flag_run = False
+            pygame.quit()
         if evento.type == pygame.MOUSEBUTTONDOWN:
             print(evento.pos)
 
@@ -154,7 +159,6 @@ while flag_run:
 sonidos.sonido_fondo.stop()
 sonidos.musica_recompensas.stop()
 
-
 """
 # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS
 # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS
@@ -189,7 +193,7 @@ while flag_run_nivel_dos:
 
     for evento in lista_eventos:
         if evento.type == pygame.QUIT:
-            flag_run_nivel_dos = False
+            pygame.quit()
         if evento.type == pygame.MOUSEBUTTONDOWN:
             print(evento.pos)
 
@@ -308,7 +312,7 @@ while flag_nivel_tres:
 
     for evento in lista_eventos:
         if evento.type == pygame.QUIT:
-            flag_nivel_tres = False
+            pygame.quit()
         if evento.type == pygame.MOUSEBUTTONDOWN:
             print(evento.pos)
 

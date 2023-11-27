@@ -1,5 +1,11 @@
 import pygame
 
+def iniciar_juego():
+    print('Iniciar Juego')
+
+def salir():
+    pygame.quit()
+
 class Boton:
     def __init__(self, x, y, ancho, alto, color_normal, color_destacado, texto, accion=None):
         self.rect = pygame.Rect(x, y, ancho, alto)
@@ -8,6 +14,7 @@ class Boton:
         self.texto = texto
         self.accion = accion
         self.hover = False
+        self.pulsado = False
 
     def dibujar(self, superficie):
         color = self.color_destacado if self.hover else self.color_normal
@@ -26,4 +33,5 @@ class Boton:
         elif evento.type == pygame.MOUSEBUTTONDOWN and self.hover:
             if self.accion:
                 self.accion()
+                self.pulsado = True
 
