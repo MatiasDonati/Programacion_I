@@ -453,8 +453,13 @@ else:
 # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL
 # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL
 """
+##################################################################
+########### ESTO AL JSON ############################################
 
-print(int(segundos))
+######################todo lo que es de inicializacion ##############
+ ###     PROBABLEMENTE FLAGS DE JUEGOS HAY Q VOLVER A TRUE ##################
+##################################################################
+y_incremento = 0
 
 flag_final = True
 while flag_final:
@@ -472,34 +477,49 @@ while flag_final:
         mensaje = "GANASTE!"
         mensaje_dos = ''
     else:
-        mensaje = "ADIOS!"
+        mensaje = "No te des por vencido aun vencido!"
         mensaje_dos = 'INTENTALO DE NUEVO'
 
     if int(segundos) == 0:
         mensaje = "TE QUEDASTE SIN TIEMPO!"
 
-
     texto_superficie, texto_rect = fuente.render(mensaje, constantes.NEGRO)
     texto_superficie_dos, texto_rect_dos = fuente.render(mensaje_dos, constantes.NEGRO)
 
-    texto_superficie_scorings, texto_rect = fuente.render('Mejores puntajes', constantes.NEGRO)
-    ventana_ppal.blit(texto_superficie_scorings, (500, 400))
+    texto_superficie_scorings, texto_rect_scorings = fuente.render('Mejores puntajes', constantes.NEGRO)
+    ventana_ppal.blit(texto_superficie_scorings, (ANCHO_VENTANA // 2 - texto_rect_scorings.width // 2, 400 - y_incremento))
 
-    posicion_vertical = 500
     if flag_cargar_usuario == False:
         crear_y_cargar_datos(nombre_usuario, frida.scoring)
         flag_cargar_usuario = True
     lista_datos = consultar_datos()
 
-    for usuario in lista_datos:
-        mensaje = f"* {usuario['nombre']} - {usuario['score']} puntos"
-        texto_superficie_usuario, texto_rect = fuente.render(mensaje, constantes.NEGRO)
-        ventana_ppal.blit(texto_superficie_usuario, (500, posicion_vertical))
-        posicion_vertical += texto_rect.height + 5
+    posicion_vertical_usuario = 500
 
-    ventana_ppal.blit(texto_superficie, (500, 200))
-    ventana_ppal.blit(texto_superficie_dos, (500, 300))
+    for usuario in lista_datos:
+        mensaje_usuario = f"* {usuario['nombre']} - {usuario['score']} puntos"
+        texto_superficie_usuario, texto_rect_usuario = fuente.render(mensaje_usuario, constantes.NEGRO)
+        ventana_ppal.blit(texto_superficie_usuario, (ANCHO_VENTANA // 2 - texto_rect_usuario.width // 2, posicion_vertical_usuario - y_incremento))
+        posicion_vertical_usuario += texto_rect_usuario.height + 5
+
+    if frida.muerta == False:
+        y_incremento += 1
+        with open('texto_final.txt', 'r') as archivo:
+            posicion_vertical_db = ALTO_VENTANA + 50  # Empieza por debajo de la pantalla
+            for linea in archivo:
+                mensaje_db = linea.strip()
+                texto_superficie_db, texto_rect_db = fuente.render(mensaje_db, constantes.NEGRO)
+
+                # Calcula la posición x para centrar el texto
+                posicion_x_db = (ANCHO_VENTANA - texto_rect_db.width) // 2
+
+                ventana_ppal.blit(texto_superficie_db, (posicion_x_db, posicion_vertical_db - y_incremento))
+                posicion_vertical_db += texto_rect_db.height + 5
+
+    ventana_ppal.blit(texto_superficie, (ANCHO_VENTANA // 2 - texto_rect.width // 2, 200 - y_incremento))
+    ventana_ppal.blit(texto_superficie_dos, (ANCHO_VENTANA // 2 - texto_rect_dos.width // 2, 300 - y_incremento))
 
     pygame.display.flip()
+    pygame.time.delay(10)
 
 pygame.quit()
