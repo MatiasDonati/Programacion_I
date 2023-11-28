@@ -15,5 +15,6 @@
   "se_rio": false,
   "flag_run": true,
   "y_incremento": 0,
-  "flag_final": true
+  "flag_final": true,
+  "flag_mensaje_w": false
 }

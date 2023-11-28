@@ -28,3 +28,5 @@ se_rio_nueva = configuracion["se_rio"]
 flag_run = configuracion["flag_run"]
 y_incremento = configuracion["y_incremento"]
 flag_final = configuracion["flag_final"]
+flag_mensaje_w = configuracion["flag_mensaje_w"]
+

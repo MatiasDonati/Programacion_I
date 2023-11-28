@@ -10,7 +10,7 @@ def mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente):
     boton_tres = Boton(-900, 530, 200, 50, (74, 95, 96), (87, 67, 58), "Records", accion=None)
     boton_cuatro = Boton(-900, 590, 200, 50, (74, 95, 96), (87, 67, 58), "Salir", accion=salir)
 
-    boton_volver = Boton(constantes.ANCHO_VENTANA // 2 - 70, 590, 200, 50, (74, 95, 96), (87, 67, 58), "Volver", accion=None)
+    boton_volver = Boton(constantes.ANCHO_VENTANA // 2 - 100, 590, 200, 50, (74, 95, 96), (87, 67, 58), "Volver", accion=None)
 
     lista_botones = [boton, boton_dos, boton_tres, boton_cuatro]
 
@@ -120,7 +120,6 @@ def mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente):
                         texto_rect = texto_superficie_usuario.get_rect()
                         ventana_ppal.blit(texto_superficie_usuario, (constantes.ANCHO_VENTANA // 2 - texto_rect.width // 2, posicion_vertical))
                         posicion_vertical += texto_rect.height + 5
-
 
                 boton_volver.dibujar(ventana_ppal)
                 boton_volver.actualizar(event)

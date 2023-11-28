@@ -295,12 +295,6 @@ else:
         enemigo_.vidas = 3
 
 
-#######################
-flag_mensaje_w = False
-#######################
-
-
-
 while flag_nivel_tres:
 
     if flag_sonido == False:
@@ -526,20 +520,43 @@ while flag_final:
     if frida.muerta == False:
         y_incremento += 1
         with open('texto_final.txt', 'r') as archivo:
-            posicion_vertical_db = ALTO_VENTANA + 50  # Empieza por debajo de la pantalla
+            posicion_vertical_db = ALTO_VENTANA + 50
+            altura_total_texto = 0
+
             for linea in archivo:
                 mensaje_db = linea.strip()
                 texto_superficie_db = fuente.render(mensaje_db, True, constantes.NEGRO)
                 texto_rect_db = texto_superficie_db.get_rect()
+                altura_total_texto += texto_rect_db.height + 5
 
-                # Calcula la posición x para centrar el texto
                 posicion_x_db = (ANCHO_VENTANA - texto_rect_db.width) // 2
 
                 ventana_ppal.blit(texto_superficie_db, (posicion_x_db, posicion_vertical_db - y_incremento))
                 posicion_vertical_db += texto_rect_db.height + 5
 
+                if linea.strip() == 'ha llegado a su conclusión victoriosa.' and posicion_vertical_db < 100:
+                    print('ACA VIENE EL SALUTO')
+                    flag_saludo = True
+
+
+            # if posicion_vertical_db <= 0:
+
+            #     fuente_saludo = gestor_de_fuentes.cargar_fuente(ruta_gotica, 70)
+            #     mensaje_saludo = "ADIOS!"
+            #     texto_superficie_saludo = fuente_saludo.render(mensaje_saludo, True, constantes.NEGRO)
+            #     texto_rect_saludo = texto_superficie_saludo.get_rect()
+
+            #     posicion_x_saludo = (ANCHO_VENTANA - texto_rect_saludo.width) // 2
+            #     posicion_y_saludo = ALTO_VENTANA - y_incremento
+            #     ventana_ppal.blit(texto_superficie_saludo, (posicion_x_saludo, posicion_y_saludo))
+            #     if posicion_y_saludo == (ALTO_VENTANA - texto_rect_saludo.height) // 2:
+            #         posicion_y_saludo = (ALTO_VENTANA - texto_rect_saludo.height) // 2
+
+
+
     ventana_ppal.blit(texto_superficie, (ANCHO_VENTANA // 2 - texto_rect.width // 2, 200 - y_incremento))
     ventana_ppal.blit(texto_superficie_dos, (ANCHO_VENTANA // 2 - texto_rect_dos.width // 2, 300 - y_incremento))
+
 
     pygame.display.flip()
     pygame.time.delay(10)
