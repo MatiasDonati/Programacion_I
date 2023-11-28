@@ -78,7 +78,7 @@ def mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente):
                 comando_tres = fuente.render("Space - Saltar        R - Hechizo",True, constantes.NEGRO)
                 comando_tres_rect = comando_tres.get_rect()
 
-                comando_cinco = fuente.render("         Shift Left   Izquierda",True, constantes.NEGRO)
+                comando_cinco = fuente.render("         Shift Left  - Turbo",True, constantes.NEGRO)
                 comando_cinco_rect = comando_cinco.get_rect()
 
 

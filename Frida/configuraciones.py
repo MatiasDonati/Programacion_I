@@ -76,8 +76,6 @@ enemigo_final = [pygame.image.load("./imgs/enemigo_final/1.png"),
                        pygame.image.load("./imgs/enemigo_final/15.png"),]
 
 enemigo_final_izquierda = [
-                        # pygame.image.load("./imgs/enemigo_final/mueve_1.png"),
-                        # pygame.image.load("./imgs/enemigo_final/mueve_2.png"),
                         pygame.image.load("./imgs/enemigo_final/fantasma_arreglado.png"),
                           ]
 
@@ -90,7 +88,7 @@ diccionario_enemigo_final['izquierda'] = enemigo_final_izquierda
 diccionario_enemigo_final['derecha'] = enemigo_final_derecha
 
 
-#Enemigo animaciones
+#Enemigos animaciones
 diccionario_animaciones = {}
 diccionario_animaciones['derecha'] = personaje_derecha
 diccionario_animaciones['izquierda'] = personaje_izquierda

@@ -10,5 +10,10 @@
   "tiempo_inicio_if": null,
   "enemigo_final_en_accion": false,
   "pantalla_final_perdido": false,
-  "se_rio": false
+  "ruta_gotica": "./fuente/VinaSans-Regular.ttf",
+  "intro": true,
+  "se_rio": false,
+  "flag_run": true,
+  "y_incremento": 0,
+  "flag_final": true
 }

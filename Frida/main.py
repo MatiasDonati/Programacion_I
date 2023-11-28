@@ -1,26 +1,21 @@
 import pygame
 import constantes
 from constantes import *
-import bloque
 from personaje import *
 from enemigo import *
 from enemigo_final import *
 from configuraciones import *
 from base_datos import *
 import colision
-import recompensas
 from disparo import *
 from textos import *
 import obtener_nombre
-import re
 import random
 import sonidos
-import json
 from elementos import *
 from fondos_niveles import *
 from json_lectura import *
 import mostrar_botones_inicio
-
 import gestor_de_fuentes
 
 pygame.init()
@@ -28,19 +23,7 @@ ventana_ppal = pygame.display.set_mode((ANCHO_VENTANA,ALTO_VENTANA))
 pygame.mixer.init()
 
 #Fuente del Texto
-# pygame.freetype.init()
-# fuente = pygame.freetype.Font(None, 36)
-import pygame.font
-
-ruta_gotica = './fuente/VinaSans-Regular.ttf'
-
-try:
-    fuente = pygame.font.Font(ruta_gotica, 36)
-except pygame.error:
-    print(f"Error al cargar la fuente desde {ruta_gotica}. Verifica la ruta del archivo de fuente.")
-    fuente = pygame.font.Font(None, 36)
-
-# fuente = gestor_de_fuentes.cargar_fuente('./fuente/VinaSans-Regular/ttf', 38)
+fuente = gestor_de_fuentes.cargar_fuente(ruta_gotica, 40)
 
 #timer segundos en juego
 timer = pygame.USEREVENT + 0
@@ -48,22 +31,19 @@ pygame.time.set_timer(timer,1000)
 
 leer_json()
 
+"""
+# PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO
+# PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO
+"""
+
 pygame.display.set_caption("Frida")
-
-"""
-# PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO
-# PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO # PANTALLA INICIO
-"""
-
 sonidos.sonido_risa.play()
-intro = True
+
 while intro:
 
     mostrar_botones_inicio.mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente)
 
     nombre_usuario, ingreso_enter = obtener_nombre.obtener_nombre_usuario(ventana_ppal, fondo_intro, fuente)
-
-    print('Hola')
 
     if ingreso_enter and patron_usuario.match(nombre_usuario):
         intro = False
@@ -71,13 +51,12 @@ while intro:
 sonidos.sonido_risa.stop()
 
 """
-# NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO
-# NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO
+# NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO# NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO
+# NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO# NVEL UNO # NVEL UNO # NVEL UNO # NVEL UNO
 """
 
 pygame.display.set_caption("Frida - Nivel 1")
-se_rio = False
-flag_run = True
+
 while flag_run:
 
     if flag_sonido == False:
@@ -173,8 +152,8 @@ sonidos.sonido_fondo.stop()
 sonidos.musica_recompensas.stop()
 
 """
-# NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS
-# NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS
+# NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS
+# NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS # NVEL DOS
 """
 
 if pantalla_final_perdido:
@@ -288,8 +267,8 @@ sonidos.danzon.stop()
 sonidos.musica_recompensas.stop()
 
 """
-# NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES
-# NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES
+# NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES TRES # NVEL TRES
+# NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES # NVEL TRES TRES # NVEL TRES
 """
 
 if pantalla_final_perdido:
@@ -314,6 +293,13 @@ else:
     for enemigo_ in enemigos:
         enemigo_.muerto = False
         enemigo_.vidas = 3
+
+
+#######################
+flag_mensaje_w = False
+#######################
+
+
 
 while flag_nivel_tres:
 
@@ -404,6 +390,24 @@ while flag_nivel_tres:
 
         if len(lista_recompensas) == 0:
 
+
+    ################################################################################
+    ################################################################################
+            if flag_mensaje_w == False:
+                tiempo_inicio_mensaje_tecla_w = pygame.time.get_ticks()
+                flag_mensaje_w = True
+
+            tiempo_transcurrido_mensaje_tecla_w = pygame.time.get_ticks() - tiempo_inicio_mensaje_tecla_w
+            if tiempo_transcurrido_mensaje_tecla_w < 3000:
+                fuente = gestor_de_fuentes.cargar_fuente(ruta_gotica, 70)
+                mensaje_volar = fuente.render('Usá la tecla W para volar!', True, constantes.NEGRO)
+                mensaje_volar_rect = mensaje_volar.get_rect()
+                ventana_ppal.blit(mensaje_volar, (constantes.ANCHO_VENTANA // 2 - mensaje_volar_rect.width // 2, constantes.ALTO_VENTANA // 3))
+                fuente = gestor_de_fuentes.cargar_fuente(ruta_gotica, 40)
+
+    ################################################################################
+    ################################################################################
+
             bloques = []
 
             if tiempo_inicio_if == None:
@@ -455,26 +459,23 @@ while flag_nivel_tres:
 sonidos.sonido_nivel_dos.stop()
 sonidos.musica_enemigo_final.stop()
 
+"""
+# PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL
+# PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL
+"""
+
 if enemigo_final.muerto:
     sonidos.musica_fin_ganado.play()
     sonidos.sonido_una_risa.play()
 else:
     sonidos.musica_fin.play()
-    # sonidos.risa_fantasma.play()
 
-"""
-# PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL
-# PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL # PANTALLA FINAL
-"""
-##################################################################
-########### ESTO AL JSON ############################################
 
-######################todo lo que es de inicializacion ##############
- ###     PROBABLEMENTE FLAGS DE JUEGOS HAY Q VOLVER A TRUE ##################
-##################################################################
-y_incremento = 0
+if frida.muerta:
+    pygame.display.set_caption("Frida - Intentalo de Nuevo.")
+else:
+    pygame.display.set_caption("Frida - Ganaste!")
 
-flag_final = True
 while flag_final:
 
     lista_eventos = pygame.event.get()
@@ -490,7 +491,7 @@ while flag_final:
         mensaje = "GANASTE!"
         mensaje_dos = ''
     else:
-        mensaje = "No te des por vencido aun vencido!"
+        mensaje = "No te des por vencido aún vencido!"
         mensaje_dos = 'INTENTALO DE NUEVO'
 
     if int(segundos) == 0:
@@ -518,8 +519,6 @@ while flag_final:
         mensaje_usuario = f"* {usuario['nombre']} - {usuario['score']} puntos"
         texto_superficie_usuario = fuente.render(mensaje_usuario,True, constantes.NEGRO)
         texto_rect_usuario = texto_superficie_usuario.get_rect()
-
-
 
         ventana_ppal.blit(texto_superficie_usuario, (ANCHO_VENTANA // 2 - texto_rect_usuario.width // 2, posicion_vertical_usuario - y_incremento))
         posicion_vertical_usuario += texto_rect_usuario.height + 5
