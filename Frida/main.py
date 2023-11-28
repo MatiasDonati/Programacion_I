@@ -470,6 +470,7 @@ if frida.muerta:
 else:
     pygame.display.set_caption("Frida - Ganaste!")
 
+
 while flag_final:
 
     lista_eventos = pygame.event.get()
@@ -530,29 +531,9 @@ while flag_final:
                 altura_total_texto += texto_rect_db.height + 5
 
                 posicion_x_db = (ANCHO_VENTANA - texto_rect_db.width) // 2
-
-                ventana_ppal.blit(texto_superficie_db, (posicion_x_db, posicion_vertical_db - y_incremento))
+                pos_y = posicion_vertical_db - y_incremento
+                ventana_ppal.blit(texto_superficie_db, (posicion_x_db, pos_y))
                 posicion_vertical_db += texto_rect_db.height + 5
-
-                if linea.strip() == 'ha llegado a su conclusión victoriosa.' and posicion_vertical_db < 100:
-                    print('ACA VIENE EL SALUTO')
-                    flag_saludo = True
-
-
-            # if posicion_vertical_db <= 0:
-
-            #     fuente_saludo = gestor_de_fuentes.cargar_fuente(ruta_gotica, 70)
-            #     mensaje_saludo = "ADIOS!"
-            #     texto_superficie_saludo = fuente_saludo.render(mensaje_saludo, True, constantes.NEGRO)
-            #     texto_rect_saludo = texto_superficie_saludo.get_rect()
-
-            #     posicion_x_saludo = (ANCHO_VENTANA - texto_rect_saludo.width) // 2
-            #     posicion_y_saludo = ALTO_VENTANA - y_incremento
-            #     ventana_ppal.blit(texto_superficie_saludo, (posicion_x_saludo, posicion_y_saludo))
-            #     if posicion_y_saludo == (ALTO_VENTANA - texto_rect_saludo.height) // 2:
-            #         posicion_y_saludo = (ALTO_VENTANA - texto_rect_saludo.height) // 2
-
-
 
     ventana_ppal.blit(texto_superficie, (ANCHO_VENTANA // 2 - texto_rect.width // 2, 200 - y_incremento))
     ventana_ppal.blit(texto_superficie_dos, (ANCHO_VENTANA // 2 - texto_rect_dos.width // 2, 300 - y_incremento))
