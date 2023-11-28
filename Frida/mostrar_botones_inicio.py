@@ -17,7 +17,9 @@ def mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente):
     fondo_intro = pygame.transform.scale(fondo_intro, (constantes.ANCHO_VENTANA, constantes.ALTO_VENTANA))
     ventana_ppal.blit(fondo_intro, (0, 0))
 
-    texto_superficie, texto_rect = fuente.render("¡FRIDA!", constantes.NEGRO)
+    texto_superficie = fuente.render("¡FRIDA!",True, constantes.NEGRO)
+    texto_rect = texto_superficie.get_rect()
+
     ventana_ppal.blit(texto_superficie, (constantes.ANCHO_VENTANA // 2 - texto_rect.width // 2, constantes.ALTO_VENTANA // 3))
 
     input_activo = True
@@ -44,7 +46,9 @@ def mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente):
 
             if instrucciones == False and records == False:
 
-                texto_superficie, texto_rect = fuente.render("¡FRIDA!", constantes.NEGRO)
+                texto_superficie = fuente.render("¡FRIDA!",True, constantes.NEGRO)
+                texto_rect = texto_superficie.get_rect()
+
                 fondo_intro = pygame.transform.scale(fondo_intro, (constantes.ANCHO_VENTANA, constantes.ALTO_VENTANA))
                 ventana_ppal.blit(fondo_intro, (0, 0))
                 ventana_ppal.blit(texto_superficie, (constantes.ANCHO_VENTANA // 2 - texto_rect.width // 2, constantes.ALTO_VENTANA // 3))
@@ -63,12 +67,21 @@ def mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente):
 
             elif instrucciones:
 
-                texto_superficie, texto_rect = fuente.render("¡FRIDA!", constantes.NEGRO)
+                texto_superficie = fuente.render("¡FRIDA!",True, constantes.NEGRO)
+                texto_rect = texto_superficie.get_rect()
+
                 fondo_intro = pygame.transform.scale(fondo_intro, (constantes.ANCHO_VENTANA, constantes.ALTO_VENTANA))
                 ventana_ppal.blit(fondo_intro, (0, 0))
-                comando, comando_rect = fuente.render("<-  Izquierda         ->  Derecha", constantes.NEGRO)
-                comando_tres, comando_tres_rect = fuente.render("Space - Saltar        R - Hechizo", constantes.NEGRO)
-                comando_cinco, comando_cinco_rect = fuente.render("         Shift Left   Izquierda", constantes.NEGRO)
+                comando = fuente.render("<-  Izquierda         ->  Derecha",True, constantes.NEGRO)
+                comando_rect = comando.get_rect()
+
+                comando_tres = fuente.render("Space - Saltar        R - Hechizo",True, constantes.NEGRO)
+                comando_tres_rect = comando_tres.get_rect()
+
+                comando_cinco = fuente.render("         Shift Left   Izquierda",True, constantes.NEGRO)
+                comando_cinco_rect = comando_cinco.get_rect()
+
+
 
                 ventana_ppal.blit(texto_superficie, (constantes.ANCHO_VENTANA // 2 - texto_rect.width // 2, constantes.ALTO_VENTANA // 4))
 
@@ -92,7 +105,9 @@ def mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente):
                 fondo_intro = pygame.transform.scale(fondo_intro, (constantes.ANCHO_VENTANA, constantes.ALTO_VENTANA))
                 ventana_ppal.blit(fondo_intro, (0, 0))
 
-                texto_superficie_scorings, texto_rect = fuente.render('Mejores puntajes', constantes.NEGRO)
+                texto_superficie_scorings = fuente.render('Mejores puntajes',True, constantes.NEGRO)
+                texto_rect = texto_superficie_scorings.get_rect()
+
                 ventana_ppal.blit(texto_superficie_scorings, (constantes.ANCHO_VENTANA // 2 - texto_rect.width // 2, 200))
 
                 posicion_vertical = 300
@@ -101,7 +116,8 @@ def mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente):
                 if lista_datos:
                     for usuario in lista_datos:
                         mensaje = f"* {usuario['nombre']} - {usuario['score']} puntos"
-                        texto_superficie_usuario, texto_rect = fuente.render(mensaje, constantes.NEGRO)
+                        texto_superficie_usuario = fuente.render(mensaje,True,  constantes.NEGRO)
+                        texto_rect = texto_superficie_usuario.get_rect()
                         ventana_ppal.blit(texto_superficie_usuario, (constantes.ANCHO_VENTANA // 2 - texto_rect.width // 2, posicion_vertical))
                         posicion_vertical += texto_rect.height + 5
 

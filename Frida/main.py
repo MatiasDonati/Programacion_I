@@ -21,13 +21,26 @@ from fondos_niveles import *
 from json_lectura import *
 import mostrar_botones_inicio
 
+import gestor_de_fuentes
+
 pygame.init()
 ventana_ppal = pygame.display.set_mode((ANCHO_VENTANA,ALTO_VENTANA))
 pygame.mixer.init()
 
 #Fuente del Texto
-pygame.freetype.init()
-fuente = pygame.freetype.Font(None, 36)
+# pygame.freetype.init()
+# fuente = pygame.freetype.Font(None, 36)
+import pygame.font
+
+ruta_gotica = './fuente/VinaSans-Regular.ttf'
+
+try:
+    fuente = pygame.font.Font(ruta_gotica, 36)
+except pygame.error:
+    print(f"Error al cargar la fuente desde {ruta_gotica}. Verifica la ruta del archivo de fuente.")
+    fuente = pygame.font.Font(None, 36)
+
+# fuente = gestor_de_fuentes.cargar_fuente('./fuente/VinaSans-Regular/ttf', 38)
 
 #timer segundos en juego
 timer = pygame.USEREVENT + 0
@@ -48,7 +61,7 @@ while intro:
 
     mostrar_botones_inicio.mostrar_botones_inicio(ventana_ppal, fondo_intro, fuente)
 
-    nombre_usuario, ingreso_enter = obtener_nombre.obtener_nombre_usuario(ventana_ppal, fondo_intro)
+    nombre_usuario, ingreso_enter = obtener_nombre.obtener_nombre_usuario(ventana_ppal, fondo_intro, fuente)
 
     print('Hola')
 
@@ -483,10 +496,15 @@ while flag_final:
     if int(segundos) == 0:
         mensaje = "TE QUEDASTE SIN TIEMPO!"
 
-    texto_superficie, texto_rect = fuente.render(mensaje, constantes.NEGRO)
-    texto_superficie_dos, texto_rect_dos = fuente.render(mensaje_dos, constantes.NEGRO)
+    texto_superficie= fuente.render(mensaje, True, constantes.NEGRO)
+    texto_rect = texto_superficie.get_rect()
 
-    texto_superficie_scorings, texto_rect_scorings = fuente.render('Mejores puntajes', constantes.NEGRO)
+    texto_superficie_dos = fuente.render(mensaje_dos,True, constantes.NEGRO)
+    texto_rect_dos = texto_superficie_dos.get_rect()
+
+    texto_superficie_scorings = fuente.render('Mejores puntajes',True, constantes.NEGRO)
+    texto_rect_scorings = texto_superficie_scorings.get_rect()
+
     ventana_ppal.blit(texto_superficie_scorings, (ANCHO_VENTANA // 2 - texto_rect_scorings.width // 2, 400 - y_incremento))
 
     if flag_cargar_usuario == False:
@@ -498,7 +516,11 @@ while flag_final:
 
     for usuario in lista_datos:
         mensaje_usuario = f"* {usuario['nombre']} - {usuario['score']} puntos"
-        texto_superficie_usuario, texto_rect_usuario = fuente.render(mensaje_usuario, constantes.NEGRO)
+        texto_superficie_usuario = fuente.render(mensaje_usuario,True, constantes.NEGRO)
+        texto_rect_usuario = texto_superficie_usuario.get_rect()
+
+
+
         ventana_ppal.blit(texto_superficie_usuario, (ANCHO_VENTANA // 2 - texto_rect_usuario.width // 2, posicion_vertical_usuario - y_incremento))
         posicion_vertical_usuario += texto_rect_usuario.height + 5
 
@@ -508,7 +530,8 @@ while flag_final:
             posicion_vertical_db = ALTO_VENTANA + 50  # Empieza por debajo de la pantalla
             for linea in archivo:
                 mensaje_db = linea.strip()
-                texto_superficie_db, texto_rect_db = fuente.render(mensaje_db, constantes.NEGRO)
+                texto_superficie_db = fuente.render(mensaje_db, True, constantes.NEGRO)
+                texto_rect_db = texto_superficie_db.get_rect()
 
                 # Calcula la posición x para centrar el texto
                 posicion_x_db = (ANCHO_VENTANA - texto_rect_db.width) // 2
